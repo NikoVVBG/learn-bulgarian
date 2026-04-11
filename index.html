@@ -224,47 +224,41 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .fc-btn.next { background: var(--accent); color: white; }
 .fc-counter { font-size: 0.82rem; color: var(--muted); }
 
-/* Quiz */
-.quiz-question { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
-.quiz-opts { display: flex; flex-direction: column; gap: 10px; }
-.quiz-opt { padding: 13px 16px; border-radius: 10px; border: 1.5px solid var(--border); background: white; text-align: left; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-.quiz-opt:hover { border-color: var(--accent); background: #eff6ff; }
-.quiz-opt.correct { background: #f0fdf4; border-color: var(--green); color: #166534; }
-.quiz-opt.wrong { background: #fef2f2; border-color: var(--red); color: #991b1b; }
-.quiz-feedback { padding: 12px 14px; border-radius: 10px; margin-top: 14px; font-size: 0.88rem; font-weight: 500; }
-.quiz-feedback.good { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
-.quiz-feedback.bad { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
-.quiz-next { margin-top: 14px; padding: 10px 24px; border-radius: 8px; background: var(--accent); color: white; border: none; cursor: pointer; font-size: 0.88rem; font-weight: 600; display: none; }
-.quiz-score { text-align: center; padding: 30px; }
-.score-big { font-size: 3rem; font-weight: 800; color: var(--accent); }
-.quiz-restart { margin-top: 16px; padding: 12px 28px; border-radius: 8px; background: var(--accent); color: white; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 600; }
+/* Quiz Tab — range/pill/card layout */
+.range-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.range-dropdown { position: relative; }
+.range-btn { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: white; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: var(--text); transition: all 0.2s; white-space: nowrap; }
+.range-btn:hover { border-color: var(--accent); }
+.range-chevron { font-size: 0.65rem; color: var(--muted); }
+.range-menu { position: absolute; top: calc(100% + 6px); left: 0; background: white; border: 1.5px solid var(--border); border-radius: 10px; box-shadow: var(--shadow); z-index: 100; min-width: 160px; overflow: hidden; }
+.range-option { padding: 10px 16px; font-size: 0.85rem; cursor: pointer; transition: background 0.15s; }
+.range-option:hover { background: #eff6ff; }
+.range-option.active { background: var(--accent); color: white; font-weight: 600; }
+.pill-nav { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+.pill { padding: 7px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: white; font-size: 0.82rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.2s; white-space: nowrap; touch-action: manipulation; }
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+.pill.active { background: var(--accent); color: white; border-color: var(--accent); }
+.pill.general { border-color: #a855f7; color: #a855f7; }
+.pill.general.active { background: #a855f7; color: white; border-color: #a855f7; }
+.week-content { display: none; }
+.week-content.active { display: block; }
+.week-summary { margin-bottom: 16px; }
+.ws-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+.ws-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+.qdc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.qdc-card { background: white; border: 1.5px solid var(--border); border-radius: 12px; padding: 16px; transition: all 0.2s; }
+.qdc-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+.qdc-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
+.qdc-title { font-size: 0.9rem; font-weight: 700; color: var(--text); flex: 1; }
+.qdc-score { font-size: 0.8rem; font-weight: 700; padding: 3px 9px; border-radius: 12px; margin-left: 8px; flex-shrink: 0; }
+.qdc-score.great { background: #dcfce7; color: #16a34a; }
+.qdc-score.ok { background: #fef3c7; color: #d97706; }
+.qdc-score.low { background: #fee2e2; color: #dc2626; }
+.qdc-meta { font-size: 0.78rem; color: var(--muted); margin-bottom: 12px; }
+.qdc-btn { width: 100%; padding: 9px 16px; border-radius: 8px; background: var(--accent); color: white; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.qdc-btn:hover { background: #1d4ed8; }
 
-/* Quiz History */
-.qh-section { margin-top: 20px; }
-.qh-section h3 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
-.qh-row { display: flex; align-items: center; gap: 10px; padding: 9px 14px; background: white; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px; }
-.qh-badge { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
-.qh-badge.great { background: #f0fdf4; color: #166534; border: 2px solid #86efac; }
-.qh-badge.good  { background: #fffbeb; color: #92400e; border: 2px solid #fde68a; }
-.qh-badge.keep  { background: #fef2f2; color: #991b1b; border: 2px solid #fecaca; }
-.qh-info { flex: 1; }
-.qh-score { font-size: 0.9rem; font-weight: 700; }
-.qh-date  { font-size: 0.73rem; color: var(--muted); margin-top: 1px; }
-.qh-bar   { width: 80px; height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; flex-shrink: 0; }
-.qh-bar-fill { height: 100%; border-radius: 3px; }
-.qh-empty { font-size: 0.83rem; color: var(--muted); font-style: italic; padding: 10px 0; }
-.qh-clear { font-size: 0.75rem; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; margin-left: auto; }
-.qh-clear:hover { color: var(--red); }
-
-/* Mistake Review */
-.mr-panel { margin-top: 20px; }
-.mr-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.mr-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-.mr-stats { font-size: 0.78rem; color: var(--muted); }
-.mr-filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-.mr-filter-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: white; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.2s; }
-.mr-filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-.mr-filter-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+/* Inline Mistake Review (used inside quiz results) */
 .mr-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
 .mr-card.incorrect { border-left: 3px solid var(--red); }
 .mr-card.correct { border-left: 3px solid var(--green); }
@@ -273,13 +267,6 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .mr-your-ans { color: var(--red); }
 .mr-your-ans.right { color: var(--green); }
 .mr-correct-ans { color: var(--green); font-weight: 600; }
-.mr-meta { font-size: 0.75rem; color: var(--muted); margin-top: 6px; }
-.mr-empty { font-size: 0.9rem; color: var(--muted); font-style: italic; padding: 20px 0; text-align: center; }
-.mr-attempt-header { font-size: 0.85rem; font-weight: 700; color: var(--text); padding: 10px 0 6px; border-bottom: 1px solid var(--border); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-.mr-attempt-score { font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; }
-.mr-attempt-score.great { background: #dcfce7; color: #16a34a; }
-.mr-attempt-score.ok { background: #fef3c7; color: #d97706; }
-.mr-attempt-score.low { background: #fee2e2; color: #dc2626; }
 
 /* Resources */
 .res-phase { margin-bottom: 28px; }
@@ -992,14 +979,7 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 
 <!-- ===== QUIZ ===== -->
 <div id="tab-quiz" class="tab">
-  <div id="daily-quiz-panel"></div>
-  <div class="card">
-    <div class="card-title">✏️ Quiz 1: General Knowledge</div>
-    <div class="card-sub">Test what you've learned so far! Covers alphabet, vocabulary, and phrases. Scores are saved automatically so you can track improvement over time.</div>
-  </div>
-  <div id="quiz-history-panel"></div>
-  <div id="quiz-area"></div>
-  <div id="mistake-review-panel"></div>
+  <div id="quiz-tab-inner"></div>
 </div>
 
 <!-- ===== RESOURCES ===== -->
@@ -1783,10 +1763,6 @@ let currentCards = [];
 let currentCardIndex = 0;
 let currentCategory = "Greetings";
 let isFlipped = false;
-let quizIndex = 0;
-let quizScore = 0;
-let answered = false;
-let shuffledQuiz = [];
 
 function showTab(name, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -1805,7 +1781,7 @@ function showTab(name, btn) {
     }
   });
   if (name === 'flashcards') renderFlashcards(currentCategory);
-  if (name === 'quiz') { renderDailyQuizPanel(); renderQuizHistoryPanel(); renderMistakeReviewPanel(); initQuiz(); }
+  if (name === 'quiz') { renderQuizTab(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2142,350 +2118,239 @@ function selectWeekDay(w, d) {
   });
 }
 
-// ---- QUIZ HISTORY ----
-function saveQuizResult(score, total, pct) {
-  const history = JSON.parse(localStorage.getItem('quiz_history') || '[]');
-  const now = new Date();
-  const label = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-              + ' at ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-  history.unshift({ score, total, pct, date: label });
-  // Keep last 50 attempts
-  if (history.length > 50) history.length = 50;
-  localStorage.setItem('quiz_history', JSON.stringify(history));
-}
+// ---- QUIZ TAB ----
+function renderQuizTab() {
+  var inner = document.getElementById('quiz-tab-inner');
+  if (!inner) return;
 
-function renderQuizHistoryPanel() {
-  const panel = document.getElementById('quiz-history-panel');
-  if (!panel) return;
-  const history = JSON.parse(localStorage.getItem('quiz_history') || '[]');
-  if (!history.length) {
-    panel.innerHTML = '';
-    return;
-  }
-  const best = Math.max(...history.map(h => h.pct));
-  const avg  = Math.round(history.reduce((s, h) => s + h.pct, 0) / history.length);
-  const rows = history.map((h, i) => {
-    const cls = h.pct >= 80 ? 'great' : h.pct >= 60 ? 'good' : 'keep';
-    const barColor = h.pct >= 80 ? 'var(--green)' : h.pct >= 60 ? '#f59e0b' : 'var(--red)';
-    return `<div class="qh-row">
-      <div class="qh-badge ${cls}">${h.pct}%</div>
-      <div class="qh-info">
-        <div class="qh-score">${h.score}/${h.total} correct ${i === 0 ? '<span style="color:var(--accent);font-size:0.7rem;font-weight:600;margin-left:4px">LATEST</span>' : ''}</div>
-        <div class="qh-date">${h.date}</div>
-      </div>
-      <div class="qh-bar"><div class="qh-bar-fill" style="width:${h.pct}%;background:${barColor}"></div></div>
-    </div>`;
-  }).join('');
-  panel.innerHTML = `<div class="card qh-section">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-      <div>
-        <span style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted)">Quiz History</span>
-        <span style="margin-left:12px;font-size:0.78rem;color:var(--muted)">${history.length} attempt${history.length !== 1 ? 's' : ''} · Best: <strong style="color:var(--green)">${best}%</strong> · Avg: <strong>${avg}%</strong></span>
-      </div>
-      <button class="qh-clear" onclick="clearQuizHistory()">Clear history</button>
-    </div>
-    ${rows}
-  </div>`;
-}
-
-function clearQuizHistory() {
-  if (confirm('Clear all quiz history? This cannot be undone.')) {
-    localStorage.removeItem('quiz_history');
-    renderQuizHistoryPanel();
-  }
-}
-
-// ---- DAILY QUIZ PANEL ----
-function renderDailyQuizPanel() {
-  const panel = document.getElementById('daily-quiz-panel');
-  if (!panel) return;
-
-  // Collect all days with quizzes
-  const dailyQuizzes = [];
-  for (const [key, data] of Object.entries(studyGuides)) {
-    if (data.quiz && data.quiz.length > 0) {
-      dailyQuizzes.push({
-        dayKey: key,
-        weekLabel: data.weekLabel,
-        dayTitle: data.dayTitle,
-        quiz: data.quiz
-      });
-    }
-  }
-
-  if (dailyQuizzes.length === 0) {
-    panel.innerHTML = '';
-    return;
-  }
-
-  let html = '<div class="card" style="margin-bottom: 20px;">';
-  html += '<div class="card-title">📅 Daily Lesson Quizzes</div>';
-  html += '<div class="card-sub">Test your knowledge after each lesson. Track your progress over time.</div>';
-  html += '</div>';
-  html += '<div style="display: grid; gap: 12px;">';
-
-  dailyQuizzes.forEach(item => {
-    const histKey = 'daily-quiz-history-' + item.dayKey;
-    const history = JSON.parse(localStorage.getItem(histKey) || '[]');
-    const bestScore = history.length > 0 ? Math.max(...history.map(h => h.pct)) : null;
-    const attemptCount = history.length;
-
-    html += '<div class="card" style="padding: 16px;">';
-    html += '<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">';
-    html += '<div>';
-    html += '<div style="font-weight: 600; color: var(--text);">' + item.dayTitle + '</div>';
-    html += '<div style="font-size: 0.85rem; color: var(--muted);">' + item.weekLabel + '</div>';
-    html += '</div>';
-    if (bestScore !== null) {
-      html += '<div style="text-align: right;">';
-      html += '<div style="font-size: 1.1rem; font-weight: 700; color: var(--accent);">' + bestScore + '%</div>';
-      html += '<div style="font-size: 0.75rem; color: var(--muted);">' + attemptCount + ' attempt' + (attemptCount !== 1 ? 's' : '') + '</div>';
-      html += '</div>';
-    }
-    html += '</div>';
-    html += '<button class="sg-mark-complete" onclick="startDailyQuizFromPanel(\'' + item.dayKey + '\')" style="width: 100%;">' + (bestScore !== null ? 'Retake' : 'Start') + ' Quiz</button>';
-    html += '</div>';
-  });
-
-  html += '</div>';
-  panel.innerHTML = html;
-}
-
-function startDailyQuizFromPanel(dayKey) {
-  const data = studyGuides[dayKey];
-  if (!data || !data.quiz) return;
-
-  const quizArea = document.getElementById('quiz-area');
-  quizArea.innerHTML = '';
-
-  const histKey = 'daily-quiz-history-' + dayKey;
-  renderInteractiveQuiz('quiz-area', data.quiz, histKey);
-
-  // Scroll to quiz area so user sees the first question
-  setTimeout(function() { quizArea.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
-}
-
-// ---- MISTAKE REVIEW PANEL ----
-function renderMistakeReviewPanel() {
-  var panel = document.getElementById('mistake-review-panel');
-  if (!panel) return;
-
-  // Gather all quiz attempts that have responses stored
-  var allAttempts = [];
-  var keys = Object.keys(localStorage);
-  keys.forEach(function(key) {
-    if (key.indexOf('daily-quiz-history-') === 0 || key === 'quiz_history' || key.indexOf('sg-quiz-') === 0 || key.indexOf('iquiz_history_') === 0) {
-      try {
-        var history = JSON.parse(localStorage.getItem(key));
-        if (Array.isArray(history)) {
-          history.forEach(function(attempt, idx) {
-            if (attempt.responses && attempt.responses.length > 0) {
-              var label = key;
-              if (key.indexOf('daily-quiz-history-') === 0) {
-                var dayKey = key.replace('daily-quiz-history-', '');
-                var guide = typeof studyGuides !== 'undefined' ? studyGuides[dayKey] : null;
-                label = guide ? guide.dayTitle : 'Day ' + dayKey;
-              } else if (key.indexOf('sg-quiz-') === 0) {
-                var parts = key.replace('sg-quiz-', '').split('-');
-                var g = typeof studyGuides !== 'undefined' ? studyGuides[parts[0] + '-' + parts[1]] : null;
-                label = g ? g.dayTitle : 'Day ' + parts[0] + '-' + parts[1];
-              } else if (key === 'quiz_history') {
-                label = 'General Knowledge Quiz';
-              }
-              allAttempts.push({
-                key: key,
-                label: label,
-                attempt: attempt,
-                attemptNum: idx + 1,
-                date: attempt.date || ''
-              });
-            }
-          });
-        }
-      } catch(e) {}
-    }
-  });
-
-  if (allAttempts.length === 0) {
-    panel.innerHTML = '';
-    return;
-  }
-
-  // Count total mistakes
-  var totalMistakes = 0;
-  var totalQuestions = 0;
-  allAttempts.forEach(function(a) {
-    a.attempt.responses.forEach(function(r) {
-      totalQuestions++;
-      if (!r.correct) totalMistakes++;
-    });
-  });
-
-  // Build filter buttons from unique labels
-  var labels = [];
-  allAttempts.forEach(function(a) {
-    if (labels.indexOf(a.label) === -1) labels.push(a.label);
-  });
-
-  var html = '<div class="card mr-panel">';
-  html += '<div class="mr-header">';
-  html += '<div><span class="mr-title">Review Your Mistakes</span>';
-  html += '<span class="mr-stats" style="margin-left:12px">' + totalMistakes + ' mistake' + (totalMistakes !== 1 ? 's' : '') + ' across ' + allAttempts.length + ' attempt' + (allAttempts.length !== 1 ? 's' : '') + '</span></div>';
-  html += '<div style="display:flex;gap:8px">';
-  html += '<button class="mr-filter-btn" onclick="filterMistakes(\'mistakes\')" id="mr-filter-mistakes" style="background:var(--red);color:white;border-color:var(--red)">Mistakes Only</button>';
-  html += '<button class="mr-filter-btn" onclick="filterMistakes(\'all\')" id="mr-filter-all">All Answers</button>';
-  html += '</div></div>';
-
-  // Filter by quiz
-  if (labels.length > 1) {
-    html += '<div class="mr-filter-row">';
-    html += '<button class="mr-filter-btn active" onclick="filterMistakeQuiz(\'all\')">All Quizzes</button>';
-    labels.forEach(function(l) {
-      html += '<button class="mr-filter-btn" onclick="filterMistakeQuiz(\'' + l.replace(/'/g, "\\'") + '\')">' + l + '</button>';
-    });
-    html += '</div>';
-  }
-
-  html += '<div id="mr-content">';
-
-  // Render attempts in reverse order (most recent first)
-  var reversed = allAttempts.slice().reverse();
-  reversed.forEach(function(a) {
-    var pctClass = a.attempt.pct >= 80 ? 'great' : a.attempt.pct >= 60 ? 'ok' : 'low';
-    html += '<div class="mr-attempt-group" data-quiz-label="' + a.label.replace(/"/g, '&quot;') + '">';
-    html += '<div class="mr-attempt-header">';
-    html += '<span>' + a.label + ' <span style="color:var(--muted);font-weight:400">' + (a.date ? ' &middot; ' + a.date : '') + '</span></span>';
-    html += '<span class="mr-attempt-score ' + pctClass + '">' + a.attempt.pct + '%</span>';
-    html += '</div>';
-
-    a.attempt.responses.forEach(function(r) {
-      var cardClass = r.correct ? 'correct' : 'incorrect';
-      html += '<div class="mr-card ' + cardClass + '" data-correct="' + r.correct + '">';
-      html += '<div class="mr-q">' + r.q + '</div>';
-      html += '<div class="mr-answers">';
-      if (r.correct) {
-        html += '<span class="mr-your-ans right">Your answer: ' + r.userAns + ' ✓</span>';
-      } else {
-        html += '<span class="mr-your-ans">Your answer: ' + r.userAns + '</span>';
-        html += '<span class="mr-correct-ans">Correct: ' + r.answer + '</span>';
+  // Gather all weeks that have quizzes
+  var weekDays = {};
+  for (var key in studyGuides) {
+    var parts = key.split('-');
+    var wk = parseInt(parts[0]);
+    if (!isNaN(wk)) {
+      if (!weekDays[wk]) weekDays[wk] = [];
+      if (studyGuides[key].quiz && studyGuides[key].quiz.length > 0) {
+        weekDays[wk].push(key);
       }
-      html += '</div></div>';
-    });
+    }
+  }
 
+  // Sorted unique week numbers
+  var weekNums = Object.keys(weekDays).map(Number).sort(function(a, b) { return a - b; });
+
+  // Build range groups (4 weeks per group)
+  var ranges = [];
+  for (var i = 0; i < weekNums.length; i += 4) {
+    var chunk = weekNums.slice(i, i + 4);
+    ranges.push({ start: chunk[0], end: chunk[chunk.length - 1], weeks: chunk, idx: ranges.length });
+  }
+
+  var html = '';
+
+  // --- Range dropdown + pill nav row ---
+  html += '<div class="range-row">';
+  if (ranges.length > 1) {
+    html += '<div class="range-dropdown" id="qt-range-dd">';
+    html += '<button class="range-btn" onclick="qtToggleRange()">';
+    html += '<span id="qt-range-label">Weeks ' + ranges[0].start + '\u2013' + ranges[0].end + '</span>';
+    html += ' <span class="range-chevron">\u25bc</span>';
+    html += '</button>';
+    html += '<div class="range-menu" id="qt-range-menu" style="display:none">';
+    ranges.forEach(function(r) {
+      html += '<div class="range-option' + (r.idx === 0 ? ' active' : '') + '" onclick="qtSelectRange(' + r.idx + ')">Weeks ' + r.start + '\u2013' + r.end + '</div>';
+    });
+    html += '</div></div>';
+  }
+
+  // Pill nav — initially show first range's weeks
+  html += '<div class="pill-nav" id="qt-pills">';
+  var firstRange = ranges[0];
+  if (firstRange) {
+    firstRange.weeks.forEach(function(wk, i) {
+      html += '<button class="pill' + (i === 0 ? ' active' : '') + '" data-week="w' + wk + '" onclick="qtShowWeek(\'w' + wk + '\')">Week ' + wk + '</button>';
+    });
+  }
+  html += '<button class="pill general" data-week="general" onclick="qtShowWeek(\'general\')">General</button>';
+  html += '</div>';
+  html += '</div>'; // end range-row
+
+  // --- Week content panels (all built upfront, CSS shows only .active) ---
+  weekNums.forEach(function(wk, i) {
+    html += '<div class="week-content' + (i === 0 ? ' active' : '') + '" id="qt-week-vw' + wk + '" data-range-idx="' + Math.floor(i / 4) + '">';
+    html += buildWeekContent(wk, weekDays[wk]);
     html += '</div>';
   });
 
-  html += '</div></div>';
-  panel.innerHTML = html;
+  // General panel
+  html += '<div class="week-content' + (weekNums.length === 0 ? ' active' : '') + '" id="qt-week-vgeneral">';
+  html += buildGeneralContent();
+  html += '</div>';
 
-  // Default to showing mistakes only
-  filterMistakes('mistakes');
+  // Quiz launch area
+  html += '<div id="quiz-area"></div>';
+
+  inner.innerHTML = html;
+
+  // Store ranges for qtSelectRange
+  window._qtRanges = ranges;
+  window._qtCurrentRange = 0;
 }
 
-window.filterMistakes = function(mode) {
-  var cards = document.querySelectorAll('#mr-content .mr-card');
-  var groups = document.querySelectorAll('#mr-content .mr-attempt-group');
-  var btnMistakes = document.getElementById('mr-filter-mistakes');
-  var btnAll = document.getElementById('mr-filter-all');
+function buildWeekContent(wk, dayKeys) {
+  var html = '<div class="week-summary">';
+  html += '<div class="ws-title">Week ' + wk + ' Quizzes</div>';
+  html += '</div>';
+  html += '<div class="qdc-grid">';
 
-  if (mode === 'mistakes') {
-    if (btnMistakes) { btnMistakes.style.background = 'var(--red)'; btnMistakes.style.color = 'white'; btnMistakes.style.borderColor = 'var(--red)'; }
-    if (btnAll) { btnAll.style.background = ''; btnAll.style.color = ''; btnAll.style.borderColor = ''; }
-    cards.forEach(function(c) {
-      c.style.display = c.getAttribute('data-correct') === 'true' ? 'none' : '';
-    });
-    // Hide groups with no visible mistakes
-    groups.forEach(function(g) {
-      var visible = g.querySelectorAll('.mr-card[data-correct="false"]');
-      g.style.display = visible.length === 0 ? 'none' : '';
-    });
+  if (!dayKeys || dayKeys.length === 0) {
+    html += '<p style="color:var(--muted);font-size:0.88rem;grid-column:1/-1">No quizzes available for this week yet.</p>';
   } else {
-    if (btnAll) { btnAll.style.background = 'var(--accent)'; btnAll.style.color = 'white'; btnAll.style.borderColor = 'var(--accent)'; }
-    if (btnMistakes) { btnMistakes.style.background = ''; btnMistakes.style.color = ''; btnMistakes.style.borderColor = ''; }
-    cards.forEach(function(c) { c.style.display = ''; });
-    groups.forEach(function(g) { g.style.display = ''; });
+    dayKeys.sort();
+    dayKeys.forEach(function(key) {
+      var guide = studyGuides[key];
+      var histKey = 'daily-quiz-history-' + key;
+      var history = JSON.parse(localStorage.getItem(histKey) || '[]');
+      var bestScore = history.length > 0 ? Math.max.apply(null, history.map(function(h) { return h.pct; })) : null;
+      var attemptCount = history.length;
+      var scoreCls = bestScore !== null ? (bestScore >= 80 ? 'great' : bestScore >= 60 ? 'ok' : 'low') : '';
+
+      html += '<div class="qdc-card">';
+      html += '<div class="qdc-header">';
+      html += '<div class="qdc-title">' + (guide.dayTitle || key) + '</div>';
+      if (bestScore !== null) {
+        html += '<div class="qdc-score ' + scoreCls + '">' + bestScore + '%</div>';
+      }
+      html += '</div>';
+      html += '<div class="qdc-meta">' + guide.weekLabel + ' \u00b7 ' + guide.quiz.length + ' questions';
+      if (attemptCount > 0) html += ' \u00b7 ' + attemptCount + ' attempt' + (attemptCount > 1 ? 's' : '');
+      html += '</div>';
+      html += '<button class="qdc-btn" onclick="qtStartQuiz(\'' + key + '\')">';
+      html += bestScore !== null ? '\u{1F504} Retake' : '\u25b6 Start Quiz';
+      html += '</button>';
+      html += '</div>';
+    });
   }
+
+  html += '</div>';
+  return html;
+}
+
+function buildGeneralContent() {
+  var histKey = 'general-quiz-history';
+  var history = JSON.parse(localStorage.getItem(histKey) || '[]');
+  var bestScore = history.length > 0 ? Math.max.apply(null, history.map(function(h) { return h.pct; })) : null;
+  var attemptCount = history.length;
+  var scoreCls = bestScore !== null ? (bestScore >= 80 ? 'great' : bestScore >= 60 ? 'ok' : 'low') : '';
+
+  var html = '<div class="week-summary">';
+  html += '<div class="ws-title">General Knowledge Quiz</div>';
+  html += '<div class="ws-desc">Covers alphabet, vocabulary, and phrases from all weeks. Great for tracking overall progress!</div>';
+  html += '</div>';
+
+  html += '<div class="qdc-grid">';
+  html += '<div class="qdc-card">';
+  html += '<div class="qdc-header">';
+  html += '<div class="qdc-title">\ud83c\udf10 All-Topics Quiz</div>';
+  if (bestScore !== null) {
+    html += '<div class="qdc-score ' + scoreCls + '">' + bestScore + '%</div>';
+  }
+  html += '</div>';
+  html += '<div class="qdc-meta">' + quizData.length + ' questions \u00b7 Tests everything';
+  if (attemptCount > 0) html += ' \u00b7 ' + attemptCount + ' attempt' + (attemptCount > 1 ? 's' : '');
+  html += '</div>';
+  html += '<button class="qdc-btn" onclick="qtStartGeneralQuiz()">';
+  html += bestScore !== null ? '\u{1F504} Retake' : '\u25b6 Start Quiz';
+  html += '</button>';
+  html += '</div>';
+  html += '</div>';
+
+  return html;
+}
+
+window.qtToggleRange = function() {
+  var menu = document.getElementById('qt-range-menu');
+  if (menu) menu.style.display = (menu.style.display === 'none' ? 'block' : 'none');
 };
 
-window.filterMistakeQuiz = function(label) {
-  var groups = document.querySelectorAll('#mr-content .mr-attempt-group');
-  var buttons = document.querySelectorAll('.mr-filter-row .mr-filter-btn');
-  buttons.forEach(function(b) { b.classList.remove('active'); });
-  event.target.classList.add('active');
+window.qtSelectRange = function(rangeIdx) {
+  var ranges = window._qtRanges;
+  if (!ranges || !ranges[rangeIdx]) return;
+  window._qtCurrentRange = rangeIdx;
+  var range = ranges[rangeIdx];
 
-  groups.forEach(function(g) {
-    if (label === 'all' || g.getAttribute('data-quiz-label') === label) {
-      g.style.display = '';
-    } else {
-      g.style.display = 'none';
-    }
+  // Update dropdown label
+  var label = document.getElementById('qt-range-label');
+  if (label) label.textContent = 'Weeks ' + range.start + '\u2013' + range.end;
+
+  // Close dropdown
+  var menu = document.getElementById('qt-range-menu');
+  if (menu) menu.style.display = 'none';
+
+  // Update range option active states
+  document.querySelectorAll('.range-option').forEach(function(o, i) {
+    o.classList.toggle('active', i === rangeIdx);
   });
 
-  // Re-apply the current mistakes/all filter
-  var btnMistakes = document.getElementById('mr-filter-mistakes');
-  if (btnMistakes && btnMistakes.style.background.indexOf('red') !== -1) {
-    filterMistakes('mistakes');
-    // But also keep the quiz filter
-    if (label !== 'all') {
-      groups.forEach(function(g) {
-        if (g.getAttribute('data-quiz-label') !== label) g.style.display = 'none';
-      });
-    }
+  // Rebuild week pills (keep General pill)
+  var pillNav = document.getElementById('qt-pills');
+  if (pillNav) {
+    pillNav.querySelectorAll('.pill:not(.general)').forEach(function(p) { p.remove(); });
+    var generalPill = pillNav.querySelector('.pill.general');
+    range.weeks.forEach(function(wk) {
+      var btn = document.createElement('button');
+      btn.className = 'pill';
+      btn.setAttribute('data-week', 'w' + wk);
+      btn.onclick = (function(w) { return function() { qtShowWeek('w' + w); }; })(wk);
+      btn.textContent = 'Week ' + wk;
+      pillNav.insertBefore(btn, generalPill);
+    });
   }
+
+  // Show first week of new range
+  qtShowWeek('w' + range.weeks[0]);
 };
 
-// ---- QUIZ ----
-function initQuiz() {
-  shuffledQuiz = [...quizData].sort(() => Math.random() - 0.5).slice(0, 10);
-  quizIndex = 0; quizScore = 0; answered = false;
-  renderQuestion();
-}
+window.qtShowWeek = function(weekId) {
+  // Hide all week content panels
+  document.querySelectorAll('.week-content').forEach(function(p) { p.classList.remove('active'); });
 
-function renderQuestion() {
-  const area = document.getElementById('quiz-area');
-  if (quizIndex >= shuffledQuiz.length) {
-    const pct = Math.round((quizScore / shuffledQuiz.length) * 100);
-    const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
-    saveQuizResult(quizScore, shuffledQuiz.length, pct);
-    area.innerHTML = `<div class="card quiz-score">
-      <div style="font-size:2rem;margin-bottom:8px">${emoji}</div>
-      <div class="score-big">${quizScore}/${shuffledQuiz.length}</div>
-      <div style="font-size:1rem;color:var(--muted);margin-top:8px">${pct}% — ${pct >= 80 ? 'Excellent! You know your Bulgarian!' : pct >= 60 ? 'Good work! Keep practicing the flashcards.' : 'Keep going! Review the flashcards and try again.'}</div>
-      <button class="quiz-restart" onclick="initQuiz()">Try Again</button>
-    </div>`;
-    renderQuizHistoryPanel();
-    return;
-  }
-  const q = shuffledQuiz[quizIndex];
-  answered = false;
-  area.innerHTML = `<div class="card">
-    <div style="font-size:0.75rem;color:var(--muted);margin-bottom:12px">Question ${quizIndex+1} of ${shuffledQuiz.length}</div>
-    <div class="quiz-question">${q.q}</div>
-    <div class="quiz-opts">
-      ${q.opts.map((o, i) => `<button class="quiz-opt" onclick="answerQuiz(${i})">${o}</button>`).join('')}
-    </div>
-    <div id="qfeedback"></div>
-    <button id="qnext" class="quiz-next" onclick="nextQuestion()">Next Question →</button>
-  </div>`;
-}
+  // Show target panel
+  var target = document.getElementById('qt-week-v' + weekId);
+  if (target) target.classList.add('active');
 
-function answerQuiz(i) {
-  if (answered) return;
-  answered = true;
-  const q = shuffledQuiz[quizIndex];
-  const opts = document.querySelectorAll('.quiz-opt');
-  opts.forEach((el, idx) => {
-    el.disabled = true;
-    if (idx === q.ans) el.classList.add('correct');
-    if (idx === i && i !== q.ans) el.classList.add('wrong');
-  });
-  const isRight = i === q.ans;
-  if (isRight) quizScore++;
-  document.getElementById('qfeedback').innerHTML = `<div class="quiz-feedback ${isRight ? 'good' : 'bad'}">${isRight ? '✅ Correct!' : `❌ The correct answer is: "${q.opts[q.ans]}"`}</div>`;
-  document.getElementById('qnext').style.display = 'block';
-}
+  // Update pill active states
+  document.querySelectorAll('#qt-pills .pill').forEach(function(p) { p.classList.remove('active'); });
+  var activePill = document.querySelector('#qt-pills .pill[data-week="' + weekId + '"]');
+  if (activePill) activePill.classList.add('active');
 
-function nextQuestion() { quizIndex++; renderQuestion(); }
+  // Clear quiz area
+  var quizArea = document.getElementById('quiz-area');
+  if (quizArea) quizArea.innerHTML = '';
+};
+
+window.qtStartQuiz = function(dayKey) {
+  var guide = studyGuides[dayKey];
+  if (!guide || !guide.quiz) return;
+  var histKey = 'daily-quiz-history-' + dayKey;
+  var quizArea = document.getElementById('quiz-area');
+  if (!quizArea) return;
+  quizArea.innerHTML = '';
+  renderInteractiveQuiz('quiz-area', guide.quiz, histKey);
+  setTimeout(function() { quizArea.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+};
+
+window.qtStartGeneralQuiz = function() {
+  var shuffled = quizData.slice().sort(function() { return Math.random() - 0.5; }).slice(0, 10);
+  var histKey = 'general-quiz-history';
+  var quizArea = document.getElementById('quiz-area');
+  if (!quizArea) return;
+  quizArea.innerHTML = '';
+  renderInteractiveQuiz('quiz-area', shuffled.map(function(q) {
+    return { q: q.q, type: 'mc', options: q.opts, answer: q.opts[q.ans] };
+  }), histKey);
+  setTimeout(function() { quizArea.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+};
 
 // ---- CHALLENGES ----
 function isChallengeComplete(w) {
@@ -2912,7 +2777,16 @@ const studyGuides = {
       title: 'Mark Day 1 complete',
       desc: 'Weekly Plan → Week 2 → check off Day 1. Only 9 more letters to go before you can read the whole Bulgarian alphabet!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "Which letter looks like P but sounds like a rolled R?", type: "mc", options: ["П", "Р", "С", "Т"], answer: "Р"},
+    {q: "What does пролет mean?", type: "text", answer: "spring"},
+    {q: "С looks like the English letter C. What sound does it make?", type: "mc", options: ["ch", "k", "s", "ts"], answer: "s"},
+    {q: "What does утро mean?", type: "text", answer: "morning"},
+    {q: "Which letter makes the 'oo' sound (like in 'moon')?", type: "mc", options: ["Т", "У", "П", "Р"], answer: "У"},
+    {q: "What Bulgarian word means 'rose'?", type: "text", answer: "роза"},
+    {q: "Which of these is an 'imposter' letter (looks like English but sounds different)?", type: "mc", options: ["П", "М", "Р", "О"], answer: "Р"}
   ]
 },
 
@@ -2959,7 +2833,16 @@ const studyGuides = {
       title: 'Mark Day 2 complete',
       desc: 'Weekly Plan → Week 2 → check off Day 2. You know 25 letters. Almost there!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "Which letter makes the 'f' sound?", type: "mc", options: ["Х", "Ф", "Ц", "Ч"], answer: "Ф"},
+    {q: "What does хляб mean?", type: "text", answer: "bread"},
+    {q: "Which letter sounds like 'ts' (as in 'pizza')?", type: "mc", options: ["Ч", "Ш", "Ц", "Ф"], answer: "Ц"},
+    {q: "What does чай mean?", type: "text", answer: "tea"},
+    {q: "Which letter makes the 'sh' sound?", type: "mc", options: ["Щ", "Ш", "Ч", "Ц"], answer: "Ш"},
+    {q: "What Bulgarian word means 'flower'?", type: "text", answer: "цвете"},
+    {q: "Х makes a guttural sound similar to which?", type: "mc", options: ["h in 'hello'", "kh as in German 'Bach'", "ch as in 'chair'", "g as in 'go'"], answer: "kh as in German 'Bach'"}
   ]
 },
 
@@ -3011,6 +2894,15 @@ const studyGuides = {
       desc: 'Weekly Plan → Week 2 → check off Day 3. You know the entire Bulgarian alphabet! 🎉',
     },
   
+  ],
+  quiz: [
+    {q: "Which letter makes the 'sht' sound (as in 'mashed')?", type: "mc", options: ["Ш", "Щ", "Ц", "Ч"], answer: "Щ"},
+    {q: "What does щастие mean?", type: "text", answer: "happiness"},
+    {q: "Ъ is unique to Bulgarian. What sound does it make?", type: "mc", options: ["oo like moon", "uh like utter", "ee like feet", "oh like open"], answer: "uh like utter"},
+    {q: "What does яйце mean?", type: "text", answer: "egg"},
+    {q: "Which letter sounds like 'yu' (as in 'you')?", type: "mc", options: ["Я", "Ъ", "Ю", "Щ"], answer: "Ю"},
+    {q: "What Bulgarian word means 'corner'?", type: "text", answer: "ъгъл"},
+    {q: "How many letters are in the Bulgarian alphabet?", type: "mc", options: ["26", "28", "30", "33"], answer: "30"}
   ]
 },
 
@@ -3050,7 +2942,15 @@ const studyGuides = {
       title: 'Mark Day 4 complete',
       desc: 'Weekly Plan → Week 2 → check off Day 4. One more day — and tomorrow you\'ll read your first real Bulgarian sentences!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "В looks like the English letter B. What sound does it actually make?", type: "mc", options: ["b", "v", "d", "g"], answer: "v"},
+    {q: "Н looks like the English letter H. What sound does it actually make?", type: "mc", options: ["h", "n", "m", "r"], answer: "n"},
+    {q: "Р looks like the English letter P. What sound does it actually make?", type: "mc", options: ["p", "rolled r", "b", "d"], answer: "rolled r"},
+    {q: "С looks like the English letter C. What sound does it actually make?", type: "mc", options: ["k", "ch", "s", "ts"], answer: "s"},
+    {q: "У looks like the English letter Y. What sound does it actually make?", type: "mc", options: ["y", "oo", "uh", "ee"], answer: "oo"},
+    {q: "Which letter sounds like 'kh' (a guttural throat sound)?", type: "mc", options: ["К", "Г", "Х", "Ц"], answer: "Х"}
   ]
 },
 
@@ -3091,6 +2991,16 @@ const studyGuides = {
       desc: 'Weekly Plan → Week 2 → check off Day 5. Check your Dashboard — you\'ve completed Phase 1! You can now read the Bulgarian alphabet.',
     },
   
+  ],
+  quiz: [
+    {q: "What does баба mean?", type: "text", answer: "grandma"},
+    {q: "What does дядо mean?", type: "text", answer: "grandpa"},
+    {q: "What does вода mean?", type: "text", answer: "water"},
+    {q: "What does хляб mean?", type: "text", answer: "bread"},
+    {q: "What does котка mean?", type: "text", answer: "cat"},
+    {q: "What does куче mean?", type: "text", answer: "dog"},
+    {q: "What does добре mean?", type: "mc", options: ["hello", "okay / good", "goodbye", "sorry"], answer: "okay / good"},
+    {q: "Where does stress typically fall in Bulgarian words?", type: "mc", options: ["Always on the first syllable", "Always on the last syllable", "It varies — must be learned per word", "Always on the second syllable"], answer: "It varies — must be learned per word"}
   ]
 },
 
@@ -3135,7 +3045,16 @@ const studyGuides = {
       title: 'Mark Day 1 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 1. Solid foundation — vowels are the building blocks of every word.',
     },
-  
+
+  ],
+  quiz: [
+    {q: "How many vowels does Bulgarian have?", type: "mc", options: ["5", "6", "7", "8"], answer: "6"},
+    {q: "What sound does А make?", type: "mc", options: ["ay like 'day'", "ah like 'father'", "aw like 'law'", "a like 'cat'"], answer: "ah like 'father'"},
+    {q: "How are Bulgarian vowels different from English vowels?", type: "mc", options: ["They have more sounds each", "Each vowel always has one consistent sound", "They change based on stress", "They are silent sometimes"], answer: "Each vowel always has one consistent sound"},
+    {q: "What sound does Ъ make?", type: "mc", options: ["oo", "ah", "uh (schwa)", "oh"], answer: "uh (schwa)"},
+    {q: "What does есен mean?", type: "text", answer: "autumn"},
+    {q: "What does игра mean?", type: "text", answer: "game"},
+    {q: "Which vowel sounds like 'ee' as in 'feet'?", type: "mc", options: ["Е", "И", "У", "Ъ"], answer: "И"}
   ]
 },
 
@@ -3176,7 +3095,16 @@ const studyGuides = {
       title: 'Mark Day 2 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 2.',
     },
-  
+
+  ],
+  quiz: [
+    {q: "What sound does Ж make?", type: "mc", options: ["sh like 'shell'", "zh like 'measure'", "ch like 'chair'", "j like 'jar'"], answer: "zh like 'measure'"},
+    {q: "What does жена mean?", type: "text", answer: "woman"},
+    {q: "Ц sounds like which combination?", type: "mc", options: ["sh", "ts", "ch", "sht"], answer: "ts"},
+    {q: "What does цар mean?", type: "text", answer: "king"},
+    {q: "Щ sounds like which combination?", type: "mc", options: ["sh", "ts", "sht", "st"], answer: "sht"},
+    {q: "What does щастие mean?", type: "text", answer: "happiness"},
+    {q: "Which sound is described as being in 'almost every other Bulgarian word'?", type: "mc", options: ["Ц", "Щ", "Ж", "Ш"], answer: "Ж"}
   ]
 },
 
@@ -3221,7 +3149,16 @@ const studyGuides = {
       title: 'Mark Day 3 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 3.',
     },
-  
+
+  ],
+  quiz: [
+    {q: "Is stress position fixed in Bulgarian?", type: "mc", options: ["Yes, always on the first syllable", "Yes, always on the last syllable", "No, it varies by word and must be memorized", "Yes, always on the second syllable"], answer: "No, it varies by word and must be memorized"},
+    {q: "Where is the stress in добре?", type: "mc", options: ["DOB-re (first syllable)", "dob-RE (second syllable)"], answer: "dob-RE (second syllable)"},
+    {q: "Where is the stress in благодаря?", type: "mc", options: ["BLA-go-da-rya", "bla-GO-da-rya", "bla-go-DA-rya", "bla-go-da-RYA"], answer: "bla-go-da-RYA"},
+    {q: "What does благодаря mean?", type: "text", answer: "thank you"},
+    {q: "What does довиждане mean?", type: "text", answer: "goodbye"},
+    {q: "What does съжалявам mean?", type: "text", answer: "I'm sorry"},
+    {q: "What happens if you get the stress wrong in Bulgarian?", type: "mc", options: ["People won't understand you at all", "It sounds foreign but is still understandable", "It changes the meaning completely", "Nothing, stress doesn't matter"], answer: "It sounds foreign but is still understandable"}
   ]
 },
 
@@ -3261,7 +3198,17 @@ const studyGuides = {
       title: 'Mark Day 4 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 4. One more day — and next week you start real conversations!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "What does благодаря mean?", type: "text", answer: "thank you"},
+    {q: "What does довиждане mean?", type: "text", answer: "goodbye"},
+    {q: "What does здравей mean?", type: "text", answer: "hello"},
+    {q: "What does съжалявам mean?", type: "mc", options: ["I understand", "I'm sorry", "Thank you", "Hello"], answer: "I'm sorry"},
+    {q: "What does разбирам mean?", type: "mc", options: ["I'm sorry", "I don't know", "I understand", "I speak"], answer: "I understand"},
+    {q: "What does не разбирам mean?", type: "text", answer: "I don't understand"},
+    {q: "What does моля mean?", type: "mc", options: ["Hello", "Sorry", "Please / You're welcome", "Goodbye"], answer: "Please / You're welcome"},
+    {q: "What does добро утро mean?", type: "text", answer: "good morning"}
   ]
 },
 
@@ -3301,7 +3248,14 @@ const studyGuides = {
       title: 'Mark Day 5 complete — Week 3 done! 🎉',
       desc: 'Weekly Plan → Week 3 → check off Day 5. Check your Dashboard — you\'re 15% through the full 20-week course!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "What type of content should you listen to for ear training?", type: "mc", options: ["English podcasts about Bulgaria", "Native Bulgarian speech (BulgarianPod101, music)", "Only your own recordings", "Audiobooks in English"], answer: "Native Bulgarian speech (BulgarianPod101, music)"},
+    {q: "What is 'shadowing' in language learning?", type: "mc", options: ["Reading quietly to yourself", "Repeating what a native speaker says immediately after them", "Writing translations of spoken words", "Listening without speaking"], answer: "Repeating what a native speaker says immediately after them"},
+    {q: "How many letters are in the Bulgarian alphabet?", type: "mc", options: ["26", "28", "30", "33"], answer: "30"},
+    {q: "What makes Ъ unique?", type: "mc", options: ["It's silent", "It's a vowel unique to Bulgarian (schwa sound)", "It's the rarest letter", "It only appears at the start of words"], answer: "It's a vowel unique to Bulgarian (schwa sound)"},
+    {q: "What does здравей mean?", type: "text", answer: "hello"}
   ]
 },
 
@@ -3347,7 +3301,15 @@ const studyGuides = {
       title: 'Mark Day 1 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 1. You said your first real Bulgarian today!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "What does здравей mean?", type: "mc", options: ["Goodbye", "Good morning", "Hello (informal)", "Thank you"], answer: "Hello (informal)"},
+    {q: "When do you use Здравейте instead of Здравей?", type: "mc", options: ["In the morning", "With strangers, elders, or groups (formal)", "When you're happy", "Only with family"], answer: "With strangers, elders, or groups (formal)"},
+    {q: "What does Добро утро mean?", type: "text", answer: "good morning"},
+    {q: "When do you use Добър ден?", type: "mc", options: ["Early morning until noon", "Noon until about 6pm", "Evening time", "Only at midnight"], answer: "Noon until about 6pm"},
+    {q: "Which greeting is always safe when in doubt?", type: "mc", options: ["Здравей", "Здравейте", "Добро утро", "Чао"], answer: "Здравейте"},
+    {q: "What does Добър ден mean?", type: "text", answer: "good afternoon"}
   ]
 },
 
@@ -3388,7 +3350,16 @@ const studyGuides = {
       title: 'Mark Day 2 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 2. You now know the full greeting cycle from morning to bedtime!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "What does Добър вечер mean?", type: "text", answer: "good evening"},
+    {q: "What does Лека нощ mean?", type: "mc", options: ["Good evening", "Goodnight (only for sleep)", "Goodbye", "See you later"], answer: "Goodnight (only for sleep)"},
+    {q: "When should you use Лека нощ?", type: "mc", options: ["When leaving at night", "Only when going to sleep", "Any time after 6pm", "When greeting someone at night"], answer: "Only when going to sleep"},
+    {q: "What does Довиждане mean?", type: "text", answer: "goodbye"},
+    {q: "Чао is an informal goodbye borrowed from which language?", type: "mc", options: ["French", "German", "Italian", "Spanish"], answer: "Italian"},
+    {q: "It's 9pm and you're leaving a friend's house. What do you say?", type: "mc", options: ["Лека нощ", "Добро утро", "Довиждане or Чао", "Добър ден"], answer: "Довиждане or Чао"},
+    {q: "Match the time: 7:30 AM greeting?", type: "mc", options: ["Добър ден", "Добро утро", "Добър вечер", "Лека нощ"], answer: "Добро утро"}
   ]
 },
 
@@ -3430,7 +3401,16 @@ const studyGuides = {
       title: 'Mark Day 3 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 3.',
     },
-  
+
+  ],
+  quiz: [
+    {q: "How do you say 'yes' in Bulgarian?", type: "text", answer: "да"},
+    {q: "How do you say 'no' in Bulgarian?", type: "text", answer: "не"},
+    {q: "What does Моля mean?", type: "mc", options: ["Sorry", "Thank you", "Please / You're welcome", "Hello"], answer: "Please / You're welcome"},
+    {q: "What does Благодаря mean?", type: "text", answer: "thank you"},
+    {q: "What's special about the word Моля?", type: "mc", options: ["It's the longest Bulgarian word", "It means both 'please' AND 'you're welcome'", "It's only used formally", "It changes meaning based on stress"], answer: "It means both 'please' AND 'you're welcome'"},
+    {q: "How would you say 'One coffee, please'?", type: "mc", options: ["Едно кафе, благодаря", "Едно кафе, моля", "Едно кафе, да", "Едно кафе, здравей"], answer: "Едно кафе, моля"},
+    {q: "Someone says Благодаря to you. How do you reply?", type: "mc", options: ["Да", "Не", "Моля", "Здравей"], answer: "Моля"}
   ]
 },
 
@@ -3470,7 +3450,16 @@ const studyGuides = {
       title: 'Mark Day 4 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 4. Tomorrow is the grand finale — Greetings Day!',
     },
-  
+
+  ],
+  quiz: [
+    {q: "What does Съжалявам mean?", type: "text", answer: "I'm sorry"},
+    {q: "How do you say 'I understand' in Bulgarian?", type: "text", answer: "разбирам"},
+    {q: "How do you say 'I don't understand'?", type: "mc", options: ["Не говоря", "Не разбирам", "Не знам", "Съжалявам"], answer: "Не разбирам"},
+    {q: "What does Говорите ли бавно? mean?", type: "mc", options: ["Do you speak English?", "Can you speak slowly?", "What did you say?", "I don't speak Bulgarian"], answer: "Can you speak slowly?"},
+    {q: "How do you ask 'What is your name?' informally?", type: "mc", options: ["Как сте?", "Как се казваш?", "Казвам се...", "Откъде си?"], answer: "Как се казваш?"},
+    {q: "How do you say 'My name is...'?", type: "text", answer: "казвам се"},
+    {q: "What does Казвам се Нико mean?", type: "mc", options: ["I am from Niko", "I like Niko", "My name is Niko", "I know Niko"], answer: "My name is Niko"}
   ]
 },
 
@@ -3510,7 +3499,17 @@ const studyGuides = {
       title: 'Mark Day 5 complete — Week 4 done! 🎉🎉',
       desc: 'Weekly Plan → Week 4 → check off Day 5. Check your Dashboard — you\'ve completed the first 4 weeks! You can read Bulgarian and greet people properly. That\'s real progress.',
     },
-  
+
+  ],
+  quiz: [
+    {q: "What Bulgarian greeting do you use in the morning?", type: "text", answer: "добро утро"},
+    {q: "What do you say when leaving in the evening (not going to sleep)?", type: "mc", options: ["Лека нощ", "Довиждане or Чао", "Добро утро", "Добър ден"], answer: "Довиждане or Чао"},
+    {q: "How do you say 'thank you'?", type: "text", answer: "благодаря"},
+    {q: "How do you say 'I'm sorry'?", type: "text", answer: "съжалявам"},
+    {q: "What does Моля mean?", type: "mc", options: ["Sorry", "Hello", "Please / You're welcome", "Goodbye"], answer: "Please / You're welcome"},
+    {q: "How do you introduce yourself? 'My name is Niko'?", type: "mc", options: ["Аз съм Нико", "Казвам се Нико", "Здравей Нико", "Обичам Нико"], answer: "Казвам се Нико"},
+    {q: "Translate: Здравейте! Казвам се Нико. Не разбирам.", type: "mc", options: ["Hello! My name is Niko. I don't understand.", "Goodbye! I am Niko. I'm sorry.", "Good morning! Call me Niko. I don't know.", "Hi! I like Niko. I'm not sure."], answer: "Hello! My name is Niko. I don't understand."},
+    {q: "What greeting is used from noon to about 6pm?", type: "text", answer: "добър ден"}
   ]
 },
 
@@ -3945,12 +3944,6 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
         });
         localStorage.setItem(storageKey, JSON.stringify(history));
 
-        // Update quiz history panel if it exists
-        if (storageKey === 'quiz_history') {
-          renderQuizHistoryPanel();
-        }
-        // Update mistake review panel
-        renderMistakeReviewPanel();
       }
 
       var mistakes = responses.filter(function(r) { return !r.correct; });
