@@ -293,14 +293,13 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .res-tag.free { background: #f0fdf4; color: var(--green); }
 
 /* Challenges */
-.challenge-week { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 12px; display: flex; gap: 16px; align-items: flex-start; }
+.challenge-week { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 12px; display: flex; gap: 16px; align-items: flex-start; position: relative; transition: all 0.2s; }
 .cw-num { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #6366f1); color: white; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .cw-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
 .cw-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
 .cw-type { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-top: 6px; }
 
 /* Challenge completion */
-.challenge-week { position: relative; transition: all 0.2s; }
 .challenge-week.done { background: #f0fdf4; border-color: #86efac; }
 .challenge-week.done .cw-num { background: linear-gradient(135deg, var(--green), #059669); }
 .challenge-week.done .cw-title { color: var(--muted); }
@@ -1100,6 +1099,8 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
   <div class="card" style="margin-bottom:20px">
     <div class="card-title">🏆 Weekly Partner Challenges</div>
     <div class="card-sub">One fun challenge per week — do it together or separately, then compare notes. These build real-world confidence.</div>
+    <div class="ch-progress-bar"><div class="ch-progress-fill" id="ch-prog-fill" style="width:0%"></div></div>
+    <div id="ch-prog-label" style="font-size:0.8rem;color:var(--muted)">0 of 0 challenges completed</div>
   </div>
   <div id="challenges-list"></div>
 </div>
@@ -2259,6 +2260,9 @@ function startDailyQuizFromPanel(dayKey) {
 
   const histKey = 'daily-quiz-history-' + dayKey;
   renderInteractiveQuiz('quiz-area', data.quiz, histKey);
+
+  // Scroll to quiz area so user sees the first question
+  setTimeout(function() { quizArea.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
 }
 
 // ---- MISTAKE REVIEW PANEL ----
@@ -3542,7 +3546,7 @@ function openStudyGuide(week, day) {
       </div>
     </div>`;
   });
-  html += '<div class="sg-mark-complete-wrapper"><button class="sg-mark-complete" onclick="markLessonComplete(' + week + ',' + day + ')">✅ Mark Day ' + day + ' Complete</button></div>';
+  html += '<div class="sg-mark-complete-wrapper"><button class="sg-mark-complete" onclick="markLessonComplete(' + week + ',' + day + ', event)">✅ Mark Day ' + day + ' Complete</button></div>';
 
   document.getElementById('sg-body').innerHTML = html;
   processQuizAnswers();
@@ -3681,7 +3685,7 @@ function buildGuideHTML(guide, week, day) {
       </div>
     </div>`;
   });
-  html += '<div class="sg-mark-complete-wrapper"><button class="sg-mark-complete" onclick="markLessonComplete(' + week + ',' + day + ')">✅ Mark Day ' + day + ' Complete</button></div>';
+  html += '<div class="sg-mark-complete-wrapper"><button class="sg-mark-complete" onclick="markLessonComplete(' + week + ',' + day + ', event)">✅ Mark Day ' + day + ' Complete</button></div>';
   return html;
 }
 
@@ -3840,113 +3844,6 @@ function printInlineGuide(panelId) {
   printWin.onload = () => { printWin.focus(); printWin.print(); };
 }
 
-// ---- INTERACTIVE QUIZ ENGINE ----
-function renderInteractiveQuiz(containerId, questions, quizKey) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  container.innerHTML = '<div class="sg-iquiz" data-quiz-key="' + quizKey + '"></div>';
-  const quizEl = container.querySelector('.sg-iquiz');
-  let currentQ = 0;
-  let score = 0;
-  const answers = [];
-
-  function showQuestion() {
-    if (currentQ >= questions.length) {
-      showScore();
-      return;
-    }
-
-    const q = questions[currentQ];
-    let html = '<div class="sg-iquiz-question">' + (currentQ + 1) + '. ' + q.q + '</div>';
-
-    if (q.type === 'mc') {
-      html += '<div class="sg-iquiz-options">';
-      q.options.forEach((opt, i) => {
-        html += '<button onclick="answerQuizMC(this, ' + i + ', \'' + q.answer.replace(/'/g, "\\'") + '\', ' + (q.caseSensitive ? 'true' : 'false') + ')">' + opt + '</button>';
-      });
-      html += '</div>';
-    } else if (q.type === 'text') {
-      html += '<input type="text" class="sg-iquiz-input" placeholder="Type your answer..." />';
-      html += '<button onclick="answerQuizText(this, \'' + q.answer.replace(/'/g, "\\'") + '\', ' + (q.caseSensitive ? 'true' : 'false') + ')">Submit</button>';
-    }
-
-    html += '<div class="sg-iquiz-feedback"></div>';
-    quizEl.innerHTML = html;
-  }
-
-  window.answerQuizMC = function(btn, idx, correct, caseSensitive) {
-    const options = btn.parentElement.querySelectorAll('button');
-    const text = btn.textContent.trim();
-    const isCorrect = (caseSensitive ? text : text.toLowerCase()) === (caseSensitive ? correct : correct.toLowerCase());
-
-    options.forEach(b => b.disabled = true);
-    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
-
-    const feedback = quizEl.querySelector('.sg-iquiz-feedback');
-    feedback.className = 'sg-iquiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
-    feedback.textContent = isCorrect ? '✅ Correct!' : '❌ Correct answer: ' + correct;
-
-    answers.push({q: q.q, userAnswer: text, correctAnswer: correct, correct: isCorrect});
-    if (isCorrect) score++;
-
-    setTimeout(() => {
-      currentQ++;
-      showQuestion();
-    }, 1500);
-  };
-
-  window.answerQuizText = function(btn, correct, caseSensitive) {
-    const input = quizEl.querySelector('.sg-iquiz-input');
-    const text = input.value.trim();
-    const isCorrect = (caseSensitive ? text : text.toLowerCase()) === (caseSensitive ? correct : correct.toLowerCase());
-
-    input.disabled = true;
-    btn.disabled = true;
-
-    const feedback = quizEl.querySelector('.sg-iquiz-feedback');
-    feedback.className = 'sg-iquiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
-    feedback.textContent = isCorrect ? '✅ Correct!' : '❌ Correct answer: ' + correct;
-
-    answers.push({q: questions[currentQ].q, userAnswer: text, correctAnswer: correct, correct: isCorrect});
-    if (isCorrect) score++;
-
-    setTimeout(() => {
-      currentQ++;
-      showQuestion();
-    }, 1500);
-  };
-
-  function showScore() {
-    const pct = Math.round((score / questions.length) * 100);
-    const history = JSON.parse(localStorage.getItem('iquiz_history_' + quizKey) || '[]');
-    history.push({date: new Date().toISOString(), score: score, total: questions.length, answers: answers});
-    localStorage.setItem('iquiz_history_' + quizKey, JSON.stringify(history));
-
-    let html = '<div class="sg-iquiz-score">';
-    html += '<div>' + score + ' / ' + questions.length + '</div>';
-    html += '<div style="font-size: 1rem; margin-top: 8px;">' + pct + '% — ' + (pct >= 80 ? '🎉 Excellent!' : pct >= 60 ? '👍 Good!' : '📚 Keep practicing') + '</div>';
-    html += '<button onclick="initQuizAgain(\'' + quizKey + '\')" style="margin-top: 12px; padding: 8px 16px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">Try Again</button>';
-    html += '</div>';
-
-    if (history.length > 1) {
-      html += '<div class="sg-iquiz-history"><div style="font-weight: 600; margin-bottom: 8px;">Past Attempts (' + history.length + ')</div>';
-      history.forEach((h, i) => {
-        const pct2 = Math.round((h.score / h.total) * 100);
-        html += '<div class="sg-iquiz-history-item">' + (i + 1) + '. ' + pct2 + '% (' + h.score + '/' + h.total + ')</div>';
-      });
-      html += '</div>';
-    }
-
-    quizEl.innerHTML = html;
-  }
-
-  showQuestion();
-}
-
-window.initQuizAgain = function(quizKey) {
-  // Placeholder for retrying quiz
-};
 
 // ---- EMBEDDED FLASHCARD COMPONENT ----
 function renderEmbeddedFlashcards(containerId, cards) {
@@ -4165,7 +4062,7 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
 }
 
 // ---- MARK LESSON COMPLETE ----
-function markLessonComplete(week, day) {
+function markLessonComplete(week, day, evt) {
   const dayIdx = day - 1;  // Convert to 0-indexed
   setChecked(week, dayIdx, true);
 
@@ -4173,7 +4070,7 @@ function markLessonComplete(week, day) {
   updateDashboard();
 
   // Find and disable the button
-  const btn = event.target;
+  const btn = evt ? evt.target : null;
   if (btn) {
     btn.disabled = true;
     btn.textContent = '✅ Day Complete';
