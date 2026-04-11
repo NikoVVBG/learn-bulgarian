@@ -30,6 +30,30 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
+/* Dark mode */
+body.dark-mode {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: #334155;
+  --shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+body.dark-mode header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+body.dark-mode nav.top-nav { background: #1e293b; border-bottom-color: #334155; }
+body.dark-mode .bottom-tab-bar { background: #1e293b; border-top-color: #334155; }
+body.dark-mode .flashcard .fc-front { background: linear-gradient(135deg, #0f172a, #1e293b); }
+body.dark-mode .flashcard .fc-back { background: #1e293b; }
+body.dark-mode .fc-translation { color: #e2e8f0; }
+body.dark-mode .sg-inline-panel { border-color: #334155; }
+body.dark-mode .week-card { background: #1e293b; border-color: #334155; }
+body.dark-mode .week-header:hover { background: #334155; }
+body.dark-mode .stat-card { background: #1e293b; border-color: #334155; }
+body.dark-mode .card { background: #1e293b; border-color: #334155; }
+body.dark-mode input[type=checkbox] { accent-color: #00966E; }
+body.dark-mode .sg-letter-card { background: linear-gradient(135deg, #1e293b, #334155); border-color: #475569; }
+body.dark-mode .sg-letter-card .sg-lc-cyrillic { color: #e2e8f0; }
+
 /* Bulgarian flag stripe */
 .flag-stripe { display: flex; height: 7px; }
 .fs-white { flex: 1; background: #fff; border-top: 1px solid #ddd; }
@@ -45,21 +69,47 @@ header h1 span { color: #94a3b8; font-weight: 400; font-size: 1rem; }
 .progress-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 6px 14px; font-size: 0.82rem; color: white; text-align: center; white-space: nowrap; }
 .progress-pill strong { color: #86efac; display: block; font-size: 1.1rem; }
 
-/* Nav */
-nav { background: white; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; overflow: visible; position: sticky; }
-.nav-scroll-wrapper { position: relative; max-width: 960px; margin: 0 auto; }
-.nav-inner { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+/* Nav - Desktop */
+nav.top-nav { background: white; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 960px; margin: 0 auto; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .nav-inner::-webkit-scrollbar { display: none; }
-.nav-scroll-hint { display: none; }
+nav.top-nav button { background: none; border: none; padding: 14px 20px; font-size: 0.88rem; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all 0.2s; }
+nav.top-nav button:hover { color: var(--text); }
+nav.top-nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
+nav.top-nav button .nav-icon { margin-right: 6px; }
+
+/* Nav - Mobile Bottom Tab Bar */
+.bottom-tab-bar { display: none; }
 @media (max-width: 640px) {
-  .nav-scroll-hint { display: block; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 2; transition: opacity 0.3s; }
-  .nav-scroll-hint.hidden { opacity: 0; }
-  nav button { padding: 12px 14px; font-size: 0.82rem; }
+  nav.top-nav { display: none; }
+  .bottom-tab-bar {
+    display: flex; justify-content: space-around; align-items: flex-start;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: white; border-top: 1px solid var(--border);
+    padding: 6px 0 max(10px, env(safe-area-inset-bottom));
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+  }
+  .bottom-tab-bar button {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    background: none; border: none; padding: 4px 6px; min-width: 52px;
+    font-size: 0.6rem; font-weight: 500; color: var(--muted);
+    cursor: pointer; transition: color 0.2s; -webkit-tap-highlight-color: transparent;
+  }
+  .bottom-tab-bar button .btb-icon { font-size: 1.25rem; line-height: 1; }
+  .bottom-tab-bar button.active { color: var(--accent); }
+  .bottom-tab-bar button.active .btb-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); margin-top: 1px; }
+  main { padding-bottom: max(100px, calc(80px + env(safe-area-inset-bottom))); }
+  .sg-mark-complete-wrapper {
+    position: sticky; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, var(--card) 20%);
+    padding: 20px 16px max(16px, env(safe-area-inset-bottom));
+    z-index: 10;
+  }
+  .sg-step-desc { font-size: 0.9rem; line-height: 1.6; }
+  .card-sub { font-size: 0.88rem; }
+  .day-task { font-size: 0.9rem; }
+  .sg-practice, .sg-quiz, .sg-tip, .sg-challenge { font-size: 0.88rem; }
 }
-nav button { background: none; border: none; padding: 14px 20px; font-size: 0.88rem; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all 0.2s; }
-nav button:hover { color: var(--text); }
-nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
-nav button .nav-icon { margin-right: 6px; }
 
 /* Main content */
 main { max-width: 960px; margin: 0 auto; padding: 24px 16px 60px; padding-bottom: max(60px, calc(40px + env(safe-area-inset-bottom))); }
@@ -561,6 +611,142 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
   color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 12px;
 }
 
+/* Progress bar at top of lesson */
+.sg-progress-bar {
+  display: flex; flex-direction: column; gap: 8px; align-items: center;
+  background: #f0f9ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  padding: 12px 16px; margin-bottom: 20px; font-size: 0.8rem; color: var(--text);
+}
+.sg-prog-track {
+  width: 100%; height: 6px; background: #dbeafe; border-radius: 3px; overflow: hidden;
+}
+.sg-prog-fill {
+  height: 100%; background: linear-gradient(90deg, var(--green), var(--accent));
+  border-radius: 3px; transition: width 0.3s ease;
+}
+
+/* Letter grid with 5th item centering */
+.sg-letter-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px; margin-top: 10px; justify-content: center;
+}
+
+/* Interactive quiz styles */
+.sg-iquiz {
+  background: #f9f5ff; border: 1px solid #e9d5ff; border-radius: 10px;
+  padding: 16px; margin-top: 12px;
+}
+.sg-iquiz-question {
+  font-weight: 600; font-size: 0.9rem; color: var(--text); margin-bottom: 12px;
+}
+.sg-iquiz-options {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px;
+}
+.sg-iquiz-options button {
+  padding: 10px 12px; border: 1.5px solid #c4b5fd; background: white;
+  border-radius: 8px; font-size: 0.82rem; cursor: pointer;
+  transition: all 0.2s; color: var(--text);
+}
+.sg-iquiz-options button:hover {
+  background: #f3e8ff; border-color: #a78bfa;
+}
+.sg-iquiz-options button.selected {
+  background: var(--accent); color: white; border-color: var(--accent);
+}
+.sg-iquiz-input {
+  width: 100%; padding: 10px 12px; border: 1.5px solid #c4b5fd;
+  border-radius: 8px; font-size: 0.9rem; margin-bottom: 8px;
+}
+.sg-iquiz-input:focus {
+  outline: none; border-color: var(--accent); background: #f8f5ff;
+}
+.sg-iquiz-feedback {
+  padding: 10px 12px; border-radius: 8px; font-size: 0.82rem; margin-bottom: 12px;
+  font-weight: 600; display: none;
+}
+.sg-iquiz-feedback.correct {
+  display: block; background: #dcfce7; color: #15803d; border: 1px solid #86efac;
+}
+.sg-iquiz-feedback.incorrect {
+  display: block; background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;
+}
+.sg-iquiz-score {
+  background: #f8fafc; border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px; margin-bottom: 12px; font-weight: 600; text-align: center;
+  color: var(--text);
+}
+.sg-iquiz-history {
+  font-size: 0.78rem; color: var(--muted); margin-top: 12px;
+}
+.sg-iquiz-history-item {
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+}
+
+/* Mark Complete button */
+.sg-mark-complete-wrapper {
+  display: flex; justify-content: center; margin-top: 28px; padding-top: 20px;
+  border-top: 2px solid var(--border);
+}
+.sg-mark-complete {
+  padding: 12px 28px; background: var(--green); color: white; border: none;
+  border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.sg-mark-complete:hover {
+  background: #006d52; box-shadow: 0 4px 12px rgba(0, 150, 110, 0.3);
+}
+.sg-mark-complete:disabled {
+  background: #cbd5e1; cursor: not-allowed; box-shadow: none;
+}
+
+/* Haptic-style visual feedback */
+.bottom-tab-bar button:active, nav.top-nav button:active,
+.sg-mark-complete:active, .sg-iquiz-options button:active,
+.fc-controls button:active, .week-header:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+}
+
+/* Embedded flashcard component */
+.sg-fc-embed {
+  background: white; border: 2px solid #fee2e2; border-radius: 12px;
+  padding: 16px; margin-top: 12px;
+}
+.sg-fc-embed-card {
+  background: #fef9e7; border: 1px solid #fde047;
+  border-radius: 10px; padding: 20px 16px; text-align: center;
+  cursor: pointer; transition: all 0.3s; min-height: 140px;
+  display: flex; flex-direction: column; justify-content: center;
+  margin-bottom: 12px;
+}
+.sg-fc-embed-card:hover {
+  transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.sg-fc-embed-card.flipped {
+  background: #f0fdf4; border-color: #86efac;
+}
+.sg-fc-embed-front {
+  font-size: 2.2rem; font-weight: 800; color: var(--accent);
+}
+.sg-fc-embed-back {
+  font-size: 1.1rem; color: var(--green); font-weight: 600;
+}
+.sg-fc-embed-nav {
+  display: flex; gap: 8px; align-items: center; justify-content: center;
+  margin-top: 12px;
+}
+.sg-fc-embed-nav button {
+  padding: 6px 12px; background: var(--border); border: none;
+  border-radius: 6px; font-size: 0.8rem; cursor: pointer;
+  transition: background 0.2s;
+}
+.sg-fc-embed-nav button:hover {
+  background: #cbd5e1;
+}
+.sg-fc-embed-counter {
+  font-size: 0.78rem; color: var(--muted); text-align: center; margin: 8px 0;
+}
+
 /* Print */
 @media print {
   #sg-overlay { position: static; background: none; backdrop-filter: none; padding: 0; display: block !important; }
@@ -622,26 +808,35 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
       <h1>Научи Български <span>· Learn Bulgarian</span></h1>
       <div class="header-meta">20-week plan · 4–5 sessions/week · 20–30 min each</div>
     </div>
-    <div class="progress-pill">
-      <strong id="pct">0%</strong>
-      overall progress
+    <div style="display:flex;gap:12px;align-items:center;">
+      <button id="dark-mode-toggle" onclick="toggleDarkMode()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;padding:4px 8px;border-radius:6px;transition:background 0.2s;" title="Toggle dark mode">🌙</button>
+      <div class="progress-pill">
+        <strong id="pct">0%</strong>
+        overall progress
+      </div>
     </div>
   </div>
 </header>
 
-<nav>
-  <div class="nav-scroll-wrapper">
-    <div class="nav-inner" id="navInner">
-      <button class="active" onclick="showTab('dashboard')"><span class="nav-icon">📊</span>Dashboard</button>
-      <button onclick="showTab('plan')"><span class="nav-icon">📅</span>Weekly Plan</button>
-      <button onclick="showTab('flashcards')"><span class="nav-icon">🃏</span>Flashcards</button>
-      <button onclick="showTab('quiz')"><span class="nav-icon">✏️</span>Quiz</button>
-      <button onclick="showTab('resources')"><span class="nav-icon">🔗</span>Resources</button>
-      <button onclick="showTab('challenges')"><span class="nav-icon">🏆</span>Challenges</button>
-    </div>
-    <div class="nav-scroll-hint" id="navScrollHint"></div>
+<nav class="top-nav">
+  <div class="nav-inner">
+    <button class="active" data-tab="dashboard" onclick="showTab('dashboard',this)"><span class="nav-icon">📊</span>Dashboard</button>
+    <button data-tab="plan" onclick="showTab('plan',this)"><span class="nav-icon">📅</span>Weekly Plan</button>
+    <button data-tab="flashcards" onclick="showTab('flashcards',this)"><span class="nav-icon">🃏</span>Flashcards</button>
+    <button data-tab="quiz" onclick="showTab('quiz',this)"><span class="nav-icon">✏️</span>Quizzes</button>
+    <button data-tab="resources" onclick="showTab('resources',this)"><span class="nav-icon">🔗</span>Resources</button>
+    <button data-tab="challenges" onclick="showTab('challenges',this)"><span class="nav-icon">🏆</span>Challenges</button>
   </div>
 </nav>
+
+<div class="bottom-tab-bar">
+  <button class="active" data-tab="dashboard" onclick="showTab('dashboard',this)"><span class="btb-icon">📊</span>Dashboard<div class="btb-dot"></div></button>
+  <button data-tab="plan" onclick="showTab('plan',this)"><span class="btb-icon">📅</span>Plan</button>
+  <button data-tab="flashcards" onclick="showTab('flashcards',this)"><span class="btb-icon">🃏</span>Cards</button>
+  <button data-tab="quiz" onclick="showTab('quiz',this)"><span class="btb-icon">✏️</span>Quizzes</button>
+  <button data-tab="resources" onclick="showTab('resources',this)"><span class="btb-icon">🔗</span>Links</button>
+  <button data-tab="challenges" onclick="showTab('challenges',this)"><span class="btb-icon">🏆</span>Goals</button>
+</div>
 
 <main>
 
@@ -773,8 +968,8 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 <!-- ===== QUIZ ===== -->
 <div id="tab-quiz" class="tab">
   <div class="card">
-    <div class="card-title">✏️ Knowledge Quiz</div>
-    <div class="card-sub">Test what you've learned! Scores are saved automatically so you can track improvement over time.</div>
+    <div class="card-title">✏️ Quiz 1: General Knowledge</div>
+    <div class="card-sub">Test what you've learned so far! Covers alphabet, vocabulary, and phrases. Scores are saved automatically so you can track improvement over time.</div>
   </div>
   <div id="quiz-history-panel"></div>
   <div id="quiz-area"></div>
@@ -888,7 +1083,7 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
     <div class="sg-topbar">
       <div class="sg-topbar-left">
         <div class="sg-week-label" id="sg-week-label">Week 1</div>
-        <div class="sg-day-title" id="sg-day-title">Day 1 Study Guide</div>
+        <div class="sg-day-title" id="sg-day-title">Day 1 Daily Lesson</div>
         <div class="sg-time-est" id="sg-time-est">⏱ Estimated time: 20–25 min</div>
       </div>
       <div class="sg-topbar-right">
@@ -1564,13 +1759,25 @@ let quizScore = 0;
 let answered = false;
 let shuffledQuiz = [];
 
-function showTab(name) {
+function showTab(name, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.top-nav button, .bottom-tab-bar button').forEach(b => {
+    b.classList.remove('active');
+    const dot = b.querySelector('.btb-dot');
+    if (dot) dot.remove();
+  });
   document.getElementById('tab-' + name).classList.add('active');
-  event.currentTarget.classList.add('active');
+  document.querySelectorAll('[data-tab="' + name + '"]').forEach(b => {
+    b.classList.add('active');
+    if (b.closest('.bottom-tab-bar') && !b.querySelector('.btb-dot')) {
+      const dot = document.createElement('div');
+      dot.className = 'btb-dot';
+      b.appendChild(dot);
+    }
+  });
   if (name === 'flashcards') renderFlashcards(currentCategory);
   if (name === 'quiz') { renderQuizHistoryPanel(); initQuiz(); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ---- PROGRESS ----
@@ -1642,7 +1849,7 @@ function buildPlan() {
         <div class="day-label">${day.d}</div>
         <div class="day-task">
           ${day.task}
-          ${hasGuide ? `<br><button class="sg-btn" id="sgbtn-${wk.w}-${i+1}" onclick="toggleStudyGuide(${wk.w},${i+1},this)">📖 Study Guide <span class="sg-arr">▼</span></button>` : ''}
+          ${hasGuide ? `<br><button class="sg-btn" id="sgbtn-${wk.w}-${i+1}" onclick="toggleStudyGuide(${wk.w},${i+1},this)">📖 Open Lesson <span class="sg-arr">▼</span></button>` : ''}
         </div>
       </div>`;
       if (hasGuide) html += `<div class="sg-inline-panel" id="sgi-${wk.w}-${i+1}"></div>`;
@@ -1770,6 +1977,7 @@ function renderFlashcards(cat) {
   document.getElementById('flashcard').classList.remove('flipped');
   document.querySelectorAll('.fc-cats button').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
   showCard();
+  initSwipeSupport();
 }
 
 function showCard() {
@@ -1792,6 +2000,37 @@ function showCard() {
 function flipCard() { isFlipped = !isFlipped; document.getElementById('flashcard').classList.toggle('flipped', isFlipped); }
 function nextCard() { currentCardIndex = (currentCardIndex + 1) % currentCards.length; showCard(); }
 function prevCard() { currentCardIndex = (currentCardIndex - 1 + currentCards.length) % currentCards.length; showCard(); }
+
+// Touch swipe support for flashcards
+let touchStartX = 0;
+function initSwipeSupport() {
+  const flashcard = document.getElementById('flashcard');
+  if (!flashcard) return;
+  flashcard.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, false);
+  flashcard.addEventListener('touchend', function(e) {
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) >= 50) {
+      if (diff > 0) nextCard(); else prevCard();
+    }
+  }, false);
+}
+// Initialize swipe support for embedded flashcards
+function initEmbeddedSwipe(elementId) {
+  const cards = document.querySelectorAll('#' + elementId + ' .sg-fc-embed-card');
+  cards.forEach(card => {
+    let swipeStartX = 0;
+    card.addEventListener('touchstart', function(e) { swipeStartX = e.touches[0].clientX; }, false);
+    card.addEventListener('touchend', function(e) {
+      const swipeEndX = e.changedTouches[0].clientX;
+      const diff = swipeStartX - swipeEndX;
+      if (Math.abs(diff) >= 50) {
+        const btns = document.querySelectorAll('#' + elementId + ' .sg-fc-embed-nav button');
+        if (diff > 0 && btns[1]) btns[1].click(); else if (diff < 0 && btns[0]) btns[0].click();
+      }
+    }, false);
+  });
+}
 
 let weeklyActiveWeek = 0; // 0 = no week selected yet
 
@@ -2043,54 +2282,54 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'You\'re in the app ✓',
-      desc: 'Great — you\'re already here! This guide lives inside the app so you always have it with you.',
+      num: 1,
+      title: 'Watch a 5-min alphabet intro video',
+      desc: 'Open YouTube and search: <strong>"Bulgarian alphabet pronunciation for beginners"</strong>. Watch for just 5 minutes to hear the sounds before you learn them. BulgarianPod101 has a great one.<br><br><a href="https://www.youtube.com/results?search_query=BulgarianPod101+bulgarian+alphabet+pronunciation" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:4px;padding:9px 16px;background:#ff0000;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">▶ Search YouTube: "Bulgarian Alphabet Pronunciation"</a>',
     },
     {
       num: 2,
-      title: 'Check your Dashboard',
-      desc: 'Click the <strong>📊 Dashboard</strong> tab at the top. See your overall progress bar and current week. Then come back here.',
-    },
-    {
-      num: 3,
-      title: 'Watch a 5-min alphabet intro video',
-      desc: 'Open YouTube and search: <strong>"Bulgarian alphabet pronunciation for beginners"</strong>. Watch for just 5 minutes to hear the sounds before you learn them. BulgarianPod101 has a great one.<br><br><a href="https://www.youtube.com/results?search_query=BulgarianPod101+bulgarian+alphabet+pronunciation" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:4px;padding:9px 16px;background:#ff0000;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">▶ Watch on YouTube</a>',
-    },
-    {
-      num: 4,
       title: 'Learn today\'s 5 letters',
       desc: `Meet your first five Cyrillic letters. Each one has a consistent sound — no exceptions!
       <div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">А</div><div class="sg-lc-lower">а (lowercase)</div><div class="sg-lc-sound">Sound: "ah" — like father</div><div class="sg-lc-eng">Think: the letter A in "car"</div><div class="sg-lc-word">А е за акула — shark</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Б</div><div class="sg-lc-lower">б (lowercase)</div><div class="sg-lc-sound">Sound: "b" — like ball</div><div class="sg-lc-eng">Looks like a 6 with a hat</div><div class="sg-lc-word">Б е за баба — grandma</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">В</div><div class="sg-lc-lower">в (lowercase)</div><div class="sg-lc-sound">Sound: "v" — like voice</div><div class="sg-lc-eng">Looks like our letter B</div><div class="sg-lc-word">В е за вода — water</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Г</div><div class="sg-lc-lower">г (lowercase)</div><div class="sg-lc-sound">Sound: "g" — like gold</div><div class="sg-lc-eng">Looks like an upside-down L</div><div class="sg-lc-word">Г е за грозде — grapes</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Д</div><div class="sg-lc-lower">д (lowercase)</div><div class="sg-lc-sound">Sound: "d" — like dog</div><div class="sg-lc-eng">Looks like a table on legs</div><div class="sg-lc-word">Д е за дъга — rainbow</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">А</div><div class="sg-lc-lower">а (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">А а</div><div class="sg-lc-sound">Sound: "ah" — like father</div><div class="sg-lc-eng">Think: the letter A in "car"</div><div class="sg-lc-word">А е за акула — shark</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Б</div><div class="sg-lc-lower">б (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Б б</div><div class="sg-lc-sound">Sound: "b" — like ball</div><div class="sg-lc-eng">Looks like a 6 with a hat</div><div class="sg-lc-word">Б е за баба — grandma</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">В</div><div class="sg-lc-lower">в (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">В в</div><div class="sg-lc-sound">Sound: "v" — like voice</div><div class="sg-lc-eng">Looks like our letter B</div><div class="sg-lc-word">В е за вода — water</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Г</div><div class="sg-lc-lower">г (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Г г</div><div class="sg-lc-sound">Sound: "g" — like gold</div><div class="sg-lc-eng">Looks like an upside-down L</div><div class="sg-lc-word">Г е за грозде — grapes</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Д</div><div class="sg-lc-lower">д (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Д д</div><div class="sg-lc-sound">Sound: "d" — like dog</div><div class="sg-lc-eng">Looks like a table on legs</div><div class="sg-lc-word">Д е за дъга — rainbow</div></div>
       </div>`,
     },
     {
-      num: 5,
+      num: 3,
       title: 'Flashcard practice in this app',
-      desc: `Go to the <strong>🃏 Flashcards</strong> tab → select <strong>Alphabet</strong> category. Find А, Б, В, Г, Д and press 🔊 on each card to hear the sound. Say it out loud — don't just listen!
-      <div class="sg-tip"><strong>💡 Tip:</strong> Press 🔊 on each card to hear the letter. Repeat it out loud immediately — the repetition is what makes it stick.</div>`,
+      desc: `Practice today's letters right here! Tap a card to flip it, swipe to navigate.
+      <div class="sg-fc-embed" id="sg-fc-1-1"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> Swipe left or right to go through cards. Say the sound out loud before flipping each card — the repetition is what makes it stick.</div>`,
     },
     {
-      num: 6,
+      num: 4,
       title: 'Writing practice',
       desc: `Write each letter 5 times on paper. Say the sound as you write it. The muscle memory + audio connection speeds up recognition dramatically.
-      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 5× while saying the sound out loud</div><ol><li><strong>А а</strong> — say "ah" each time you write it</li><li><strong>Б б</strong> — say "b"</li><li><strong>В в</strong> — say "v"</li><li><strong>Г г</strong> — say "g"</li><li><strong>Д д</strong> — say "d"</li></ol></div>`,
+      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 5× while saying the sound out loud</div><ol><li><strong>А а</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(А а)</span> — say "ah" each time you write it</li><li><strong>Б б</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Б б)</span> — say "b"</li><li><strong>В в</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(В в)</span> — say "v"</li><li><strong>Г г</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Г г)</span> — say "g"</li><li><strong>Д д</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Д д)</span> — say "d"</li></ol></div>`,
     },
     {
-      num: 7,
-      title: 'Quick no-peek quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Close this guide and test yourself</div><ol><li>Which letter makes the "v" sound? (Answer: В)</li><li>What does <em>вода</em> mean? (Answer: water)</li><li>Which letter looks like an upside-down L? (Answer: Г)</li><li>What Bulgarian word means "grandma"? (Answer: баба, starts with Б)</li><li>Write А, Б, В, Г, Д in order without looking.</li></ol><div class="sg-quiz-note">No grading needed — just check yourself. If you hesitated on any, do one more pass on the flashcards.</div></div>`,
+      num: 5,
+      title: 'Quick quiz',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-1-1"></div>`,
     },
-    {
-      num: 8,
-      title: 'Mark this day complete',
-      desc: 'Go back to the <strong>📅 Weekly Plan</strong> tab → Week 1 → check off <strong>Day 1</strong>. Your progress saves automatically!',
-    },
+  ],
+  flashcards: [
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as in аз (I)", speechText: "А е за акула"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as in баба (grandma)", speechText: "Б е за баба"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as in вода (water)", speechText: "В е за вода"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as in грозде (grapes)", speechText: "Г е за грозде"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as in дъга (rainbow)", speechText: "Д е за дъга"}
+  ],
+  quiz: [
+    {q: "Which letter makes the 'v' sound?", type: "mc", options: ["Б", "В", "Г", "Д"], answer: "В"},
+    {q: "What does вода mean?", type: "text", answer: "water"},
+    {q: "Which letter looks like an upside-down L?", type: "mc", options: ["А", "Б", "В", "Г"], answer: "Г"},
+    {q: "What Bulgarian word means 'grandma'?", type: "text", answer: "баба"},
+    {q: "Write the letters in order: А, ?, В, Г, Д", type: "mc", options: ["Б", "Е", "З", "К"], answer: "Б"}
   ]
 },
 
@@ -2101,48 +2340,54 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'You\'re here. Check the <strong>📊 Dashboard</strong> — Day 1 should show as complete. If not, check it off in Weekly Plan first.',
-    },
-    {
-      num: 2,
+      num: 1,
       title: '5-minute review of А–Д',
       desc: 'Before new letters, warm up. Go to Flashcards → Alphabet and cycle through the first 5 cards. Can you say the sound before flipping? Good — let\'s add 5 more.',
     },
     {
-      num: 3,
+      num: 2,
       title: 'Learn today\'s 5 new letters',
       desc: `<div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Е</div><div class="sg-lc-lower">е (lowercase)</div><div class="sg-lc-sound">Sound: "eh" — like bed</div><div class="sg-lc-eng">Looks like our E, same sound!</div><div class="sg-lc-word">Е е за есен — autumn</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ж</div><div class="sg-lc-lower">ж (lowercase)</div><div class="sg-lc-sound">Sound: "zh" — like measure</div><div class="sg-lc-eng">Like a snowflake, unique sound</div><div class="sg-lc-word">Ж е за жираф — giraffe</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">З</div><div class="sg-lc-lower">з (lowercase)</div><div class="sg-lc-sound">Sound: "z" — like zoo</div><div class="sg-lc-eng">Looks like the number 3</div><div class="sg-lc-word">З е за зайче — bunny</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">И</div><div class="sg-lc-lower">и (lowercase)</div><div class="sg-lc-sound">Sound: "ee" — like bee</div><div class="sg-lc-eng">Looks like backwards N</div><div class="sg-lc-word">И е за игра — game</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Й</div><div class="sg-lc-lower">й (lowercase)</div><div class="sg-lc-sound">Sound: "y" — like yes</div><div class="sg-lc-eng">И with a breve accent on top</div><div class="sg-lc-word">Й е за йогурт — yogurt</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Е</div><div class="sg-lc-lower">е (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Е е</div><div class="sg-lc-sound">Sound: "eh" — like bed</div><div class="sg-lc-eng">Looks like our E, same sound!</div><div class="sg-lc-word">Е е за есен — autumn</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ж</div><div class="sg-lc-lower">ж (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Ж ж</div><div class="sg-lc-sound">Sound: "zh" — like measure</div><div class="sg-lc-eng">Like a snowflake, unique sound</div><div class="sg-lc-word">Ж е за жираф — giraffe</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">З</div><div class="sg-lc-lower">з (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">З з</div><div class="sg-lc-sound">Sound: "z" — like zoo</div><div class="sg-lc-eng">Looks like the number 3</div><div class="sg-lc-word">З е за зайче — bunny</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">И</div><div class="sg-lc-lower">и (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">И и</div><div class="sg-lc-sound">Sound: "ee" — like bee</div><div class="sg-lc-eng">Looks like backwards N</div><div class="sg-lc-word">И е за игра — game</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Й</div><div class="sg-lc-lower">й (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Й й</div><div class="sg-lc-sound">Sound: "y" — like yes</div><div class="sg-lc-eng">И with a breve accent on top</div><div class="sg-lc-word">Й е за йогурт — yogurt</div></div>
       </div>
       <div class="sg-tip"><strong>💡 Watch out:</strong> И sounds like "ee" (not like English I). Й is a short glide sound — like the Y in "yes". They look similar — the accent mark matters!</div>`,
     },
     {
-      num: 4,
+      num: 3,
       title: 'Say each letter with its example word',
       desc: `Practice the "X е за Y" pattern out loud — this is how Bulgarian children learn:
-      <div class="sg-practice"><div class="sg-practice-title">🗣️ Say out loud, then press 🔊 on each card to check</div><ol><li><strong>Е е за есен</strong> — "E is for autumn"</li><li><strong>Ж е за жираф</strong> — "Zh is for giraffe"</li><li><strong>З е за зайче</strong> — "Z is for bunny"</li><li><strong>И е за игра</strong> — "I is for game"</li><li><strong>Й е за йогурт</strong> — "Y is for yogurt"</li></ol></div>`,
+      <div class="sg-practice"><div class="sg-practice-title">🗣️ Say out loud, then press 🔊 on each card to check</div><ol><li><strong>Е е за есен</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Е е)</span> — "E is for autumn"</li><li><strong>Ж е за жираф</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Ж ж)</span> — "Zh is for giraffe"</li><li><strong>З е за зайче</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(З з)</span> — "Z is for bunny"</li><li><strong>И е за игра</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(И и)</span> — "I is for game"</li><li><strong>Й е за йогурт</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Й й)</span> — "Y is for yogurt"</li></ol></div>`,
+    },
+    {
+      num: 4,
+      title: 'Flashcard practice for new letters',
+      desc: `Practice today's 5 new letters right here! Tap a card to flip it, swipe to navigate.
+      <div class="sg-fc-embed" id="sg-fc-1-2"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> Say the sound out loud before flipping each card. This double-codes it in your memory.</div>`,
     },
     {
       num: 5,
-      title: 'Write all 10 letters from memory',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">✍️ Close this guide and write А through Й (all 10 so far) without looking</div><ul><li>Write each uppercase + lowercase pair</li><li>Write the sound next to each one</li><li>Check yourself against yesterday\'s letters</li></ul></div>`,
-    },
-    {
-      num: 6,
       title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>Which letter makes the "zh" sound like in "measure"? (Ж)</li><li>What does <em>есен</em> mean? (autumn)</li><li>What's the difference between И and Й?</li><li>Write the 10 letters you've learned in order.</li><li>Which letter looks like the number 3? (З)</li></ol></div>`,
+      desc: `<div class="sg-iquiz" id="sg-iquiz-1-2"></div>`,
     },
-    {
-      num: 7,
-      title: 'Mark Day 2 complete',
-      desc: 'Weekly Plan → Week 1 → check off Day 2. You know 10 Cyrillic letters now — that\'s ⅓ of the alphabet!',
-    },
+  ],
+  flashcards: [
+    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as in есен (autumn)", speechText: "Е е за есен"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as in жираф (giraffe)", speechText: "Ж е за жираф"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as in зайче (bunny)", speechText: "З е за зайче"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as in игра (game)", speechText: "И е за игра"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as in йогурт (yogurt)", speechText: "Й е за йогурт"}
+  ],
+  quiz: [
+    {q: "Which letter makes the 'zh' sound like in 'measure'?", type: "mc", options: ["З", "Ж", "Й", "И"], answer: "Ж"},
+    {q: "What does есен mean?", type: "text", answer: "autumn"},
+    {q: "What's the difference between И and Й?", type: "mc", options: ["И is 'ee', Й is 'y' glide", "They're the same", "И is 'y', Й is 'ee'", "Й is lowercase И"], answer: "И is 'ee', Й is 'y' glide"},
+    {q: "Which letter looks like the number 3?", type: "mc", options: ["Е", "Ж", "З", "И"], answer: "З"},
+    {q: "What does жираф mean?", type: "text", answer: "giraffe"}
   ]
 },
 
@@ -2153,12 +2398,7 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Check Dashboard — Days 1 and 2 should be done. If you\'re feeling fuzzy on any earlier letters, do a quick flashcard pass first (5 min max).',
-    },
-    {
-      num: 2,
+      num: 1,
       title: 'Learn today\'s 5 letters — the familiar ones',
       desc: `Good news: some of these look like English letters but sound different! Pay attention.
       <div class="sg-letter-grid">
@@ -2171,29 +2411,24 @@ const studyGuides = {
       <div class="sg-tip"><strong>⚠️ Watch out for Н!</strong> It looks exactly like the English letter H — but it makes the "n" sound. This trips everyone up at first. Write it 10 extra times and say "n, n, n" each time.</div>`,
     },
     {
-      num: 3,
+      num: 2,
       title: 'Use Forvo to hear native pronunciation',
       desc: 'Search for: <strong>котка</strong>, <strong>лимон</strong>, <strong>майка</strong>. Listen to a real Bulgarian speaker. Your app\'s TTS is good, but Forvo = real human voice.<br><br><a href="https://forvo.com/languages/bg/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#2d6a4f;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Forvo</a>',
     },
     {
-      num: 4,
+      num: 3,
       title: 'Cumulative flashcard drill',
       desc: 'Go to Flashcards → Alphabet. Go through letters А–О (the 15 you know). Your target: say the sound before you flip the card. Don\'t skip the hard ones — flip back and redo them.',
     },
     {
-      num: 5,
+      num: 4,
       title: 'Find English look-alikes — the traps',
       desc: `<div class="sg-practice"><div class="sg-practice-title">🚨 Letters that look like English but aren\'t</div><ol><li><strong>В</strong> looks like B — but sounds like "v"</li><li><strong>Н</strong> looks like H — but sounds like "n"</li><li><strong>С</strong> (coming later) looks like C — but sounds like "s"</li><li><strong>Р</strong> (coming Week 2) looks like P — but sounds like rolled "r"</li></ol>Write these imposters on a sticky note and put it on your monitor.</div>`,
     },
     {
-      num: 6,
+      num: 5,
       title: 'Quick quiz',
       desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>Which letter looks like H but sounds like N? (Н)</li><li>What is <em>майка</em> in English? (mother)</li><li>Write the 15 letters you know now from memory.</li><li>What does <em>небе</em> mean? (sky)</li><li>Which letters К, М have the exact same sound as in English?</li></ol></div>`,
-    },
-    {
-      num: 7,
-      title: 'Mark Day 3 complete',
-      desc: 'Weekly Plan → Week 1 → check off Day 3. 15 letters down — you\'re halfway through the alphabet!',
     },
   ]
 },
@@ -2240,6 +2475,7 @@ const studyGuides = {
       title: 'Mark Day 4 complete',
       desc: 'Weekly Plan → Week 1 → check off Day 4. One more day before your learning partner quiz!',
     },
+  
   ]
 },
 
@@ -2280,6 +2516,7 @@ const studyGuides = {
       title: 'Mark Day 5 complete — Week 1 done! 🎉',
       desc: 'Weekly Plan → Week 1 → check off Day 5. If all 5 days are checked, Week 1 turns green. Check your Dashboard — see your progress go up!',
     },
+  
   ]
 },
 
@@ -2332,6 +2569,7 @@ const studyGuides = {
       title: 'Mark Day 1 complete',
       desc: 'Weekly Plan → Week 2 → check off Day 1. Only 9 more letters to go before you can read the whole Bulgarian alphabet!',
     },
+  
   ]
 },
 
@@ -2378,6 +2616,7 @@ const studyGuides = {
       title: 'Mark Day 2 complete',
       desc: 'Weekly Plan → Week 2 → check off Day 2. You know 25 letters. Almost there!',
     },
+  
   ]
 },
 
@@ -2428,6 +2667,7 @@ const studyGuides = {
       title: 'Mark Day 3 complete',
       desc: 'Weekly Plan → Week 2 → check off Day 3. You know the entire Bulgarian alphabet! 🎉',
     },
+  
   ]
 },
 
@@ -2467,6 +2707,7 @@ const studyGuides = {
       title: 'Mark Day 4 complete',
       desc: 'Weekly Plan → Week 2 → check off Day 4. One more day — and tomorrow you\'ll read your first real Bulgarian sentences!',
     },
+  
   ]
 },
 
@@ -2506,6 +2747,7 @@ const studyGuides = {
       title: 'Mark Day 5 complete — Week 2 done! 🎉',
       desc: 'Weekly Plan → Week 2 → check off Day 5. Check your Dashboard — you\'ve completed Phase 1! You can now read the Bulgarian alphabet.',
     },
+  
   ]
 },
 
@@ -2550,6 +2792,7 @@ const studyGuides = {
       title: 'Mark Day 1 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 1. Solid foundation — vowels are the building blocks of every word.',
     },
+  
   ]
 },
 
@@ -2590,6 +2833,7 @@ const studyGuides = {
       title: 'Mark Day 2 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 2.',
     },
+  
   ]
 },
 
@@ -2634,6 +2878,7 @@ const studyGuides = {
       title: 'Mark Day 3 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 3.',
     },
+  
   ]
 },
 
@@ -2673,6 +2918,7 @@ const studyGuides = {
       title: 'Mark Day 4 complete',
       desc: 'Weekly Plan → Week 3 → check off Day 4. One more day — and next week you start real conversations!',
     },
+  
   ]
 },
 
@@ -2712,6 +2958,7 @@ const studyGuides = {
       title: 'Mark Day 5 complete — Week 3 done! 🎉',
       desc: 'Weekly Plan → Week 3 → check off Day 5. Check your Dashboard — you\'re 15% through the full 20-week course!',
     },
+  
   ]
 },
 
@@ -2757,6 +3004,7 @@ const studyGuides = {
       title: 'Mark Day 1 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 1. You said your first real Bulgarian today!',
     },
+  
   ]
 },
 
@@ -2797,6 +3045,7 @@ const studyGuides = {
       title: 'Mark Day 2 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 2. You now know the full greeting cycle from morning to bedtime!',
     },
+  
   ]
 },
 
@@ -2838,6 +3087,7 @@ const studyGuides = {
       title: 'Mark Day 3 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 3.',
     },
+  
   ]
 },
 
@@ -2877,6 +3127,7 @@ const studyGuides = {
       title: 'Mark Day 4 complete',
       desc: 'Weekly Plan → Week 4 → check off Day 4. Tomorrow is the grand finale — Greetings Day!',
     },
+  
   ]
 },
 
@@ -2916,6 +3167,7 @@ const studyGuides = {
       title: 'Mark Day 5 complete — Week 4 done! 🎉🎉',
       desc: 'Weekly Plan → Week 4 → check off Day 5. Check your Dashboard — you\'ve completed the first 4 weeks! You can read Bulgarian and greet people properly. That\'s real progress.',
     },
+  
   ]
 },
 
@@ -2941,7 +3193,7 @@ function openStudyGuide(week, day) {
   document.getElementById('sg-day-title').textContent = guide.dayTitle;
   document.getElementById('sg-time-est').textContent = '⏱ Estimated time: ' + guide.timeEst;
 
-  let html = '';
+  let html = '<div class="sg-progress-bar"><span>Day ' + day + ' of 5 · Week ' + week + '</span><div class="sg-prog-track"><div class="sg-prog-fill" style="width:' + (day / 5 * 100) + '%"></div></div></div>';
   guide.steps.forEach(step => {
     html += `<div class="sg-step">
       <div class="sg-step-num ${step.done ? 'done' : ''}">${step.num}</div>
@@ -2951,9 +3203,28 @@ function openStudyGuide(week, day) {
       </div>
     </div>`;
   });
+  html += '<div class="sg-mark-complete-wrapper"><button class="sg-mark-complete" onclick="markLessonComplete(' + week + ',' + day + ')">✅ Mark Day ' + day + ' Complete</button></div>';
 
   document.getElementById('sg-body').innerHTML = html;
   processQuizAnswers();
+
+  // Initialize embedded flashcards if the guide has them
+  if (guide.flashcards) {
+    setTimeout(function() {
+      var fcEl = document.querySelector('.sg-fc-embed');
+      if (fcEl) renderEmbeddedFlashcards(fcEl.id, guide.flashcards);
+      initEmbeddedSwipe(fcEl.id);
+    }, 100);
+  }
+
+  // Initialize interactive quizzes if the guide has them
+  if (guide.quiz) {
+    setTimeout(function() {
+      var qEl = document.querySelector('.sg-iquiz');
+      if (qEl) renderInteractiveQuiz(qEl.id, guide.quiz, 'sg-quiz-' + week + '-' + day);
+    }, 100);
+  }
+
   const overlay = document.getElementById('sg-overlay');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -3060,8 +3331,8 @@ function toggleAnswers(btn) {
 
 
 // ---- INLINE STUDY GUIDE ----
-function buildGuideHTML(guide) {
-  let html = '';
+function buildGuideHTML(guide, week, day) {
+  let html = '<div class="sg-progress-bar"><span>Day ' + day + ' of 5 · Week ' + week + '</span><div class="sg-prog-track"><div class="sg-prog-fill" style="width:' + (day / 5 * 100) + '%"></div></div></div>';
   guide.steps.forEach(step => {
     html += `<div class="sg-step">
       <div class="sg-step-num ${step.done ? 'done' : ''}">${step.num}</div>
@@ -3071,6 +3342,7 @@ function buildGuideHTML(guide) {
       </div>
     </div>`;
   });
+  html += '<div class="sg-mark-complete-wrapper"><button class="sg-mark-complete" onclick="markLessonComplete(' + week + ',' + day + ')">✅ Mark Day ' + day + ' Complete</button></div>';
   return html;
 }
 
@@ -3114,12 +3386,30 @@ function toggleStudyGuide(week, day, btn) {
   </div>
   <div class="sg-flag"><div class="sg-flag-w"></div><div class="sg-flag-g"></div><div class="sg-flag-r"></div></div>
   <div class="sg-inline-body">`;
-  html += buildGuideHTML(guide);
+  html += buildGuideHTML(guide, week, day);
   html += '</div>';
 
   panel.innerHTML = html;
   processQuizAnswers(panel);
   enhanceLetterCards(panel);
+
+  // Initialize embedded flashcards if the guide has them
+  if (guide.flashcards) {
+    setTimeout(function() {
+      var fcEl = panel.querySelector('.sg-fc-embed');
+      if (fcEl) renderEmbeddedFlashcards(fcEl.id, guide.flashcards);
+      if (fcEl) initEmbeddedSwipe(fcEl.id);
+    }, 100);
+  }
+
+  // Initialize interactive quizzes if the guide has them
+  if (guide.quiz) {
+    setTimeout(function() {
+      var qEl = panel.querySelector('.sg-iquiz');
+      if (qEl) renderInteractiveQuiz(qEl.id, guide.quiz, 'sg-quiz-' + week + '-' + day);
+    }, 100);
+  }
+
   panel.classList.add('open');
   btn.querySelector('.sg-arr').textContent = '▲';
   btn.classList.add('sg-btn-open');
@@ -3211,23 +3501,305 @@ function printInlineGuide(panelId) {
   printWin.onload = () => { printWin.focus(); printWin.print(); };
 }
 
+// ---- INTERACTIVE QUIZ ENGINE ----
+function renderInteractiveQuiz(containerId, questions, quizKey) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = '<div class="sg-iquiz" data-quiz-key="' + quizKey + '"></div>';
+  const quizEl = container.querySelector('.sg-iquiz');
+  let currentQ = 0;
+  let score = 0;
+  const answers = [];
+
+  function showQuestion() {
+    if (currentQ >= questions.length) {
+      showScore();
+      return;
+    }
+
+    const q = questions[currentQ];
+    let html = '<div class="sg-iquiz-question">' + (currentQ + 1) + '. ' + q.q + '</div>';
+
+    if (q.type === 'mc') {
+      html += '<div class="sg-iquiz-options">';
+      q.options.forEach((opt, i) => {
+        html += '<button onclick="answerQuizMC(this, ' + i + ', \'' + q.answer.replace(/'/g, "\\'") + '\', ' + (q.caseSensitive ? 'true' : 'false') + ')">' + opt + '</button>';
+      });
+      html += '</div>';
+    } else if (q.type === 'text') {
+      html += '<input type="text" class="sg-iquiz-input" placeholder="Type your answer..." />';
+      html += '<button onclick="answerQuizText(this, \'' + q.answer.replace(/'/g, "\\'") + '\', ' + (q.caseSensitive ? 'true' : 'false') + ')">Submit</button>';
+    }
+
+    html += '<div class="sg-iquiz-feedback"></div>';
+    quizEl.innerHTML = html;
+  }
+
+  window.answerQuizMC = function(btn, idx, correct, caseSensitive) {
+    const options = btn.parentElement.querySelectorAll('button');
+    const text = btn.textContent.trim();
+    const isCorrect = (caseSensitive ? text : text.toLowerCase()) === (caseSensitive ? correct : correct.toLowerCase());
+
+    options.forEach(b => b.disabled = true);
+    btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+    const feedback = quizEl.querySelector('.sg-iquiz-feedback');
+    feedback.className = 'sg-iquiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+    feedback.textContent = isCorrect ? '✅ Correct!' : '❌ Correct answer: ' + correct;
+
+    answers.push({q: q.q, userAnswer: text, correctAnswer: correct, correct: isCorrect});
+    if (isCorrect) score++;
+
+    setTimeout(() => {
+      currentQ++;
+      showQuestion();
+    }, 1500);
+  };
+
+  window.answerQuizText = function(btn, correct, caseSensitive) {
+    const input = quizEl.querySelector('.sg-iquiz-input');
+    const text = input.value.trim();
+    const isCorrect = (caseSensitive ? text : text.toLowerCase()) === (caseSensitive ? correct : correct.toLowerCase());
+
+    input.disabled = true;
+    btn.disabled = true;
+
+    const feedback = quizEl.querySelector('.sg-iquiz-feedback');
+    feedback.className = 'sg-iquiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+    feedback.textContent = isCorrect ? '✅ Correct!' : '❌ Correct answer: ' + correct;
+
+    answers.push({q: questions[currentQ].q, userAnswer: text, correctAnswer: correct, correct: isCorrect});
+    if (isCorrect) score++;
+
+    setTimeout(() => {
+      currentQ++;
+      showQuestion();
+    }, 1500);
+  };
+
+  function showScore() {
+    const pct = Math.round((score / questions.length) * 100);
+    const history = JSON.parse(localStorage.getItem('iquiz_history_' + quizKey) || '[]');
+    history.push({date: new Date().toISOString(), score: score, total: questions.length, answers: answers});
+    localStorage.setItem('iquiz_history_' + quizKey, JSON.stringify(history));
+
+    let html = '<div class="sg-iquiz-score">';
+    html += '<div>' + score + ' / ' + questions.length + '</div>';
+    html += '<div style="font-size: 1rem; margin-top: 8px;">' + pct + '% — ' + (pct >= 80 ? '🎉 Excellent!' : pct >= 60 ? '👍 Good!' : '📚 Keep practicing') + '</div>';
+    html += '<button onclick="initQuizAgain(\'' + quizKey + '\')" style="margin-top: 12px; padding: 8px 16px; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">Try Again</button>';
+    html += '</div>';
+
+    if (history.length > 1) {
+      html += '<div class="sg-iquiz-history"><div style="font-weight: 600; margin-bottom: 8px;">Past Attempts (' + history.length + ')</div>';
+      history.forEach((h, i) => {
+        const pct2 = Math.round((h.score / h.total) * 100);
+        html += '<div class="sg-iquiz-history-item">' + (i + 1) + '. ' + pct2 + '% (' + h.score + '/' + h.total + ')</div>';
+      });
+      html += '</div>';
+    }
+
+    quizEl.innerHTML = html;
+  }
+
+  showQuestion();
+}
+
+window.initQuizAgain = function(quizKey) {
+  // Placeholder for retrying quiz
+};
+
+// ---- EMBEDDED FLASHCARD COMPONENT ----
+function renderEmbeddedFlashcards(containerId, cards) {
+  const container = document.getElementById(containerId);
+  if (!container || !cards || cards.length === 0) return;
+
+  let currentIdx = 0;
+  let isFlipped = false;
+
+  function render() {
+    const card = cards[currentIdx];
+    let html = '<div style="text-align: center; padding: 16px;">';
+    html += '<div class="sg-fc-embed-card ' + (isFlipped ? 'flipped' : '') + '" onclick="flipEmbedCard()">';
+    html += '<div class="' + (isFlipped ? 'sg-fc-embed-back' : 'sg-fc-embed-front') + '">';
+    html += isFlipped ? card.translation : card.word;
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="sg-fc-embed-counter">' + (currentIdx + 1) + ' / ' + cards.length + '</div>';
+    html += '<div class="sg-fc-embed-nav">';
+    if (currentIdx > 0) html += '<button onclick="prevEmbedCard()">← Prev</button>';
+    html += '<button onclick="flipEmbedCard()">Flip</button>';
+    if (currentIdx < cards.length - 1) html += '<button onclick="nextEmbedCard()">Next →</button>';
+    if (card.speechText) html += '<button onclick="speakEmbedCard()">🔊</button>';
+    html += '</div>';
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+  window.flipEmbedCard = function() {
+    isFlipped = !isFlipped;
+    render();
+  };
+
+  window.nextEmbedCard = function() {
+    if (currentIdx < cards.length - 1) {
+      currentIdx++;
+      isFlipped = false;
+      render();
+    }
+  };
+
+  window.prevEmbedCard = function() {
+    if (currentIdx > 0) {
+      currentIdx--;
+      isFlipped = false;
+      render();
+    }
+  };
+
+  window.speakEmbedCard = function() {
+    const card = cards[currentIdx];
+    if (card.speechText) speakText(card.speechText);
+  };
+
+  render();
+}
+
+// ---- INTERACTIVE QUIZ COMPONENT ----
+function renderInteractiveQuiz(containerId, quiz, storageKey) {
+  const container = document.getElementById(containerId);
+  if (!container || !quiz || quiz.length === 0) return;
+
+  let currentQ = 0;
+  let score = 0;
+  const responses = [];
+
+  function renderQuestion() {
+    if (currentQ >= quiz.length) {
+      const pct = Math.round((score / quiz.length) * 100);
+      const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
+      let html = '<div class="sg-iquiz-score">';
+      html += '<div style="font-size:1.8rem;margin-bottom:8px">' + emoji + '</div>';
+      html += '<div style="font-size:1.4rem;font-weight:700;color:var(--accent)">' + score + '/' + quiz.length + '</div>';
+      html += '<div style="font-size:0.95rem;color:var(--muted);margin-top:8px">' + pct + '% — ';
+      if (pct >= 80) html += 'Excellent! You know these well!';
+      else if (pct >= 60) html += 'Good work! Keep practicing.';
+      else html += 'Keep going! Review and try again.';
+      html += '</div>';
+      html += '<button class="sg-mark-complete" style="margin-top:12px" onclick="location.reload()">Try Again</button>';
+      html += '</div>';
+      container.innerHTML = html;
+      return;
+    }
+
+    const q = quiz[currentQ];
+    let html = '<div style="font-size:0.8rem;color:var(--muted);margin-bottom:12px">Question ' + (currentQ + 1) + ' of ' + quiz.length + '</div>';
+    html += '<div class="sg-iquiz-question">' + q.q + '</div>';
+
+    if (q.type === 'mc') {
+      html += '<div class="sg-iquiz-options">';
+      q.options.forEach((opt, i) => {
+        html += '<button class="iq-opt" data-idx="' + i + '" onclick="answerIQuiz(' + i + ')">' + opt + '</button>';
+      });
+      html += '</div>';
+    } else {
+      html += '<input class="sg-iquiz-input" type="text" placeholder="Type your answer..." id="iq-input">';
+      html += '<button class="sg-mark-complete" onclick="submitIQuizText()">Submit</button>';
+    }
+
+    html += '<div class="sg-iquiz-feedback"></div>';
+    container.innerHTML = html;
+
+    if (q.type === 'text') {
+      document.getElementById('iq-input').focus();
+      document.getElementById('iq-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') submitIQuizText();
+      });
+    }
+  }
+
+  window.answerIQuiz = function(idx) {
+    const q = quiz[currentQ];
+    const correct = idx === q.options.indexOf(q.answer);
+    responses.push({q: q.q, userAns: q.options[idx], correct: correct, answer: q.answer});
+    if (correct) score++;
+
+    const feedback = container.querySelector('.sg-iquiz-feedback');
+    feedback.innerHTML = correct ? '✅ Correct!' : '❌ Correct answer: ' + q.answer;
+    feedback.classList.add(correct ? 'correct' : 'incorrect');
+    feedback.style.display = 'block';
+
+    setTimeout(() => { currentQ++; renderQuestion(); }, 1500);
+  };
+
+  window.submitIQuizText = function() {
+    const q = quiz[currentQ];
+    const input = document.getElementById('iq-input');
+    const userAns = input.value.trim().toLowerCase();
+    const expected = q.answer.toLowerCase();
+    const correct = userAns === expected;
+    responses.push({q: q.q, userAns: userAns, correct: correct, answer: q.answer});
+    if (correct) score++;
+
+    const feedback = container.querySelector('.sg-iquiz-feedback');
+    feedback.innerHTML = correct ? '✅ Correct!' : '❌ Expected: ' + q.answer;
+    feedback.classList.add(correct ? 'correct' : 'incorrect');
+    feedback.style.display = 'block';
+    input.disabled = true;
+
+    setTimeout(() => { currentQ++; renderQuestion(); }, 1500);
+  };
+
+  renderQuestion();
+}
+
+// ---- MARK LESSON COMPLETE ----
+function markLessonComplete(week, day) {
+  const dayIdx = day - 1;  // Convert to 0-indexed
+  setChecked(week, dayIdx, true);
+
+  // Update dashboard
+  updateDashboard();
+
+  // Find and disable the button
+  const btn = event.target;
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = '✅ Day Complete';
+    btn.style.background = '#cbd5e1';
+  }
+
+  // Show success message
+  const msg = document.createElement('div');
+  msg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: var(--green); color: white; padding: 12px 20px; border-radius: 8px; font-weight: 600; z-index: 9999;';
+  msg.textContent = '✅ Day ' + day + ' marked complete!';
+  document.body.appendChild(msg);
+
+  setTimeout(() => msg.remove(), 3000);
+}
+
+// Dark mode toggle
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? '1' : '0');
+  updateDarkModeIcon();
+}
+
+function updateDarkModeIcon() {
+  const btn = document.getElementById('dark-mode-toggle');
+  if (btn) {
+    btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  }
+}
+
+// Initialize dark mode on page load
+if (localStorage.getItem('darkMode') === '1') {
+  document.body.classList.add('dark-mode');
+  updateDarkModeIcon();
+}
+
 </script>
 <script>
-// Nav scroll hint: hide fade when scrolled to end
-(function() {
-  const nav = document.getElementById('navInner');
-  const hint = document.getElementById('navScrollHint');
-  if (nav && hint) {
-    function checkScroll() {
-      const atEnd = nav.scrollLeft + nav.offsetWidth >= nav.scrollWidth - 8;
-      hint.classList.toggle('hidden', atEnd);
-    }
-    nav.addEventListener('scroll', checkScroll, { passive: true });
-    window.addEventListener('resize', checkScroll);
-    checkScroll();
-  }
-})();
-
 // Register Service Worker for PWA / offline support
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

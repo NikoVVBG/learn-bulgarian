@@ -1,6 +1,6 @@
 const CACHE_NAME = 'learn-bg-v1';
 const ASSETS = [
-  './learn-bulgarian.html',
+  './index.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png'

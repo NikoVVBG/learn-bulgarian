@@ -2,7 +2,7 @@
   "name": "Научи Български · Learn Bulgarian",
   "short_name": "Learn BG",
   "description": "Step-by-step Bulgarian language course with flashcards, quizzes, and progress tracking",
-  "start_url": "./learn-bulgarian.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f4f6f9",
   "theme_color": "#1e293b",
