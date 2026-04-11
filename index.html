@@ -660,8 +660,10 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
   border-radius: 8px; font-size: 0.82rem; cursor: pointer;
   transition: all 0.2s; color: var(--text);
 }
-.sg-iquiz-options button:hover {
-  background: #f3e8ff; border-color: #a78bfa;
+@media (hover: hover) {
+  .sg-iquiz-options button:hover {
+    background: #f3e8ff; border-color: #a78bfa;
+  }
 }
 .sg-iquiz-options button.selected {
   background: var(--accent); color: white; border-color: var(--accent);
@@ -4030,7 +4032,10 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
     feedback.classList.add(correct ? 'correct' : 'incorrect');
     feedback.style.display = 'block';
 
-    setTimeout(() => { currentQ++; renderQuestion(); }, 1500);
+    // Disable all option buttons to prevent double-tap
+    container.querySelectorAll('.sg-iquiz-options button').forEach(b => { b.disabled = true; });
+
+    setTimeout(() => { currentQ++; if (document.activeElement) document.activeElement.blur(); renderQuestion(); }, 1500);
   };
 
   window.submitIQuizText = function() {
@@ -4048,7 +4053,7 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
     feedback.style.display = 'block';
     input.disabled = true;
 
-    setTimeout(() => { currentQ++; renderQuestion(); }, 1500);
+    setTimeout(() => { currentQ++; if (document.activeElement) document.activeElement.blur(); renderQuestion(); }, 1500);
   };
 
   renderQuestion();
