@@ -256,6 +256,31 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .qh-clear { font-size: 0.75rem; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; margin-left: auto; }
 .qh-clear:hover { color: var(--red); }
 
+/* Mistake Review */
+.mr-panel { margin-top: 20px; }
+.mr-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.mr-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.mr-stats { font-size: 0.78rem; color: var(--muted); }
+.mr-filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.mr-filter-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: white; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.2s; }
+.mr-filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+.mr-filter-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+.mr-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+.mr-card.incorrect { border-left: 3px solid var(--red); }
+.mr-card.correct { border-left: 3px solid var(--green); }
+.mr-q { font-weight: 600; color: var(--text); margin-bottom: 8px; font-size: 0.92rem; }
+.mr-answers { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; }
+.mr-your-ans { color: var(--red); }
+.mr-your-ans.right { color: var(--green); }
+.mr-correct-ans { color: var(--green); font-weight: 600; }
+.mr-meta { font-size: 0.75rem; color: var(--muted); margin-top: 6px; }
+.mr-empty { font-size: 0.9rem; color: var(--muted); font-style: italic; padding: 20px 0; text-align: center; }
+.mr-attempt-header { font-size: 0.85rem; font-weight: 700; color: var(--text); padding: 10px 0 6px; border-bottom: 1px solid var(--border); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.mr-attempt-score { font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; }
+.mr-attempt-score.great { background: #dcfce7; color: #16a34a; }
+.mr-attempt-score.ok { background: #fef3c7; color: #d97706; }
+.mr-attempt-score.low { background: #fee2e2; color: #dc2626; }
+
 /* Resources */
 .res-phase { margin-bottom: 28px; }
 .res-phase h3 { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
@@ -975,6 +1000,7 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
   </div>
   <div id="quiz-history-panel"></div>
   <div id="quiz-area"></div>
+  <div id="mistake-review-panel"></div>
 </div>
 
 <!-- ===== RESOURCES ===== -->
@@ -1778,7 +1804,7 @@ function showTab(name, btn) {
     }
   });
   if (name === 'flashcards') renderFlashcards(currentCategory);
-  if (name === 'quiz') { renderDailyQuizPanel(); renderQuizHistoryPanel(); initQuiz(); }
+  if (name === 'quiz') { renderDailyQuizPanel(); renderQuizHistoryPanel(); renderMistakeReviewPanel(); initQuiz(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2234,6 +2260,175 @@ function startDailyQuizFromPanel(dayKey) {
   const histKey = 'daily-quiz-history-' + dayKey;
   renderInteractiveQuiz('quiz-area', data.quiz, histKey);
 }
+
+// ---- MISTAKE REVIEW PANEL ----
+function renderMistakeReviewPanel() {
+  var panel = document.getElementById('mistake-review-panel');
+  if (!panel) return;
+
+  // Gather all quiz attempts that have responses stored
+  var allAttempts = [];
+  var keys = Object.keys(localStorage);
+  keys.forEach(function(key) {
+    if (key.indexOf('daily-quiz-history-') === 0 || key === 'quiz_history' || key.indexOf('sg-quiz-') === 0 || key.indexOf('iquiz_history_') === 0) {
+      try {
+        var history = JSON.parse(localStorage.getItem(key));
+        if (Array.isArray(history)) {
+          history.forEach(function(attempt, idx) {
+            if (attempt.responses && attempt.responses.length > 0) {
+              var label = key;
+              if (key.indexOf('daily-quiz-history-') === 0) {
+                var dayKey = key.replace('daily-quiz-history-', '');
+                var guide = typeof studyGuides !== 'undefined' ? studyGuides[dayKey] : null;
+                label = guide ? guide.dayTitle : 'Day ' + dayKey;
+              } else if (key.indexOf('sg-quiz-') === 0) {
+                var parts = key.replace('sg-quiz-', '').split('-');
+                var g = typeof studyGuides !== 'undefined' ? studyGuides[parts[0] + '-' + parts[1]] : null;
+                label = g ? g.dayTitle : 'Day ' + parts[0] + '-' + parts[1];
+              } else if (key === 'quiz_history') {
+                label = 'General Knowledge Quiz';
+              }
+              allAttempts.push({
+                key: key,
+                label: label,
+                attempt: attempt,
+                attemptNum: idx + 1,
+                date: attempt.date || ''
+              });
+            }
+          });
+        }
+      } catch(e) {}
+    }
+  });
+
+  if (allAttempts.length === 0) {
+    panel.innerHTML = '';
+    return;
+  }
+
+  // Count total mistakes
+  var totalMistakes = 0;
+  var totalQuestions = 0;
+  allAttempts.forEach(function(a) {
+    a.attempt.responses.forEach(function(r) {
+      totalQuestions++;
+      if (!r.correct) totalMistakes++;
+    });
+  });
+
+  // Build filter buttons from unique labels
+  var labels = [];
+  allAttempts.forEach(function(a) {
+    if (labels.indexOf(a.label) === -1) labels.push(a.label);
+  });
+
+  var html = '<div class="card mr-panel">';
+  html += '<div class="mr-header">';
+  html += '<div><span class="mr-title">Review Your Mistakes</span>';
+  html += '<span class="mr-stats" style="margin-left:12px">' + totalMistakes + ' mistake' + (totalMistakes !== 1 ? 's' : '') + ' across ' + allAttempts.length + ' attempt' + (allAttempts.length !== 1 ? 's' : '') + '</span></div>';
+  html += '<div style="display:flex;gap:8px">';
+  html += '<button class="mr-filter-btn" onclick="filterMistakes(\'mistakes\')" id="mr-filter-mistakes" style="background:var(--red);color:white;border-color:var(--red)">Mistakes Only</button>';
+  html += '<button class="mr-filter-btn" onclick="filterMistakes(\'all\')" id="mr-filter-all">All Answers</button>';
+  html += '</div></div>';
+
+  // Filter by quiz
+  if (labels.length > 1) {
+    html += '<div class="mr-filter-row">';
+    html += '<button class="mr-filter-btn active" onclick="filterMistakeQuiz(\'all\')">All Quizzes</button>';
+    labels.forEach(function(l) {
+      html += '<button class="mr-filter-btn" onclick="filterMistakeQuiz(\'' + l.replace(/'/g, "\\'") + '\')">' + l + '</button>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div id="mr-content">';
+
+  // Render attempts in reverse order (most recent first)
+  var reversed = allAttempts.slice().reverse();
+  reversed.forEach(function(a) {
+    var pctClass = a.attempt.pct >= 80 ? 'great' : a.attempt.pct >= 60 ? 'ok' : 'low';
+    html += '<div class="mr-attempt-group" data-quiz-label="' + a.label.replace(/"/g, '&quot;') + '">';
+    html += '<div class="mr-attempt-header">';
+    html += '<span>' + a.label + ' <span style="color:var(--muted);font-weight:400">' + (a.date ? ' &middot; ' + a.date : '') + '</span></span>';
+    html += '<span class="mr-attempt-score ' + pctClass + '">' + a.attempt.pct + '%</span>';
+    html += '</div>';
+
+    a.attempt.responses.forEach(function(r) {
+      var cardClass = r.correct ? 'correct' : 'incorrect';
+      html += '<div class="mr-card ' + cardClass + '" data-correct="' + r.correct + '">';
+      html += '<div class="mr-q">' + r.q + '</div>';
+      html += '<div class="mr-answers">';
+      if (r.correct) {
+        html += '<span class="mr-your-ans right">Your answer: ' + r.userAns + ' ✓</span>';
+      } else {
+        html += '<span class="mr-your-ans">Your answer: ' + r.userAns + '</span>';
+        html += '<span class="mr-correct-ans">Correct: ' + r.answer + '</span>';
+      }
+      html += '</div></div>';
+    });
+
+    html += '</div>';
+  });
+
+  html += '</div></div>';
+  panel.innerHTML = html;
+
+  // Default to showing mistakes only
+  filterMistakes('mistakes');
+}
+
+window.filterMistakes = function(mode) {
+  var cards = document.querySelectorAll('#mr-content .mr-card');
+  var groups = document.querySelectorAll('#mr-content .mr-attempt-group');
+  var btnMistakes = document.getElementById('mr-filter-mistakes');
+  var btnAll = document.getElementById('mr-filter-all');
+
+  if (mode === 'mistakes') {
+    if (btnMistakes) { btnMistakes.style.background = 'var(--red)'; btnMistakes.style.color = 'white'; btnMistakes.style.borderColor = 'var(--red)'; }
+    if (btnAll) { btnAll.style.background = ''; btnAll.style.color = ''; btnAll.style.borderColor = ''; }
+    cards.forEach(function(c) {
+      c.style.display = c.getAttribute('data-correct') === 'true' ? 'none' : '';
+    });
+    // Hide groups with no visible mistakes
+    groups.forEach(function(g) {
+      var visible = g.querySelectorAll('.mr-card[data-correct="false"]');
+      g.style.display = visible.length === 0 ? 'none' : '';
+    });
+  } else {
+    if (btnAll) { btnAll.style.background = 'var(--accent)'; btnAll.style.color = 'white'; btnAll.style.borderColor = 'var(--accent)'; }
+    if (btnMistakes) { btnMistakes.style.background = ''; btnMistakes.style.color = ''; btnMistakes.style.borderColor = ''; }
+    cards.forEach(function(c) { c.style.display = ''; });
+    groups.forEach(function(g) { g.style.display = ''; });
+  }
+};
+
+window.filterMistakeQuiz = function(label) {
+  var groups = document.querySelectorAll('#mr-content .mr-attempt-group');
+  var buttons = document.querySelectorAll('.mr-filter-row .mr-filter-btn');
+  buttons.forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+
+  groups.forEach(function(g) {
+    if (label === 'all' || g.getAttribute('data-quiz-label') === label) {
+      g.style.display = '';
+    } else {
+      g.style.display = 'none';
+    }
+  });
+
+  // Re-apply the current mistakes/all filter
+  var btnMistakes = document.getElementById('mr-filter-mistakes');
+  if (btnMistakes && btnMistakes.style.background.indexOf('red') !== -1) {
+    filterMistakes('mistakes');
+    // But also keep the quiz filter
+    if (label !== 'all') {
+      groups.forEach(function(g) {
+        if (g.getAttribute('data-quiz-label') !== label) g.style.display = 'none';
+      });
+    }
+  }
+};
 
 // ---- QUIZ ----
 function initQuiz() {
@@ -3848,7 +4043,8 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
           score: score,
           total: quiz.length,
           pct: pct,
-          date: dateStr
+          date: dateStr,
+          responses: responses
         });
         localStorage.setItem(storageKey, JSON.stringify(history));
 
@@ -3856,7 +4052,11 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
         if (storageKey === 'quiz_history') {
           renderQuizHistoryPanel();
         }
+        // Update mistake review panel
+        renderMistakeReviewPanel();
       }
+
+      var mistakes = responses.filter(function(r) { return !r.correct; });
 
       let html = '<div class="sg-iquiz-score">';
       html += '<div style="font-size:1.8rem;margin-bottom:8px">' + emoji + '</div>';
@@ -3866,9 +4066,40 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
       else if (pct >= 60) html += 'Good work! Keep practicing.';
       else html += 'Keep going! Review and try again.';
       html += '</div>';
-      html += '<button class="sg-mark-complete" style="margin-top:12px" onclick="location.reload()">Try Again</button>';
+      html += '<div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">';
+      html += '<button class="sg-mark-complete" onclick="retakeCurrentQuiz()">Try Again</button>';
+      if (mistakes.length > 0) {
+        html += '<button class="sg-mark-complete" style="background:var(--red)" onclick="showInlineReview()">Review ' + mistakes.length + ' Mistake' + (mistakes.length > 1 ? 's' : '') + '</button>';
+      }
+      html += '</div>';
+
+      // Inline mistake review
+      if (mistakes.length > 0) {
+        html += '<div id="inline-mistake-review" style="display:none;margin-top:20px;text-align:left">';
+        html += '<div style="font-weight:700;font-size:0.9rem;color:var(--text);margin-bottom:12px">Questions you missed:</div>';
+        mistakes.forEach(function(m, idx) {
+          html += '<div class="mr-card incorrect">';
+          html += '<div class="mr-q">' + (idx + 1) + '. ' + m.q + '</div>';
+          html += '<div class="mr-answers">';
+          html += '<span class="mr-your-ans">Your answer: ' + m.userAns + '</span>';
+          html += '<span class="mr-correct-ans">Correct: ' + m.answer + '</span>';
+          html += '</div></div>';
+        });
+        html += '</div>';
+      }
+
       html += '</div>';
       container.innerHTML = html;
+
+      window.showInlineReview = function() {
+        var el = document.getElementById('inline-mistake-review');
+        if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      };
+
+      window.retakeCurrentQuiz = function() {
+        currentQ = 0; score = 0; responses.length = 0;
+        renderQuestion();
+      };
       return;
     }
 
