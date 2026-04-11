@@ -2468,14 +2468,14 @@ const studyGuides = {
   steps: [
     {
       num: 1,
-      title: 'Learn today\'s 5 letters — the familiar ones',
+      title: 'Learn today\'s 5 letters',
       desc: `Good news: some of these look like English letters but sound different! Pay attention.
       <div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">К</div><div class="sg-lc-lower">к (lowercase)</div><div class="sg-lc-sound">Sound: "k" — like kite</div><div class="sg-lc-eng">Looks like English K — same sound!</div><div class="sg-lc-word">К е за котка — cat</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Л</div><div class="sg-lc-lower">л (lowercase)</div><div class="sg-lc-sound">Sound: "l" — like lamp</div><div class="sg-lc-eng">Looks like an upside-down V</div><div class="sg-lc-word">Л е за лимон — lemon</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">М</div><div class="sg-lc-lower">м (lowercase)</div><div class="sg-lc-sound">Sound: "m" — like moon</div><div class="sg-lc-eng">Looks like English M — same sound!</div><div class="sg-lc-word">М е за майка — mother</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Н</div><div class="sg-lc-lower">н (lowercase)</div><div class="sg-lc-sound">Sound: "n" — like night</div><div class="sg-lc-eng">Looks like English H — but sounds like N!</div><div class="sg-lc-word">Н е за небе — sky</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">О</div><div class="sg-lc-lower">о (lowercase)</div><div class="sg-lc-sound">Sound: "o" — like open</div><div class="sg-lc-eng">Looks like English O — similar sound</div><div class="sg-lc-word">О е за ориз — rice</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">К к</div><div class="sg-lc-hw">К к</div><div class="sg-lc-sound">Sound: "k" — like kite</div><div class="sg-lc-eng">Looks like English K — same sound!</div><div class="sg-lc-word">К е за котка — cat</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Л л</div><div class="sg-lc-hw">Л л</div><div class="sg-lc-sound">Sound: "l" — like lamp</div><div class="sg-lc-eng">Looks like an upside-down V</div><div class="sg-lc-word">Л е за лимон — lemon</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">М м</div><div class="sg-lc-hw">М м</div><div class="sg-lc-sound">Sound: "m" — like moon</div><div class="sg-lc-eng">Looks like English M — same sound!</div><div class="sg-lc-word">М е за майка — mother</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Н н</div><div class="sg-lc-hw">Н н</div><div class="sg-lc-sound">Sound: "n" — like night</div><div class="sg-lc-eng">Looks like English H — but sounds like N!</div><div class="sg-lc-word">Н е за небе — sky</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">О о</div><div class="sg-lc-hw">О о</div><div class="sg-lc-sound">Sound: "o" — like open</div><div class="sg-lc-eng">Looks like English O — similar sound</div><div class="sg-lc-word">О е за ориз — rice</div></div>
       </div>
       <div class="sg-tip"><strong>⚠️ Watch out for Н!</strong> It looks exactly like the English letter H — but it makes the "n" sound. This trips everyone up at first. Write it 10 extra times and say "n, n, n" each time.</div>`,
     },
@@ -2486,8 +2486,10 @@ const studyGuides = {
     },
     {
       num: 3,
-      title: 'Cumulative flashcard drill',
-      desc: 'Go to Flashcards → Alphabet. Go through letters А–О (the 15 you know). Your target: say the sound before you flip the card. Don\'t skip the hard ones — flip back and redo them.',
+      title: 'Flashcard practice',
+      desc: `Practice today's letters right here! Tap a card to flip it, swipe to navigate.
+      <div class="sg-fc-embed" id="sg-fc-1-3"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> Say the sound out loud before flipping each card. The repetition is what makes it stick.</div>`,
     },
     {
       num: 4,
@@ -2496,9 +2498,29 @@ const studyGuides = {
     },
     {
       num: 5,
-      title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>Which letter looks like H but sounds like N? (Н)</li><li>What is <em>майка</em> in English? (mother)</li><li>Write the 15 letters you know now from memory.</li><li>What does <em>небе</em> mean? (sky)</li><li>Which letters К, М have the exact same sound as in English?</li></ol></div>`,
+      title: 'Writing practice',
+      desc: `Write each letter 5 times on paper. Say the sound as you write it.
+      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 5× while saying the sound out loud</div><ol><li><strong>К к</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">К к</span> — say "k" each time you write it</li><li><strong>Л л</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Л л</span> — say "l"</li><li><strong>М м</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">М м</span> — say "m"</li><li><strong>Н н</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Н н</span> — say "n"</li><li><strong>О о</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">О о</span> — say "o"</li></ol></div>`,
     },
+    {
+      num: 6,
+      title: 'Quick quiz',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-1-3"></div>`,
+    },
+  ],
+  flashcards: [
+    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка"},
+    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон"},
+    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка"},
+    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе"},
+    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз"}
+  ],
+  quiz: [
+    {q: "Which letter looks like H but sounds like N?", type: "mc", options: ["К", "Л", "М", "Н"], answer: "Н"},
+    {q: "What does майка mean?", type: "text", answer: "mother"},
+    {q: "Which letter makes the 'k' sound?", type: "mc", options: ["Л", "М", "К", "Н"], answer: "К"},
+    {q: "What does небе mean?", type: "text", answer: "sky"},
+    {q: "Which two letters look the same as in English?", type: "mc", options: ["К and М", "Л and Н", "М and О", "К and Л"], answer: "К and М"}
   ]
 },
 
@@ -2509,14 +2531,16 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Today is a drill day — no new letters. Just making what you learned stick. This is how language learning actually works: learn, then drill, then recall.',
+      num: 1,
+      title: 'Warm-up: what you know so far',
+      desc: 'Today is a drill day. No new letters. Just making what you learned stick. This is how language learning actually works: learn, then drill, then recall.',
     },
     {
       num: 2,
-      title: 'First pass — Flashcards tab',
-      desc: 'Flashcards → Alphabet. Go through all 15 letters (А–О). For each card: <strong>look at the letter, say the sound out loud BEFORE you flip.</strong> If you were right ✓ mentally. If wrong ✗ — flip back and say it correctly 3 times.',
+      title: 'Flashcard drill — all 15 letters',
+      desc: `Practice all letters А through О right here. Try to say the sound out loud BEFORE you flip each card.
+      <div class="sg-fc-embed" id="sg-fc-1-4"></div>
+      <div class="sg-tip"><strong>💡 Challenge:</strong> Go through all 15 cards. If you get one wrong, flip back and say the correct sound 3 times before moving on.</div>`,
     },
     {
       num: 3,
@@ -2525,26 +2549,47 @@ const studyGuides = {
     },
     {
       num: 4,
-      title: 'Focus on your personal problem letters',
-      desc: 'Everyone has 2–3 letters that don\'t stick. Write yours down right now. Do 20 extra reps of those specific letters — write them, say them, use them in the example word.',
-      
+      title: 'Writing practice — all 15 letters',
+      desc: `Write every letter you've learned so far. This is your full writing drill.
+      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 3× while saying the sound out loud</div><ol><li><strong>А а</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">А а</span> — "ah"</li><li><strong>Б б</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Б б</span> — "b"</li><li><strong>В в</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">В в</span> — "v"</li><li><strong>Г г</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Г г</span> — "g"</li><li><strong>Д д</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Д д</span> — "d"</li><li><strong>Е е</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Е е</span> — "eh"</li><li><strong>Ж ж</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Ж ж</span> — "zh"</li><li><strong>З з</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">З з</span> — "z"</li><li><strong>И и</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">И и</span> — "ee"</li><li><strong>Й й</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Й й</span> — "y"</li><li><strong>К к</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">К к</span> — "k"</li><li><strong>Л л</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Л л</span> — "l"</li><li><strong>М м</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">М м</span> — "m"</li><li><strong>Н н</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Н н</span> — "n"</li><li><strong>О о</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">О о</span> — "o"</li></ol></div>`,
     },
     {
       num: 5,
-      title: 'Try the Quiz tab',
-      desc: 'Go to the <strong>✏️ Quiz</strong> tab and take the quiz. It includes your alphabet letters. Don\'t worry about the score — the quiz tab saves your result so you can track improvement over time. The score from today is your baseline.',
+      title: 'Focus on your personal problem letters',
+      desc: 'Everyone has 2-3 letters that don\'t stick. Write yours down right now. Do 20 extra reps of those specific letters. Write them, say them, use them in the example word.',
     },
     {
       num: 6,
-      title: 'Repeat with autoplay ON',
-      desc: `<div class="sg-tip"><strong>💡 Autoplay trick:</strong> In the Flashcards tab, check the "Auto-play pronunciation" box. Now just cycle through cards without touching anything — the app will say each letter automatically. Great for passive review while you write.</div>`,
+      title: 'Quick quiz — cumulative test',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-1-4"></div>`,
     },
-    {
-      num: 7,
-      title: 'Mark Day 4 complete',
-      desc: 'Weekly Plan → Week 1 → check off Day 4. One more day before your learning partner quiz!',
-    },
-  
+  ],
+  flashcards: [
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга"},
+    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт"},
+    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка"},
+    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон"},
+    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка"},
+    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе"},
+    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз"}
+  ],
+  quiz: [
+    {q: "Which letter looks like B but sounds like 'v'?", type: "mc", options: ["Б", "В", "Г", "Д"], answer: "В"},
+    {q: "What does вода mean?", type: "text", answer: "water"},
+    {q: "Which letter looks like H but sounds like 'n'?", type: "mc", options: ["К", "М", "Н", "О"], answer: "Н"},
+    {q: "What does жираф mean?", type: "text", answer: "giraffe"},
+    {q: "Which letter makes the 'zh' sound (like in 'measure')?", type: "mc", options: ["З", "Ж", "Й", "Л"], answer: "Ж"},
+    {q: "What does котка mean?", type: "text", answer: "cat"},
+    {q: "Write the letter that makes the 'ee' sound:", type: "mc", options: ["Е", "И", "О", "А"], answer: "И"},
+    {q: "What does лимон mean?", type: "text", answer: "lemon"}
   ]
 },
 
@@ -2555,37 +2600,67 @@ const studyGuides = {
   timeEst: '20–30 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Last day of Week 1! Today you\'ll prove to yourself (and your learning partner) that you\'ve really locked in these 15 letters.',
+      num: 1,
+      title: 'Write all 15 letters from memory',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">✍️ Memory test — no peeking!</div><ol><li>Close this guide</li><li>On paper, write the letters А through О in order</li><li>Next to each, write the sound it makes</li><li>Then write the example word you remember</li><li>Open the app and check yourself</li></ol>This is harder than it sounds. Any you missed — those are the ones to drill for 5 more minutes.</div>`,
     },
     {
       num: 2,
-      title: 'Write all 15 letters from memory',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">✍️ Memory test — no peeking!</div><ol><li>Close this guide</li><li>On paper, write the letters А through О in order</li><li>Next to each, write the sound it makes</li><li>Then write the example word you remember</li><li>Open the app and check yourself</li></ol>This is harder than it sounds. Any you missed — those are the ones to drill for 5 more minutes.</div>`,
+      title: 'Final flashcard review',
+      desc: `One last pass through all 15 letters. Can you name each sound instantly?
+      <div class="sg-fc-embed" id="sg-fc-1-5"></div>`,
     },
     {
       num: 3,
       title: 'Learning partner check-in',
       desc: `Find your learning partner and do this together:
-      <div class="sg-practice"><div class="sg-practice-title">🤝 Partner exercise (5–10 min)</div><ol><li>They point to a Cyrillic letter — you say the sound</li><li>They say a sound — you write the letter</li><li>They ask: "How do you say \'water\' in Bulgarian?" (вода)</li><li>Recite А–О out loud from memory</li></ol>Goal: no hesitations. If you hesitate, that letter gets 10 more practice reps tomorrow.</div>`,
+      <div class="sg-practice"><div class="sg-practice-title">🤝 Partner exercise (5–10 min)</div><ol><li>They point to a Cyrillic letter — you say the sound</li><li>They say a sound — you write the letter</li><li>They ask: "How do you say 'water' in Bulgarian?" (вода)</li><li>Recite А–О out loud from memory</li></ol>Goal: no hesitations. If you hesitate, that letter gets 10 more practice reps tomorrow.</div>`,
     },
     {
       num: 4,
+      title: 'Writing practice — full review',
+      desc: `Write every letter one more time. Fast and confident.
+      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 2× — fast and confident</div><ol><li><strong>А а</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">А а</span> — "ah"</li><li><strong>Б б</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Б б</span> — "b"</li><li><strong>В в</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">В в</span> — "v"</li><li><strong>Г г</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Г г</span> — "g"</li><li><strong>Д д</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Д д</span> — "d"</li><li><strong>Е е</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Е е</span> — "eh"</li><li><strong>Ж ж</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Ж ж</span> — "zh"</li><li><strong>З з</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">З з</span> — "z"</li><li><strong>И и</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">И и</span> — "ee"</li><li><strong>Й й</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Й й</span> — "y"</li><li><strong>К к</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">К к</span> — "k"</li><li><strong>Л л</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Л л</span> — "l"</li><li><strong>М м</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">М м</span> — "m"</li><li><strong>Н н</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Н н</span> — "n"</li><li><strong>О о</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">О о</span> — "o"</li></ol></div>`,
+    },
+    {
+      num: 5,
       title: 'Weekly challenge — send the photo',
       desc: `<div class="sg-challenge">🏆 <strong>Weekly Challenge:</strong> Write all 15 letters beautifully on paper. Photo it and send it to your learning partner. Aim for clean, confident letters — not tiny cramped ones. Your learning partner will grade your handwriting!<br><br><em>Bonus: Can you write each letter's example word next to it?</em></div>`,
     },
     {
-      num: 5,
-      title: 'Preview Week 2',
-      desc: 'Next week you\'ll learn the remaining 14 letters (П–Я) and complete the full Bulgarian alphabet. Sneak peek: П looks like English P but... is actually "p". That one\'s a freebie!',
-    },
-    {
       num: 6,
-      title: 'Mark Day 5 complete — Week 1 done! 🎉',
-      desc: 'Weekly Plan → Week 1 → check off Day 5. If all 5 days are checked, Week 1 turns green. Check your Dashboard — see your progress go up!',
+      title: 'End-of-week quiz',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-1-5"></div>`,
     },
-  
+  ],
+  flashcards: [
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга"},
+    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт"},
+    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка"},
+    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон"},
+    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка"},
+    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе"},
+    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз"}
+  ],
+  quiz: [
+    {q: "What sound does В make?", type: "mc", options: ["b", "v", "g", "d"], answer: "v"},
+    {q: "What does грозде mean?", type: "text", answer: "grapes"},
+    {q: "Which letter makes the 'zh' sound?", type: "mc", options: ["З", "Ж", "Й", "Г"], answer: "Ж"},
+    {q: "What does ориз mean?", type: "text", answer: "rice"},
+    {q: "Н looks like which English letter?", type: "mc", options: ["N", "H", "M", "K"], answer: "H"},
+    {q: "What does дъга mean?", type: "text", answer: "rainbow"},
+    {q: "Which letter makes the 'ee' sound?", type: "mc", options: ["Е", "И", "Й", "О"], answer: "И"},
+    {q: "What is the difference between Й and И?", type: "mc", options: ["Й is 'y', И is 'ee'", "They are the same", "Й is 'ee', И is 'y'", "Both are vowels"], answer: "Й is 'y', И is 'ee'"},
+    {q: "What does акула mean?", type: "text", answer: "shark"},
+    {q: "How many letters have you learned this week?", type: "mc", options: ["10", "12", "15", "20"], answer: "15"}
   ]
 },
 
