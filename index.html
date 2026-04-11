@@ -53,6 +53,7 @@ body.dark-mode .card { background: #1e293b; border-color: #334155; }
 body.dark-mode input[type=checkbox] { accent-color: #00966E; }
 body.dark-mode .sg-letter-card { background: linear-gradient(135deg, #1e293b, #334155); border-color: #475569; }
 body.dark-mode .sg-letter-card .sg-lc-cyrillic { color: #e2e8f0; }
+body.dark-mode .sg-letter-card .sg-lc-hw { color: #a5b4fc; }
 
 /* Bulgarian flag stripe */
 .flag-stripe { display: flex; height: 7px; }
@@ -478,27 +479,28 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .sg-step-desc strong { color: var(--text); }
 
 /* Letter cards inside guide */
-.sg-letter-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.sg-letter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 10px; }
 .sg-letter-card {
   background: linear-gradient(135deg, #f8fafc, #f1f5f9);
   border: 1.5px solid var(--border); border-radius: 12px;
-  padding: 12px 14px; min-width: 140px; flex: 1;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto auto auto;
+  align-content: start;
 }
 /* Uppercase + lowercase pair in blue */
 .sg-lc-pair { display: flex; align-items: baseline; gap: 10px; line-height: 1; margin-bottom: 6px; }
 .sg-lc-upper { font-size: 2rem; font-weight: 800; color: var(--accent); }
 .sg-lc-low   { font-size: 1.4rem; font-weight: 700; color: var(--accent); opacity: 0.75; }
-/* Handwritten row */
-.sg-lc-handwritten { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; padding: 6px 8px; background: white; border-radius: 8px; border: 1px dashed #c7d2fe; }
-.sg-hw-upper { font-family: 'Caveat', cursive; font-size: 1.9rem; color: #6366f1; line-height: 1; }
-.sg-hw-low   { font-family: 'Caveat', cursive; font-size: 1.35rem; color: #6366f1; opacity: 0.8; }
-.sg-lc-hw-label { font-size: 0.65rem; color: var(--muted); margin-left: auto; align-self: center; font-style: italic; }
 /* Keep old classes for compat */
-.sg-lc-cyrillic { font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.sg-lc-cyrillic { font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; grid-column: 1; grid-row: 1; align-self: center; }
 .sg-lc-lower { display: none; }
-.sg-lc-sound { font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-.sg-lc-eng { font-size: 0.75rem; color: var(--muted); }
-.sg-lc-word { font-size: 0.78rem; color: var(--green); font-style: italic; margin-top: 4px; font-weight: 600; }
+.sg-lc-hw { font-family: 'Caveat', cursive; font-size: 2rem; font-weight: 600; color: #6366f1; line-height: 1;
+  grid-column: 2; grid-row: 1; align-self: center; text-align: right; }
+.sg-lc-sound { font-size: 0.8rem; font-weight: 600; color: var(--text); grid-column: 1 / -1; grid-row: 2; align-self: start; padding-top: 8px; min-height: 2.4em; }
+.sg-lc-eng { font-size: 0.75rem; color: var(--muted); grid-column: 1 / -1; grid-row: 3; align-self: start; min-height: 2.2em; }
+.sg-lc-word { font-size: 0.78rem; color: var(--green); font-style: italic; font-weight: 600; grid-column: 1 / -1; grid-row: 4; align-self: start; }
 
 /* Inline study guide panel */
 .sg-inline-panel { display: none; border: 2px solid #c7d2fe; border-radius: 14px; margin: 4px 0 14px; overflow: hidden; }
@@ -967,6 +969,7 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 
 <!-- ===== QUIZ ===== -->
 <div id="tab-quiz" class="tab">
+  <div id="daily-quiz-panel"></div>
   <div class="card">
     <div class="card-title">✏️ Quiz 1: General Knowledge</div>
     <div class="card-sub">Test what you've learned so far! Covers alphabet, vocabulary, and phrases. Scores are saved automatically so you can track improvement over time.</div>
@@ -1776,7 +1779,7 @@ function showTab(name, btn) {
     }
   });
   if (name === 'flashcards') renderFlashcards(currentCategory);
-  if (name === 'quiz') { renderQuizHistoryPanel(); initQuiz(); }
+  if (name === 'quiz') { renderDailyQuizPanel(); renderQuizHistoryPanel(); initQuiz(); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2166,6 +2169,73 @@ function clearQuizHistory() {
   }
 }
 
+// ---- DAILY QUIZ PANEL ----
+function renderDailyQuizPanel() {
+  const panel = document.getElementById('daily-quiz-panel');
+  if (!panel) return;
+
+  // Collect all days with quizzes
+  const dailyQuizzes = [];
+  for (const [key, data] of Object.entries(studyGuides)) {
+    if (data.quiz && data.quiz.length > 0) {
+      dailyQuizzes.push({
+        dayKey: key,
+        weekLabel: data.weekLabel,
+        dayTitle: data.dayTitle,
+        quiz: data.quiz
+      });
+    }
+  }
+
+  if (dailyQuizzes.length === 0) {
+    panel.innerHTML = '';
+    return;
+  }
+
+  let html = '<div class="card" style="margin-bottom: 20px;">';
+  html += '<div class="card-title">📅 Daily Lesson Quizzes</div>';
+  html += '<div class="card-sub">Test your knowledge after each lesson. Track your progress over time.</div>';
+  html += '</div>';
+  html += '<div style="display: grid; gap: 12px;">';
+
+  dailyQuizzes.forEach(item => {
+    const histKey = 'daily-quiz-history-' + item.dayKey;
+    const history = JSON.parse(localStorage.getItem(histKey) || '[]');
+    const bestScore = history.length > 0 ? Math.max(...history.map(h => h.pct)) : null;
+    const attemptCount = history.length;
+
+    html += '<div class="card" style="padding: 16px;">';
+    html += '<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">';
+    html += '<div>';
+    html += '<div style="font-weight: 600; color: var(--text);">' + item.dayTitle + '</div>';
+    html += '<div style="font-size: 0.85rem; color: var(--muted);">' + item.weekLabel + '</div>';
+    html += '</div>';
+    if (bestScore !== null) {
+      html += '<div style="text-align: right;">';
+      html += '<div style="font-size: 1.1rem; font-weight: 700; color: var(--accent);">' + bestScore + '%</div>';
+      html += '<div style="font-size: 0.75rem; color: var(--muted);">' + attemptCount + ' attempt' + (attemptCount !== 1 ? 's' : '') + '</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '<button class="sg-mark-complete" onclick="startDailyQuizFromPanel(\'' + item.dayKey + '\')" style="width: 100%;">' + (bestScore !== null ? 'Retake' : 'Start') + ' Quiz</button>';
+    html += '</div>';
+  });
+
+  html += '</div>';
+  panel.innerHTML = html;
+}
+
+function startDailyQuizFromPanel(dayKey) {
+  const data = studyGuides[dayKey];
+  if (!data || !data.quiz) return;
+
+  const quizArea = document.getElementById('quiz-area');
+  quizArea.innerHTML = '';
+
+  const histKey = 'daily-quiz-history-' + dayKey;
+  renderInteractiveQuiz('quiz-area', data.quiz, histKey);
+}
+
 // ---- QUIZ ----
 function initQuiz() {
   shuffledQuiz = [...quizData].sort(() => Math.random() - 0.5).slice(0, 10);
@@ -2291,11 +2361,11 @@ const studyGuides = {
       title: 'Learn today\'s 5 letters',
       desc: `Meet your first five Cyrillic letters. Each one has a consistent sound — no exceptions!
       <div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">А</div><div class="sg-lc-lower">а (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">А а</div><div class="sg-lc-sound">Sound: "ah" — like father</div><div class="sg-lc-eng">Think: the letter A in "car"</div><div class="sg-lc-word">А е за акула — shark</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Б</div><div class="sg-lc-lower">б (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Б б</div><div class="sg-lc-sound">Sound: "b" — like ball</div><div class="sg-lc-eng">Looks like a 6 with a hat</div><div class="sg-lc-word">Б е за баба — grandma</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">В</div><div class="sg-lc-lower">в (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">В в</div><div class="sg-lc-sound">Sound: "v" — like voice</div><div class="sg-lc-eng">Looks like our letter B</div><div class="sg-lc-word">В е за вода — water</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Г</div><div class="sg-lc-lower">г (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Г г</div><div class="sg-lc-sound">Sound: "g" — like gold</div><div class="sg-lc-eng">Looks like an upside-down L</div><div class="sg-lc-word">Г е за грозде — grapes</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Д</div><div class="sg-lc-lower">д (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Д д</div><div class="sg-lc-sound">Sound: "d" — like dog</div><div class="sg-lc-eng">Looks like a table on legs</div><div class="sg-lc-word">Д е за дъга — rainbow</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">А а</div><div class="sg-lc-hw">А а</div><div class="sg-lc-sound">Sound: "ah" — like father</div><div class="sg-lc-eng">Think: the letter A in "car"</div><div class="sg-lc-word">А е за акула — shark</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Б б</div><div class="sg-lc-hw">Б б</div><div class="sg-lc-sound">Sound: "b" — like ball</div><div class="sg-lc-eng">Looks like a 6 with a hat</div><div class="sg-lc-word">Б е за баба — grandma</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">В в</div><div class="sg-lc-hw">В в</div><div class="sg-lc-sound">Sound: "v" — like voice</div><div class="sg-lc-eng">Looks like our letter B</div><div class="sg-lc-word">В е за вода — water</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Г г</div><div class="sg-lc-hw">Г г</div><div class="sg-lc-sound">Sound: "g" — like gold</div><div class="sg-lc-eng">Looks like an upside-down L</div><div class="sg-lc-word">Г е за грозде — grapes</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Д д</div><div class="sg-lc-hw">Д д</div><div class="sg-lc-sound">Sound: "d" — like dog</div><div class="sg-lc-eng">Looks like a table on legs</div><div class="sg-lc-word">Д е за дъга — rainbow</div></div>
       </div>`,
     },
     {
@@ -2309,7 +2379,7 @@ const studyGuides = {
       num: 4,
       title: 'Writing practice',
       desc: `Write each letter 5 times on paper. Say the sound as you write it. The muscle memory + audio connection speeds up recognition dramatically.
-      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 5× while saying the sound out loud</div><ol><li><strong>А а</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(А а)</span> — say "ah" each time you write it</li><li><strong>Б б</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Б б)</span> — say "b"</li><li><strong>В в</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(В в)</span> — say "v"</li><li><strong>Г г</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Г г)</span> — say "g"</li><li><strong>Д д</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Д д)</span> — say "d"</li></ol></div>`,
+      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 5× while saying the sound out loud</div><ol><li><strong>А а</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">А а</span> — say "ah" each time you write it</li><li><strong>Б б</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Б б</span> — say "b"</li><li><strong>В в</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">В в</span> — say "v"</li><li><strong>Г г</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Г г</span> — say "g"</li><li><strong>Д д</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Д д</span> — say "d"</li></ol></div>`,
     },
     {
       num: 5,
@@ -2318,11 +2388,11 @@ const studyGuides = {
     },
   ],
   flashcards: [
-    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as in аз (I)", speechText: "А е за акула"},
-    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as in баба (grandma)", speechText: "Б е за баба"},
-    {word: "В в", translation: "'v' — like voice", pronunciation: "В as in вода (water)", speechText: "В е за вода"},
-    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as in грозде (grapes)", speechText: "Г е за грозде"},
-    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as in дъга (rainbow)", speechText: "Д е за дъга"}
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга"}
   ],
   quiz: [
     {q: "Which letter makes the 'v' sound?", type: "mc", options: ["Б", "В", "Г", "Д"], answer: "В"},
@@ -2348,11 +2418,11 @@ const studyGuides = {
       num: 2,
       title: 'Learn today\'s 5 new letters',
       desc: `<div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Е</div><div class="sg-lc-lower">е (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Е е</div><div class="sg-lc-sound">Sound: "eh" — like bed</div><div class="sg-lc-eng">Looks like our E, same sound!</div><div class="sg-lc-word">Е е за есен — autumn</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ж</div><div class="sg-lc-lower">ж (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Ж ж</div><div class="sg-lc-sound">Sound: "zh" — like measure</div><div class="sg-lc-eng">Like a snowflake, unique sound</div><div class="sg-lc-word">Ж е за жираф — giraffe</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">З</div><div class="sg-lc-lower">з (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">З з</div><div class="sg-lc-sound">Sound: "z" — like zoo</div><div class="sg-lc-eng">Looks like the number 3</div><div class="sg-lc-word">З е за зайче — bunny</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">И</div><div class="sg-lc-lower">и (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">И и</div><div class="sg-lc-sound">Sound: "ee" — like bee</div><div class="sg-lc-eng">Looks like backwards N</div><div class="sg-lc-word">И е за игра — game</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Й</div><div class="sg-lc-lower">й (lowercase)</div><div class="sg-lc-handwritten" style="font-family:'Caveat',cursive;font-size:1.8rem;color:#3b6fd4;margin:4px 0;">Й й</div><div class="sg-lc-sound">Sound: "y" — like yes</div><div class="sg-lc-eng">И with a breve accent on top</div><div class="sg-lc-word">Й е за йогурт — yogurt</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Е е</div><div class="sg-lc-hw">Е е</div><div class="sg-lc-sound">Sound: "eh" — like bed</div><div class="sg-lc-eng">Looks like our E, same sound!</div><div class="sg-lc-word">Е е за есен — autumn</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ж ж</div><div class="sg-lc-hw">Ж ж</div><div class="sg-lc-sound">Sound: "zh" — like measure</div><div class="sg-lc-eng">Like a snowflake, unique sound</div><div class="sg-lc-word">Ж е за жираф — giraffe</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">З з</div><div class="sg-lc-hw">З з</div><div class="sg-lc-sound">Sound: "z" — like zoo</div><div class="sg-lc-eng">Looks like the number 3</div><div class="sg-lc-word">З е за зайче — bunny</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">И и</div><div class="sg-lc-hw">И и</div><div class="sg-lc-sound">Sound: "ee" — like bee</div><div class="sg-lc-eng">Looks like backwards N</div><div class="sg-lc-word">И е за игра — game</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Й й</div><div class="sg-lc-hw">Й й</div><div class="sg-lc-sound">Sound: "y" — like yes</div><div class="sg-lc-eng">И with a breve accent on top</div><div class="sg-lc-word">Й е за йогурт — yogurt</div></div>
       </div>
       <div class="sg-tip"><strong>💡 Watch out:</strong> И sounds like "ee" (not like English I). Й is a short glide sound — like the Y in "yes". They look similar — the accent mark matters!</div>`,
     },
@@ -2360,7 +2430,7 @@ const studyGuides = {
       num: 3,
       title: 'Say each letter with its example word',
       desc: `Practice the "X е за Y" pattern out loud — this is how Bulgarian children learn:
-      <div class="sg-practice"><div class="sg-practice-title">🗣️ Say out loud, then press 🔊 on each card to check</div><ol><li><strong>Е е за есен</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Е е)</span> — "E is for autumn"</li><li><strong>Ж е за жираф</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Ж ж)</span> — "Zh is for giraffe"</li><li><strong>З е за зайче</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(З з)</span> — "Z is for bunny"</li><li><strong>И е за игра</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(И и)</span> — "I is for game"</li><li><strong>Й е за йогурт</strong> <span style="font-family:'Caveat',cursive;font-size:1.2em;color:#3b6fd4">(Й й)</span> — "Y is for yogurt"</li></ol></div>`,
+      <div class="sg-practice"><div class="sg-practice-title">🗣️ Say out loud, then press 🔊 on each card to check</div><ol><li><strong>Е е за есен</strong> — "E is for autumn"</li><li><strong>Ж е за жираф</strong> — "Zh is for giraffe"</li><li><strong>З е за зайче</strong> — "Z is for bunny"</li><li><strong>И е за игра</strong> — "I is for game"</li><li><strong>Й е за йогурт</strong> — "Y is for yogurt"</li></ol></div>`,
     },
     {
       num: 4,
@@ -2376,11 +2446,11 @@ const studyGuides = {
     },
   ],
   flashcards: [
-    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as in есен (autumn)", speechText: "Е е за есен"},
-    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as in жираф (giraffe)", speechText: "Ж е за жираф"},
-    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as in зайче (bunny)", speechText: "З е за зайче"},
-    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as in игра (game)", speechText: "И е за игра"},
-    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as in йогурт (yogurt)", speechText: "Й е за йогурт"}
+    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт"}
   ],
   quiz: [
     {q: "Which letter makes the 'zh' sound like in 'measure'?", type: "mc", options: ["З", "Ж", "Й", "И"], answer: "Ж"},
@@ -3422,24 +3492,25 @@ function enhanceLetterCards(container) {
   container.querySelectorAll('.sg-letter-card').forEach(card => {
     const cyrEl = card.querySelector('.sg-lc-cyrillic');
     const lowerEl = card.querySelector('.sg-lc-lower');
-    if (!cyrEl || card.querySelector('.sg-lc-pair')) return; // already enhanced
+    if (!cyrEl) return;
 
-    const upper = cyrEl.textContent.trim();
-    // Extract lowercase letter: "а (lowercase)" → "а"
-    const lowerRaw = lowerEl ? lowerEl.textContent.trim() : '';
-    const lower = lowerRaw.replace(/\s*\(.*\)\s*/, '').trim() || upper.toLowerCase();
+    // If there's a separate sg-lc-lower element (old format), merge it into cyrillic
+    if (lowerEl) {
+      const upper = cyrEl.textContent.trim();
+      const lowerRaw = lowerEl.textContent.trim();
+      const lower = lowerRaw.replace(/\s*\(.*\)\s*/, '').trim() || upper.toLowerCase();
+      cyrEl.textContent = upper + ' ' + lower;
+      lowerEl.remove();
+    }
 
-    // Build pair row (print + handwritten)
-    const pairDiv = document.createElement('div');
-    pairDiv.className = 'sg-lc-pair';
-    pairDiv.innerHTML = `<span class="sg-lc-upper">${upper}</span><span class="sg-lc-low">${lower}</span>`;
-
-    const hwDiv = document.createElement('div');
-    hwDiv.className = 'sg-lc-handwritten';
-    hwDiv.innerHTML = `<span class="sg-hw-upper">${upper}</span><span class="sg-hw-low">${lower}</span><span class="sg-lc-hw-label">handwritten</span>`;
-
-    cyrEl.replaceWith(pairDiv);
-    if (lowerEl) lowerEl.replaceWith(hwDiv);
+    // Add handwritten form if not already present
+    if (!card.querySelector('.sg-lc-hw')) {
+      const letters = cyrEl.textContent.trim();
+      const hwDiv = document.createElement('div');
+      hwDiv.className = 'sg-lc-hw';
+      hwDiv.textContent = letters;
+      cyrEl.after(hwDiv);
+    }
   });
 }
 
@@ -3452,6 +3523,7 @@ function printInlineGuide(panelId) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
   <style>
+    .sg-lc-hw { font-family: 'Caveat', cursive; font-size: 1.6rem; color: #6366f1; margin: 4px 0 6px; line-height: 1.2; }
     body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1e293b; padding: 32px; max-width: 720px; margin: 0 auto; }
     :root { --accent:#3b6fd4; --green:#00966E; --border:#e2e8f0; --muted:#64748b; --text:#1e293b; --bg:#f4f6f9; }
     .sg-inline-header { background: #1e293b; color: white; padding: 16px 20px; border-radius: 10px 10px 0 0; }
@@ -3465,18 +3537,16 @@ function printInlineGuide(panelId) {
     .sg-step-num { width:28px; height:28px; border-radius:50%; background:var(--accent); color:white; font-weight:700; font-size:0.8rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .sg-step-title { font-size:0.9rem; font-weight:700; margin-bottom:4px; }
     .sg-step-desc { font-size:0.83rem; line-height:1.6; }
-    .sg-letter-grid { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
-    .sg-letter-card { border:1.5px solid var(--border); border-radius:10px; padding:12px; min-width:120px; flex:1; }
-    .sg-lc-pair { display:flex; gap:8px; align-items:baseline; margin-bottom:5px; }
+    .sg-letter-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:10px; margin-top:10px; }
+    .sg-letter-card { border:1.5px solid var(--border); border-radius:10px; padding:12px; display:grid; grid-template-columns:1fr auto; grid-template-rows:auto auto auto auto; }
+    .sg-lc-pair { display:flex; gap:8px; align-items:baseline; }
     .sg-lc-upper { font-size:1.9rem; font-weight:800; color:var(--accent); }
     .sg-lc-low { font-size:1.3rem; font-weight:700; color:var(--accent); opacity:0.75; }
-    .sg-lc-handwritten { display:flex; gap:8px; align-items:baseline; background:#f8f9ff; border:1px dashed #c7d2fe; border-radius:6px; padding:5px 8px; margin-bottom:7px; }
-    .sg-hw-upper, .sg-hw-low { font-family:'Caveat',cursive; color:#6366f1; }
-    .sg-hw-upper { font-size:1.8rem; } .sg-hw-low { font-size:1.25rem; }
-    .sg-lc-hw-label { font-size:0.62rem; color:var(--muted); margin-left:auto; align-self:center; font-style:italic; }
-    .sg-lc-sound { font-size:0.78rem; font-weight:600; margin-bottom:2px; }
-    .sg-lc-eng { font-size:0.73rem; color:var(--muted); }
-    .sg-lc-word { font-size:0.76rem; color:var(--green); font-style:italic; margin-top:4px; font-weight:600; }
+    .sg-lc-cyrillic { font-size:1.9rem; font-weight:800; color:var(--accent); grid-column:1; grid-row:1; }
+    .sg-lc-hw { font-family:'Caveat',cursive; font-size:1.9rem; color:#6366f1; grid-column:2; grid-row:1; text-align:right; }
+    .sg-lc-sound { font-size:0.78rem; font-weight:600; grid-column:1/-1; grid-row:2; padding-top:8px; min-height:2.4em; }
+    .sg-lc-eng { font-size:0.73rem; color:var(--muted); grid-column:1/-1; grid-row:3; min-height:2.2em; }
+    .sg-lc-word { font-size:0.76rem; color:var(--green); font-style:italic; font-weight:600; grid-column:1/-1; grid-row:4; }
     .sg-lc-lower { display:none; }
     .sg-quiz { background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:12px; margin-top:10px; }
     .sg-quiz-title { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#92400e; margin-bottom:8px; }
@@ -3622,7 +3692,23 @@ function renderEmbeddedFlashcards(containerId, cards) {
     let html = '<div style="text-align: center; padding: 16px;">';
     html += '<div class="sg-fc-embed-card ' + (isFlipped ? 'flipped' : '') + '" onclick="flipEmbedCard()">';
     html += '<div class="' + (isFlipped ? 'sg-fc-embed-back' : 'sg-fc-embed-front') + '">';
-    html += isFlipped ? card.translation : card.word;
+    if (!isFlipped) {
+      // Extract the Bulgarian word from pronunciation (e.g. "А as Акула" → "Акула")
+      var bgWord = card.pronunciation.split(' as ')[1] || '';
+      var letterPart = card.pronunciation.split(' as ')[0] || '';
+      html += '<div style="font-size: 3rem; font-weight: 800; color: var(--accent); margin-bottom: 12px;">' + card.word + '</div>';
+      html += '<div style="text-align: center; margin-bottom: 4px;">';
+      html += '<span style="font-size: 1rem; color: var(--muted);">' + letterPart + ' as </span>';
+      html += '<span style="font-size: 1.1rem; font-weight: 700; color: var(--text);">' + bgWord + '</span>';
+      html += '</div>';
+      if (card.englishWord) html += '<div style="font-size: 0.9rem; color: var(--green); font-weight: 600; text-align: center;">(' + card.englishWord + ')</div>';
+    } else {
+      // Extract the English reference word from translation (e.g. "'ah' — like in 'father'" → "father")
+      var refMatch = card.translation.match(/like(?:\s+in)?\s+'?([^']+)'?$/i);
+      var refWord = refMatch ? refMatch[1] : '';
+      html += '<div style="font-size: 1.3rem; margin-bottom: 6px;">' + card.translation + '</div>';
+      if (card.bgRef) html += '<div style="font-size: 0.95rem; color: var(--green); font-weight: 600;">(' + card.bgRef + ')</div>';
+    }
     html += '</div>';
     html += '</div>';
     html += '<div class="sg-fc-embed-counter">' + (currentIdx + 1) + ' / ' + cards.length + '</div>';
@@ -3678,6 +3764,26 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
     if (currentQ >= quiz.length) {
       const pct = Math.round((score / quiz.length) * 100);
       const emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
+
+      // Save quiz result to localStorage if storageKey is provided
+      if (storageKey) {
+        const history = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        const now = new Date();
+        const dateStr = (now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear();
+        history.push({
+          score: score,
+          total: quiz.length,
+          pct: pct,
+          date: dateStr
+        });
+        localStorage.setItem(storageKey, JSON.stringify(history));
+
+        // Update quiz history panel if it exists
+        if (storageKey === 'quiz_history') {
+          renderQuizHistoryPanel();
+        }
+      }
+
       let html = '<div class="sg-iquiz-score">';
       html += '<div style="font-size:1.8rem;margin-bottom:8px">' + emoji + '</div>';
       html += '<div style="font-size:1.4rem;font-weight:700;color:var(--accent)">' + score + '/' + quiz.length + '</div>';
@@ -3776,6 +3882,24 @@ function markLessonComplete(week, day) {
   document.body.appendChild(msg);
 
   setTimeout(() => msg.remove(), 3000);
+
+  // Close lesson after a slight delay to show success toast
+  setTimeout(function() {
+    const overlay = document.getElementById('sg-overlay');
+    if (overlay && overlay.classList.contains('open')) {
+      closeStudyGuide();
+    } else {
+      // Close inline panel
+      const panel = document.querySelector('.sg-inline-panel.open');
+      if (panel) {
+        panel.classList.remove('open');
+        panel.innerHTML = '';
+        const pid = panel.id.replace('sgi-', '');
+        const ob = document.getElementById('sgbtn-' + pid);
+        if (ob) { ob.querySelector('.sg-arr').textContent = '▼'; ob.classList.remove('sg-btn-open'); }
+      }
+    }
+  }, 800);
 }
 
 // Dark mode toggle
