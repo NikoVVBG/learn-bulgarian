@@ -46,9 +46,16 @@ header h1 span { color: #94a3b8; font-weight: 400; font-size: 1rem; }
 .progress-pill strong { color: #86efac; display: block; font-size: 1.1rem; }
 
 /* Nav */
-nav { background: white; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; }
-.nav-inner { max-width: 960px; margin: 0 auto; display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+nav { background: white; border-bottom: 2px solid var(--border); position: sticky; top: 0; z-index: 100; overflow: visible; position: sticky; }
+.nav-scroll-wrapper { position: relative; max-width: 960px; margin: 0 auto; }
+.nav-inner { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .nav-inner::-webkit-scrollbar { display: none; }
+.nav-scroll-hint { display: none; }
+@media (max-width: 640px) {
+  .nav-scroll-hint { display: block; position: absolute; right: 0; top: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); pointer-events: none; z-index: 2; transition: opacity 0.3s; }
+  .nav-scroll-hint.hidden { opacity: 0; }
+  nav button { padding: 12px 14px; font-size: 0.82rem; }
+}
 nav button { background: none; border: none; padding: 14px 20px; font-size: 0.88rem; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all 0.2s; }
 nav button:hover { color: var(--text); }
 nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
@@ -623,13 +630,16 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 </header>
 
 <nav>
-  <div class="nav-inner">
-    <button class="active" onclick="showTab('dashboard')"><span class="nav-icon">📊</span>Dashboard</button>
-    <button onclick="showTab('plan')"><span class="nav-icon">📅</span>Weekly Plan</button>
-    <button onclick="showTab('flashcards')"><span class="nav-icon">🃏</span>Flashcards</button>
-    <button onclick="showTab('quiz')"><span class="nav-icon">✏️</span>Quiz</button>
-    <button onclick="showTab('resources')"><span class="nav-icon">🔗</span>Resources</button>
-    <button onclick="showTab('challenges')"><span class="nav-icon">🏆</span>Challenges</button>
+  <div class="nav-scroll-wrapper">
+    <div class="nav-inner" id="navInner">
+      <button class="active" onclick="showTab('dashboard')"><span class="nav-icon">📊</span>Dashboard</button>
+      <button onclick="showTab('plan')"><span class="nav-icon">📅</span>Weekly Plan</button>
+      <button onclick="showTab('flashcards')"><span class="nav-icon">🃏</span>Flashcards</button>
+      <button onclick="showTab('quiz')"><span class="nav-icon">✏️</span>Quiz</button>
+      <button onclick="showTab('resources')"><span class="nav-icon">🔗</span>Resources</button>
+      <button onclick="showTab('challenges')"><span class="nav-icon">🏆</span>Challenges</button>
+    </div>
+    <div class="nav-scroll-hint" id="navScrollHint"></div>
   </div>
 </nav>
 
@@ -3203,6 +3213,21 @@ function printInlineGuide(panelId) {
 
 </script>
 <script>
+// Nav scroll hint: hide fade when scrolled to end
+(function() {
+  const nav = document.getElementById('navInner');
+  const hint = document.getElementById('navScrollHint');
+  if (nav && hint) {
+    function checkScroll() {
+      const atEnd = nav.scrollLeft + nav.offsetWidth >= nav.scrollWidth - 8;
+      hint.classList.toggle('hidden', atEnd);
+    }
+    nav.addEventListener('scroll', checkScroll, { passive: true });
+    window.addEventListener('resize', checkScroll);
+    checkScroll();
+  }
+})();
+
 // Register Service Worker for PWA / offline support
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
