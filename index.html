@@ -715,23 +715,22 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
   padding: 16px; margin-top: 12px;
 }
 .sg-fc-embed-card {
-  background: #fef9e7; border: 1px solid #fde047;
-  border-radius: 10px; padding: 20px 16px; text-align: center;
-  cursor: pointer; transition: all 0.3s; min-height: 180px;
-  display: flex; flex-direction: column; justify-content: center;
-  margin-bottom: 12px;
+  text-align: center; cursor: pointer; margin-bottom: 12px;
 }
-.sg-fc-embed-card:hover {
-  transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.sg-fc-embed-inner {
+  display: grid; border-radius: 10px; overflow: hidden;
 }
-.sg-fc-embed-card.flipped {
-  background: #f0fdf4; border-color: #86efac;
+.sg-fc-embed-front, .sg-fc-embed-back {
+  grid-row: 1; grid-column: 1;
+  padding: 24px 16px; border-radius: 10px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  min-height: 160px; transition: opacity 0.2s;
 }
 .sg-fc-embed-front {
-  font-size: 2.2rem; font-weight: 800; color: var(--accent);
+  background: #fef9e7; border: 1px solid #fde047;
 }
 .sg-fc-embed-back {
-  font-size: 1.1rem; color: var(--green); font-weight: 600;
+  background: #f0fdf4; border: 1px solid #86efac;
 }
 .sg-fc-embed-nav {
   display: flex; gap: 8px; align-items: center; justify-content: center;
@@ -3690,25 +3689,25 @@ function renderEmbeddedFlashcards(containerId, cards) {
   function render() {
     const card = cards[currentIdx];
     let html = '<div style="text-align: center; padding: 16px;">';
-    html += '<div class="sg-fc-embed-card ' + (isFlipped ? 'flipped' : '') + '" onclick="flipEmbedCard()">';
-    html += '<div class="' + (isFlipped ? 'sg-fc-embed-back' : 'sg-fc-embed-front') + '">';
-    if (!isFlipped) {
-      // Extract the Bulgarian word from pronunciation (e.g. "А as Акула" → "Акула")
-      var bgWord = card.pronunciation.split(' as ')[1] || '';
-      var letterPart = card.pronunciation.split(' as ')[0] || '';
-      html += '<div style="font-size: 3rem; font-weight: 800; color: var(--accent); margin-bottom: 12px;">' + card.word + '</div>';
-      html += '<div style="text-align: center; margin-bottom: 4px;">';
-      html += '<span style="font-size: 1rem; color: var(--muted);">' + letterPart + ' as </span>';
-      html += '<span style="font-size: 1.1rem; font-weight: 700; color: var(--text);">' + bgWord + '</span>';
-      html += '</div>';
-      if (card.englishWord) html += '<div style="font-size: 0.9rem; color: var(--green); font-weight: 600; text-align: center;">(' + card.englishWord + ')</div>';
-    } else {
-      // Extract the English reference word from translation (e.g. "'ah' — like in 'father'" → "father")
-      var refMatch = card.translation.match(/like(?:\s+in)?\s+'?([^']+)'?$/i);
-      var refWord = refMatch ? refMatch[1] : '';
-      html += '<div style="font-size: 1.3rem; margin-bottom: 6px;">' + card.translation + '</div>';
-      if (card.bgRef) html += '<div style="font-size: 0.95rem; color: var(--green); font-weight: 600;">(' + card.bgRef + ')</div>';
-    }
+    var bgWord = card.pronunciation ? (card.pronunciation.split(' as ')[1] || '') : '';
+    var letterPart = card.pronunciation ? (card.pronunciation.split(' as ')[0] || '') : '';
+    html += '<div class="sg-fc-embed-card" onclick="flipEmbedCard()">';
+    html += '<div class="sg-fc-embed-inner">';
+    // Front side
+    var hideStyle = 'opacity:0; visibility:hidden;';
+    html += '<div class="sg-fc-embed-front" style="' + (isFlipped ? hideStyle : '') + '">';
+    html += '<div style="font-size: 3rem; font-weight: 800; color: var(--accent); margin-bottom: 12px;">' + card.word + '</div>';
+    html += '<div style="text-align: center; margin-bottom: 4px;">';
+    html += '<span style="font-size: 1rem; color: var(--muted);">' + letterPart + ' as </span>';
+    html += '<span style="font-size: 1.1rem; font-weight: 700; color: var(--text);">' + bgWord + '</span>';
+    html += '</div>';
+    if (card.englishWord) html += '<div style="font-size: 0.9rem; color: var(--green); font-weight: 600; text-align: center;">(' + card.englishWord + ')</div>';
+    html += '</div>';
+    // Back side
+    html += '<div class="sg-fc-embed-back" style="' + (!isFlipped ? hideStyle : '') + '">';
+    html += '<div style="font-size: 1.3rem; margin-bottom: 6px;">' + card.translation + '</div>';
+    if (card.bgRef) html += '<div style="font-size: 0.95rem; color: var(--green); font-weight: 600;">(' + card.bgRef + ')</div>';
+    html += '</div>';
     html += '</div>';
     html += '</div>';
     html += '<div class="sg-fc-embed-counter">' + (currentIdx + 1) + ' / ' + cards.length + '</div>';
