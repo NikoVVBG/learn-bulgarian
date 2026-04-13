@@ -42,8 +42,8 @@ body.dark-mode {
 body.dark-mode header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
 body.dark-mode nav.top-nav { background: #1e293b; border-bottom-color: #334155; }
 body.dark-mode .bottom-tab-bar { background: #1e293b; border-top-color: #334155; }
-body.dark-mode .flashcard .fc-front { background: linear-gradient(135deg, #0f172a, #1e293b); }
-body.dark-mode .flashcard .fc-back { background: #1e293b; }
+body.dark-mode .flashcard .fc-front { background: #2a2518; border-color: #6b5a10; }
+body.dark-mode .flashcard .fc-back { background: #1a2e1a; border-color: #2d6b2d; }
 body.dark-mode .fc-translation { color: #e2e8f0; }
 body.dark-mode .sg-inline-panel { border-color: #334155; }
 body.dark-mode .week-card { background: #1e293b; border-color: #334155; }
@@ -168,30 +168,42 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .fc-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .fc-cats button { padding: 7px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: white; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; }
 .fc-cats button.active { background: var(--accent); color: white; border-color: var(--accent); }
-.flashcard-area { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.flashcard { width: 100%; max-width: 420px; height: 240px; perspective: 1000px; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-.fc-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.5s; }
-.flashcard.flipped .fc-inner { transform: rotateY(180deg); }
-.fc-front, .fc-back { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; box-shadow: var(--shadow); border: 1px solid var(--border); }
-.fc-front { background: linear-gradient(135deg, #1e293b, #334155); color: white; }
-.fc-back { background: white; transform: rotateY(180deg); }
-.fc-word { font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
-.fc-hint { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+.flashcard-area { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.flashcard { width: 100%; max-width: 420px; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.fc-inner { display: grid; border-radius: 12px; overflow: hidden; }
+.fc-front, .fc-back { grid-row: 1; grid-column: 1; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px 24px; min-height: 200px; transition: opacity 0.2s; }
+.fc-front { background: #fef9e7; border: 1.5px solid #fde047; color: var(--text); }
+.fc-back { background: #f0fdf4; border: 1.5px solid #86efac; }
+.flashcard .fc-front { opacity: 1; visibility: visible; }
+.flashcard .fc-back { opacity: 0; visibility: hidden; }
+.flashcard.flipped .fc-front { opacity: 0; visibility: hidden; }
+.flashcard.flipped .fc-back { opacity: 1; visibility: visible; }
+.fc-word { font-size: 2.4rem; font-weight: 800; margin-bottom: 8px; color: var(--accent); }
+.fc-phrase { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.fc-phonetic { font-size: 0.88rem; color: var(--muted); font-style: italic; margin-bottom: 4px; }
+.fc-english-hint { font-size: 0.9rem; color: var(--green); font-weight: 600; }
+.fc-badge { position: absolute; top: 12px; left: 12px; padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.3px; }
+.fc-badge-trap { background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; }
+.fc-badge-vocab { background: #eff6ff; color: #2563eb; border: 1px solid #93c5fd; }
+.fc-note { font-size: 0.78rem; font-style: italic; margin-top: 8px; text-align: center; }
+.fc-note-trap { color: #dc2626; }
+.fc-note-vocab { color: #2563eb; }
+.fc-hint { font-size: 0.8rem; color: var(--muted); }
 .fc-translation { font-size: 1.5rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-.fc-pronunciation { font-size: 0.85rem; color: var(--muted); font-style: italic; }
-.fc-tap { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 12px; }
+.fc-pronunciation { font-size: 0.88rem; color: var(--muted); font-style: italic; }
+.fc-tap { font-size: 0.72rem; color: var(--muted); margin-top: 12px; }
 .fc-controls { display: flex; gap: 12px; align-items: center; }
 
 /* Audio / Speech */
 .fc-speak-btn {
   position: absolute; bottom: 14px; right: 14px;
   width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3);
-  color: white; font-size: 1rem; cursor: pointer;
+  background: rgba(0,0,0,0.06); border: 1.5px solid var(--border);
+  color: var(--muted); font-size: 1rem; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.2s; z-index: 5;
 }
-.fc-speak-btn:hover { background: rgba(255,255,255,0.28); transform: scale(1.08); }
+.fc-speak-btn:hover { background: rgba(0,0,0,0.1); transform: scale(1.08); border-color: var(--accent); color: var(--accent); }
 .fc-speak-btn.speaking { animation: speakpulse 0.7s ease-in-out infinite; }
 .fc-back .fc-speak-btn-back {
   position: absolute; bottom: 14px; right: 14px;
@@ -348,7 +360,7 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
   /* Flashcards */
   .fc-cats { gap: 6px; }
   .fc-cats button { padding: 8px 13px; font-size: 0.8rem; }
-  .flashcard { height: 210px; }
+  .flashcard { min-height: 180px; }
   .fc-word { font-size: 2rem; }
   .fc-translation { font-size: 1.3rem; }
   .fc-pronunciation { font-size: 0.8rem; }
@@ -413,7 +425,7 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
   nav button { padding: 12px 10px; font-size: 0.73rem; }
   nav button .nav-icon { display: none; }
   .dash-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .flashcard { height: 190px; }
+  .flashcard { min-height: 160px; }
   .fc-word { font-size: 1.8rem; }
 }
 
@@ -512,6 +524,8 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .sg-lc-sound { font-size: 0.8rem; font-weight: 600; color: var(--text); grid-column: 1 / -1; grid-row: 2; align-self: start; padding-top: 8px; min-height: 2.4em; text-align: center; }
 .sg-lc-eng { font-size: 0.75rem; color: var(--muted); grid-column: 1 / -1; grid-row: 3; align-self: start; min-height: 2.2em; text-align: center; }
 .sg-lc-word { font-size: 0.78rem; color: var(--green); font-style: italic; font-weight: 600; grid-column: 1 / -1; grid-row: 4; align-self: start; text-align: center; }
+.sg-lc-phonetic { font-size: 0.72rem; color: var(--muted); font-style: italic; grid-column: 1 / -1; text-align: center; margin-top: 2px; }
+.sg-lc-meaning { font-size: 0.72rem; color: var(--text); font-weight: 600; grid-column: 1 / -1; text-align: center; margin-top: 1px; }
 
 /* Inline study guide panel */
 .sg-inline-panel { display: none; border: 2px solid #c7d2fe; border-radius: 14px; margin: 4px 0 14px; overflow: hidden; }
@@ -952,9 +966,14 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
     <div class="flashcard" id="flashcard" onclick="flipCard()">
       <div class="fc-inner">
         <div class="fc-front" style="position:relative">
+          <div class="fc-badge" id="fc-badge" style="display:none"></div>
           <div class="fc-word" id="fc-word">—</div>
+          <div class="fc-phrase" id="fc-phrase"></div>
+          <div class="fc-phonetic" id="fc-phonetic"></div>
+          <div class="fc-english-hint" id="fc-english-hint"></div>
+          <div class="fc-note" id="fc-note" style="display:none"></div>
           <div class="fc-hint" id="fc-cat-label">Category</div>
-          <div class="fc-tap">tap to reveal · press 🔊 to hear</div>
+          <div class="fc-tap">tap to reveal</div>
           <button class="fc-speak-btn" id="fc-speak-btn"
             onclick="event.stopPropagation(); speakCurrent('bg')"
             title="Hear Bulgarian pronunciation">🔊</button>
@@ -974,7 +993,7 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
       <button class="fc-btn next" onclick="nextCard()">Next →</button>
     </div>
     <div style="font-size:0.75rem;color:var(--muted);text-align:center;max-width:380px;line-height:1.5">
-      💡 <strong>Tip:</strong> For Weeks 1–2 (Alphabet), press 🔊 to hear the letter sound + example word. Press 🔊 to hear letters spoken at a clear, natural pace.
+      💡 <strong>Tip:</strong> Tap the card to flip it. Press 🔊 to hear pronunciation.
     </div>
   </div>
 </div>
@@ -1359,8 +1378,6 @@ const weeklyFlashcards = {
   {word:"З з", translation:"'z' — like in zebra",          pronunciation:"З as in зайче (bunny)",   speechText:"З е за зайче"},
   {word:"И и", translation:"'ee' — like in bee",           pronunciation:"И as in игра (game)",     speechText:"И е за игра"},
   {word:"Й й", translation:"'y' — like in yes",            pronunciation:"Й as in йогурт (yogurt)", speechText:"Й е за йогурт"},
-  {word:"А а", translation:"'ah' — REVIEW: like father",   pronunciation:"А as in акула",           speechText:"А е за акула"},
-  {word:"В в", translation:"'v' — REVIEW: like voice",     pronunciation:"В as in вода",            speechText:"В е за вода"},
 ],
 "wk-1-3": [
   {word:"К к", translation:"'k' — like in key",            pronunciation:"К as in котка (cat)",     speechText:"К е за котка"},
@@ -1368,7 +1385,7 @@ const weeklyFlashcards = {
   {word:"М м", translation:"'m' — like in moon",           pronunciation:"М as in майка (mother)",  speechText:"М е за майка"},
   {word:"Н н", translation:"'n' — looks like H but says N",pronunciation:"Н as in небе (sky)",      speechText:"Н е за небе"},
   {word:"О о", translation:"'oh' — like in open",          pronunciation:"О as in ориз (rice)",     speechText:"О е за ориз"},
-  {word:"Н н", translation:"TRAP: looks like H — sounds N",pronunciation:"Say it: н-н-н",           speechText:"Н е за небе"},
+  {word:"Н н", translation:"Looks like H — sounds N", pronunciation:"Say it: н-н-н", speechText:"Н е за небе", badge:"trap", badgeNote:"Looks like English H but sounds like N!"},
 ],
 "wk-1-4": [
   {word:"А а", translation:"'ah'", pronunciation:"А as in акула", speechText:"А е за акула"},
@@ -1407,8 +1424,8 @@ const weeklyFlashcards = {
   {word:"С с", translation:"'s' — looks like C, says S",    pronunciation:"С as in слон (elephant)", speechText:"С е за слон"},
   {word:"Т т", translation:"'t' — like in tree",            pronunciation:"Т as in тигър (tiger)",   speechText:"Т е за тигър"},
   {word:"У у", translation:"'oo' — like in moon",           pronunciation:"У as in утро (morning)",  speechText:"У е за утро"},
-  {word:"Р р", translation:"TRAP: looks like P — rolled R", pronunciation:"Practice: ро-ра-ри-ру",   speechText:"Р е за роза"},
-  {word:"С с", translation:"TRAP: looks like C — says S",   pronunciation:"Practice: са-си-со-су",   speechText:"С е за слон"},
+  {word:"Р р", translation:"Rolled R — not P!", pronunciation:"Practice: ро-ра-ри-ру", speechText:"Р е за роза", badge:"trap", badgeNote:"Looks like English P but sounds like rolled R!"},
+  {word:"С с", translation:"S sound — not C!", pronunciation:"Practice: са-си-со-су", speechText:"С е за слон", badge:"trap", badgeNote:"Looks like English C but sounds like S!"},
 ],
 "wk-2-2": [
   {word:"Ф ф", translation:"'f' — like in fun",             pronunciation:"Ф as in фамилия (family)",speechText:"Ф е за фамилия"},
@@ -1416,10 +1433,10 @@ const weeklyFlashcards = {
   {word:"Ц ц", translation:"'ts' — like in pizza",          pronunciation:"Ц as in цвете (flower)",  speechText:"Ц е за цвете"},
   {word:"Ч ч", translation:"'ch' — like in chair",          pronunciation:"Ч as in чай (tea)",       speechText:"Ч е за чай"},
   {word:"Ш ш", translation:"'sh' — like in shell",          pronunciation:"Ш as in шоколад (choco)", speechText:"Ш е за шоколад"},
-  {word:"хляб",      translation:"bread",    pronunciation:"khlyab"},
-  {word:"шоколад",   translation:"chocolate",pronunciation:"sho-ko-LAD"},
-  {word:"чай",       translation:"tea",      pronunciation:"chay"},
-  {word:"цвете",     translation:"flower",   pronunciation:"TSVE-te"},
+  {word:"хляб",      translation:"bread",    pronunciation:"khlyab",     badge:"vocab", badgeNote:"Bonus word using today's letters"},
+  {word:"шоколад",   translation:"chocolate",pronunciation:"sho-ko-LAD", badge:"vocab", badgeNote:"Bonus word using today's letters"},
+  {word:"чай",       translation:"tea",      pronunciation:"chay",       badge:"vocab", badgeNote:"Bonus word using today's letters"},
+  {word:"цвете",     translation:"flower",   pronunciation:"TSVE-te",    badge:"vocab", badgeNote:"Bonus word using today's letters"},
 ],
 "wk-2-3": [
   {word:"Щ щ", translation:"'sht' — like mashed (fast)",    pronunciation:"Щ as in щастие (happiness)",speechText:"Щ е за щастие"},
@@ -1427,9 +1444,9 @@ const weeklyFlashcards = {
   {word:"Ь ь", translation:"soft sign — softens the preceding consonant (like 'y' in 'youth')", pronunciation:"Ь as in бельо (laundry)", speechText:"Ь е за бельо"},
   {word:"Ю ю", translation:"'you' — like the word you",      pronunciation:"Ю as in юла (spinning top)",speechText:"Ю е за юла"},
   {word:"Я я", translation:"'ya' — like in yard",            pronunciation:"Я as in яйце (egg)",       speechText:"Я е за яйце"},
-  {word:"щастие", translation:"happiness",   pronunciation:"SHTAS-ti-e"},
-  {word:"ъгъл",   translation:"corner/angle",pronunciation:"UH-gul"},
-  {word:"яйце",   translation:"egg",         pronunciation:"YAY-tse"},
+  {word:"щастие", translation:"happiness",   pronunciation:"SHTAS-ti-e", badge:"vocab", badgeNote:"Bonus word using today's letters"},
+  {word:"ъгъл",   translation:"corner/angle",pronunciation:"UH-gul",     badge:"vocab", badgeNote:"Bonus word using today's letters"},
+  {word:"яйце",   translation:"egg",         pronunciation:"YAY-tse",    badge:"vocab", badgeNote:"Bonus word using today's letters"},
 ],
 "wk-2-4": [
   {word:"А а",translation:"'ah'",pronunciation:"акула (shark)",  speechText:"А е за акула"},
@@ -1600,36 +1617,36 @@ const weeklyMeta = [
 
 const flashcardData = {
   "Alphabet": [
-    {word:"А а", translation:"'ah' — like in 'father'", pronunciation:"А as in аз (I)",              speechText:"А е за акула"},
-    {word:"Б б", translation:"'b' — like in 'boy'",    pronunciation:"Б as in баща (father)",       speechText:"Б е за баба"},
-    {word:"В в", translation:"'v' — like in 'voice'",  pronunciation:"В as in вода (water)",         speechText:"В е за вода"},
-    {word:"Г г", translation:"'g' — like in 'go'",     pronunciation:"Г as in град (city)",          speechText:"Г е за грозде"},
-    {word:"Д д", translation:"'d' — like in 'dog'",    pronunciation:"Д as in ден (day)",            speechText:"Д е за дъга"},
-    {word:"Е е", translation:"'e' — like in 'bed'",    pronunciation:"Е as in есен (autumn)",        speechText:"Е е за есен"},
-    {word:"Ж ж", translation:"'zh' — like 's' in 'measure'", pronunciation:"Ж as in жена (woman)", speechText:"Ж е за жираф"},
-    {word:"З з", translation:"'z' — like in 'zebra'",  pronunciation:"З as in земя (earth)",         speechText:"З е за зайче"},
-    {word:"И и", translation:"'ee' — like in 'see'",   pronunciation:"И as in игра (game)",          speechText:"И е за игра"},
-    {word:"Й й", translation:"'y' — like 'y' in 'boy'",pronunciation:"Й as in йогурт (yogurt)",     speechText:"Й е за йогурт"},
-    {word:"К к", translation:"'k' — like in 'key'",    pronunciation:"К as in книга (book)",         speechText:"К е за котка"},
-    {word:"Л л", translation:"'l' — like in 'lamp'",   pronunciation:"Л as in лимон (lemon)",        speechText:"Л е за лимон"},
-    {word:"М м", translation:"'m' — like in 'moon'",   pronunciation:"М as in майка (mother)",       speechText:"М е за майка"},
-    {word:"Н н", translation:"'n' — like in 'no'",     pronunciation:"Н as in небе (sky)",           speechText:"Н е за небе"},
-    {word:"О о", translation:"'o' — like in 'corn'",   pronunciation:"О as in ориз (rice)",          speechText:"О е за ориз"},
-    {word:"П п", translation:"'p' — like in 'pen'",    pronunciation:"П as in пролет (spring)",      speechText:"П е за пролет"},
-    {word:"Р р", translation:"'r' — rolled like Spanish", pronunciation:"Р as in роза (rose)",       speechText:"Р е за роза"},
-    {word:"С с", translation:"'s' — like in 'sun'",    pronunciation:"С as in слон (elephant)",      speechText:"С е за слон"},
-    {word:"Т т", translation:"'t' — like in 'top'",    pronunciation:"Т as in тигър (tiger)",        speechText:"Т е за тигър"},
-    {word:"У у", translation:"'oo' — like in 'moon'",  pronunciation:"У as in утро (morning)",       speechText:"У е за утро"},
-    {word:"Ф ф", translation:"'f' — like in 'fun'",    pronunciation:"Ф as in фамилия (family)",     speechText:"Ф е за фамилия"},
-    {word:"Х х", translation:"'h' — like 'ch' in Scottish 'loch'", pronunciation:"Х as in хляб (bread)", speechText:"Х е за хляб"},
-    {word:"Ц ц", translation:"'ts' — like in 'bits'",  pronunciation:"Ц as in цвете (flower)",       speechText:"Ц е за цвете"},
-    {word:"Ч ч", translation:"'ch' — like in 'chair'", pronunciation:"Ч as in чай (tea)",            speechText:"Ч е за чай"},
-    {word:"Ш ш", translation:"'sh' — like in 'she'",   pronunciation:"Ш as in шоколад (chocolate)",  speechText:"Ш е за шоколад"},
-    {word:"Щ щ", translation:"'sht' — like 'sht' in 'pushed'", pronunciation:"Щ as in щастие (happiness)", speechText:"Щ е за щастие"},
-    {word:"Ъ ъ", translation:"'uh' — unique Bulgarian sound, like a deep 'uh'", pronunciation:"Ъ as in ъгъл (corner)", speechText:"Ъ е за ъгъл"},
-    {word:"Ь ь", translation:"soft sign — softens the consonant before it, like 'y' in 'youth'", pronunciation:"Ь as in бельо (laundry)", speechText:"Ь е за бельо"},
-    {word:"Ю ю", translation:"'you' — like in 'youth'",pronunciation:"Ю as in юла (spinning top)",   speechText:"Ю е за юла"},
-    {word:"Я я", translation:"'ya' — like 'ya' in 'yard'", pronunciation:"Я as in ябълка (apple)",  speechText:"Я е за яйце"},
+    {word:"А а", translation:"'ah' — like in 'father'", pronunciation:"А as in аз (I)",              speechText:"А е за акула", phonetic: "akula", englishWord: "Shark"},
+    {word:"Б б", translation:"'b' — like in 'boy'",    pronunciation:"Б as in баща (father)",       speechText:"Б е за баба", phonetic: "baba", englishWord: "Grandma"},
+    {word:"В в", translation:"'v' — like in 'voice'",  pronunciation:"В as in вода (water)",         speechText:"В е за вода", phonetic: "voda", englishWord: "Water"},
+    {word:"Г г", translation:"'g' — like in 'go'",     pronunciation:"Г as in град (city)",          speechText:"Г е за грозде", phonetic: "grozde", englishWord: "Grapes"},
+    {word:"Д д", translation:"'d' — like in 'dog'",    pronunciation:"Д as in ден (day)",            speechText:"Д е за дъга", phonetic: "daga", englishWord: "Rainbow"},
+    {word:"Е е", translation:"'e' — like in 'bed'",    pronunciation:"Е as in есен (autumn)",        speechText:"Е е за есен", phonetic: "esen", englishWord: "Autumn"},
+    {word:"Ж ж", translation:"'zh' — like 's' in 'measure'", pronunciation:"Ж as in жена (woman)", speechText:"Ж е за жираф", phonetic: "zhiraf", englishWord: "Giraffe"},
+    {word:"З з", translation:"'z' — like in 'zebra'",  pronunciation:"З as in земя (earth)",         speechText:"З е за зайче", phonetic: "zayche", englishWord: "Bunny"},
+    {word:"И и", translation:"'ee' — like in 'see'",   pronunciation:"И as in игра (game)",          speechText:"И е за игра", phonetic: "igra", englishWord: "Game"},
+    {word:"Й й", translation:"'y' — like 'y' in 'boy'",pronunciation:"Й as in йогурт (yogurt)",     speechText:"Й е за йогурт", phonetic: "yogurt", englishWord: "Yogurt"},
+    {word:"К к", translation:"'k' — like in 'key'",    pronunciation:"К as in книга (book)",         speechText:"К е за котка", phonetic: "kotka", englishWord: "Cat"},
+    {word:"Л л", translation:"'l' — like in 'lamp'",   pronunciation:"Л as in лимон (lemon)",        speechText:"Л е за лимон", phonetic: "limon", englishWord: "Lemon"},
+    {word:"М м", translation:"'m' — like in 'moon'",   pronunciation:"М as in майка (mother)",       speechText:"М е за майка", phonetic: "mayka", englishWord: "Mother"},
+    {word:"Н н", translation:"'n' — like in 'no'",     pronunciation:"Н as in небе (sky)",           speechText:"Н е за небе", phonetic: "nebe", englishWord: "Sky"},
+    {word:"О о", translation:"'o' — like in 'corn'",   pronunciation:"О as in ориз (rice)",          speechText:"О е за ориз", phonetic: "oriz", englishWord: "Rice"},
+    {word:"П п", translation:"'p' — like in 'pen'",    pronunciation:"П as in пролет (spring)",      speechText:"П е за пролет", phonetic: "prolet", englishWord: "Spring"},
+    {word:"Р р", translation:"'r' — rolled like Spanish", pronunciation:"Р as in роза (rose)",       speechText:"Р е за роза", phonetic: "roza", englishWord: "Rose"},
+    {word:"С с", translation:"'s' — like in 'sun'",    pronunciation:"С as in слон (elephant)",      speechText:"С е за слон", phonetic: "slon", englishWord: "Elephant"},
+    {word:"Т т", translation:"'t' — like in 'top'",    pronunciation:"Т as in тигър (tiger)",        speechText:"Т е за тигър", phonetic: "tigar", englishWord: "Tiger"},
+    {word:"У у", translation:"'oo' — like in 'moon'",  pronunciation:"У as in утро (morning)",       speechText:"У е за утро", phonetic: "utro", englishWord: "Morning"},
+    {word:"Ф ф", translation:"'f' — like in 'fun'",    pronunciation:"Ф as in фамилия (family)",     speechText:"Ф е за фамилия", phonetic: "familiya", englishWord: "Family"},
+    {word:"Х х", translation:"'h' — like 'ch' in Scottish 'loch'", pronunciation:"Х as in хляб (bread)", speechText:"Х е за хляб", phonetic: "hlyab", englishWord: "Bread"},
+    {word:"Ц ц", translation:"'ts' — like in 'bits'",  pronunciation:"Ц as in цвете (flower)",       speechText:"Ц е за цвете", phonetic: "tsvete", englishWord: "Flower"},
+    {word:"Ч ч", translation:"'ch' — like in 'chair'", pronunciation:"Ч as in чай (tea)",            speechText:"Ч е за чай", phonetic: "chay", englishWord: "Tea"},
+    {word:"Ш ш", translation:"'sh' — like in 'she'",   pronunciation:"Ш as in шоколад (chocolate)",  speechText:"Ш е за шоколад", phonetic: "shokolad", englishWord: "Chocolate"},
+    {word:"Щ щ", translation:"'sht' — like 'sht' in 'pushed'", pronunciation:"Щ as in щастие (happiness)", speechText:"Щ е за щастие", phonetic: "shtastie", englishWord: "Happiness"},
+    {word:"Ъ ъ", translation:"'uh' — unique Bulgarian sound, like a deep 'uh'", pronunciation:"Ъ as in ъгъл (corner)", speechText:"Ъ е за ъгъл", phonetic: "agal", englishWord: "Corner"},
+    {word:"Ь ь", translation:"soft sign — softens the consonant before it, like 'y' in 'youth'", pronunciation:"Ь as in бельо (laundry)", speechText:"Ь е за бельо", phonetic: "belyo", englishWord: "Laundry"},
+    {word:"Ю ю", translation:"'you' — like in 'youth'",pronunciation:"Ю as in юла (spinning top)",   speechText:"Ю е за юла", phonetic: "yula", englishWord: "Spinning top"},
+    {word:"Я я", translation:"'ya' — like 'ya' in 'yard'", pronunciation:"Я as in ябълка (apple)",  speechText:"Я е за яйце", phonetic: "yaytse", englishWord: "Egg"},
   ],
   "Greetings": [
     {word:"Здравей!", translation:"Hello! (informal)", pronunciation:"ZDRA-vey"},
@@ -1993,8 +2010,61 @@ function showCard() {
   document.getElementById('fc-word').textContent = card.word;
   document.getElementById('fc-cat-label').textContent = currentCategory;
   document.getElementById('fc-translation').textContent = card.translation;
-  document.getElementById('fc-pronunciation').textContent = card.pronunciation;
-  document.getElementById('fc-counter').textContent = `${currentCardIndex + 1} / ${currentCards.length}`;
+  document.getElementById('fc-pronunciation').textContent = card.pronunciation || '';
+
+  // Populate new front side fields
+  var phraseEl = document.getElementById('fc-phrase');
+  var phoneticEl = document.getElementById('fc-phonetic');
+  var englishHintEl = document.getElementById('fc-english-hint');
+  var badgeEl = document.getElementById('fc-badge');
+  var noteEl = document.getElementById('fc-note');
+
+  if (card.speechText) {
+    phraseEl.textContent = card.speechText;
+    phraseEl.style.display = '';
+  } else {
+    phraseEl.textContent = '';
+    phraseEl.style.display = 'none';
+  }
+
+  if (card.phonetic) {
+    phoneticEl.textContent = '(' + card.phonetic + ')';
+    phoneticEl.style.display = '';
+  } else {
+    phoneticEl.textContent = '';
+    phoneticEl.style.display = 'none';
+  }
+
+  if (card.englishWord) {
+    englishHintEl.textContent = card.englishWord;
+    englishHintEl.style.display = '';
+  } else {
+    englishHintEl.textContent = '';
+    englishHintEl.style.display = 'none';
+  }
+
+  // Badge pill and note
+  if (card.badge === 'trap') {
+    badgeEl.textContent = '⚠️ Trap Alert';
+    badgeEl.className = 'fc-badge fc-badge-trap';
+    badgeEl.style.display = '';
+  } else if (card.badge === 'vocab') {
+    badgeEl.textContent = '💡 Bonus Word';
+    badgeEl.className = 'fc-badge fc-badge-vocab';
+    badgeEl.style.display = '';
+  } else {
+    badgeEl.style.display = 'none';
+  }
+
+  if (card.badgeNote) {
+    noteEl.textContent = card.badgeNote;
+    noteEl.className = 'fc-note' + (card.badge === 'trap' ? ' fc-note-trap' : card.badge === 'vocab' ? ' fc-note-vocab' : '');
+    noteEl.style.display = '';
+  } else {
+    noteEl.style.display = 'none';
+  }
+
+  document.getElementById('fc-counter').textContent = (currentCardIndex + 1) + ' / ' + currentCards.length;
   document.getElementById('flashcard').classList.remove('flipped');
   isFlipped = false;
   // Auto-play pronunciation if toggle is on
@@ -2426,11 +2496,11 @@ const studyGuides = {
       title: 'Learn today\'s 5 letters',
       desc: `Meet your first five Cyrillic letters. Each one has a consistent sound — no exceptions!
       <div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">А а</div><div class="sg-lc-hw">А а</div><div class="sg-lc-sound">Sound: "ah" — like father</div><div class="sg-lc-eng">Think: the letter A in "car"</div><div class="sg-lc-word">А е за акула — shark</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Б б</div><div class="sg-lc-hw">Б б</div><div class="sg-lc-sound">Sound: "b" — like ball</div><div class="sg-lc-eng">Looks like a 6 with a hat</div><div class="sg-lc-word">Б е за баба — grandma</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">В в</div><div class="sg-lc-hw">В в</div><div class="sg-lc-sound">Sound: "v" — like voice</div><div class="sg-lc-eng">Looks like our letter B</div><div class="sg-lc-word">В е за вода — water</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Г г</div><div class="sg-lc-hw">Г г</div><div class="sg-lc-sound">Sound: "g" — like gold</div><div class="sg-lc-eng">Looks like an upside-down L</div><div class="sg-lc-word">Г е за грозде — grapes</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Д д</div><div class="sg-lc-hw">Д д</div><div class="sg-lc-sound">Sound: "d" — like dog</div><div class="sg-lc-eng">Looks like a table on legs</div><div class="sg-lc-word">Д е за дъга — rainbow</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">А а</div><div class="sg-lc-hw">А а</div><div class="sg-lc-sound">Sound: "ah" — like father</div><div class="sg-lc-eng">Think: the letter A in "car"</div><div class="sg-lc-word">А е за акула</div><div class="sg-lc-phonetic">(akula)</div><div class="sg-lc-meaning">shark</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Б б</div><div class="sg-lc-hw">Б б</div><div class="sg-lc-sound">Sound: "b" — like ball</div><div class="sg-lc-eng">Looks like a 6 with a hat</div><div class="sg-lc-word">Б е за баба</div><div class="sg-lc-phonetic">(baba)</div><div class="sg-lc-meaning">grandma</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">В в</div><div class="sg-lc-hw">В в</div><div class="sg-lc-sound">Sound: "v" — like voice</div><div class="sg-lc-eng">Looks like our letter B</div><div class="sg-lc-word">В е за вода</div><div class="sg-lc-phonetic">(voda)</div><div class="sg-lc-meaning">water</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Г г</div><div class="sg-lc-hw">Г г</div><div class="sg-lc-sound">Sound: "g" — like gold</div><div class="sg-lc-eng">Looks like an upside-down L</div><div class="sg-lc-word">Г е за грозде</div><div class="sg-lc-phonetic">(grozde)</div><div class="sg-lc-meaning">grapes</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Д д</div><div class="sg-lc-hw">Д д</div><div class="sg-lc-sound">Sound: "d" — like dog</div><div class="sg-lc-eng">Looks like a table on legs</div><div class="sg-lc-word">Д е за дъга</div><div class="sg-lc-phonetic">(daga)</div><div class="sg-lc-meaning">rainbow</div></div>
       </div>`,
     },
     {
@@ -2453,11 +2523,11 @@ const studyGuides = {
     },
   ],
   flashcards: [
-    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула"},
-    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба"},
-    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода"},
-    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде"},
-    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга"}
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула", phonetic: "akula"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба", phonetic: "baba"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода", phonetic: "voda"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде", phonetic: "grozde"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга", phonetic: "daga"}
   ],
   quiz: [
     {q: "Which letter makes the 'v' sound?", type: "mc", options: ["Б", "В", "Г", "Д"], answer: "В"},
@@ -2477,17 +2547,19 @@ const studyGuides = {
     {
       num: 1,
       title: '5-minute review of А–Д',
-      desc: 'Before new letters, warm up. Go to Flashcards → Alphabet and cycle through the first 5 cards. Can you say the sound before flipping? Good — let\'s add 5 more.',
+      desc: `Before new letters, warm up! Cycle through yesterday's 5 cards below. Can you say the sound before flipping?
+      <div class="sg-fc-embed" id="sg-fc-review-1-2"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> Try to say the sound and word from memory before flipping. If you get them all right, you're ready for new letters!</div>`,
     },
     {
       num: 2,
       title: 'Learn today\'s 5 new letters',
       desc: `<div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Е е</div><div class="sg-lc-hw">Е е</div><div class="sg-lc-sound">Sound: "eh" — like bed</div><div class="sg-lc-eng">Looks like our E, same sound!</div><div class="sg-lc-word">Е е за есен — autumn</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ж ж</div><div class="sg-lc-hw">Ж ж</div><div class="sg-lc-sound">Sound: "zh" — like measure</div><div class="sg-lc-eng">Like a snowflake, unique sound</div><div class="sg-lc-word">Ж е за жираф — giraffe</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">З з</div><div class="sg-lc-hw">З з</div><div class="sg-lc-sound">Sound: "z" — like zoo</div><div class="sg-lc-eng">Looks like the number 3</div><div class="sg-lc-word">З е за зайче — bunny</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">И и</div><div class="sg-lc-hw">И и</div><div class="sg-lc-sound">Sound: "ee" — like bee</div><div class="sg-lc-eng">Looks like backwards N</div><div class="sg-lc-word">И е за игра — game</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Й й</div><div class="sg-lc-hw">Й й</div><div class="sg-lc-sound">Sound: "y" — like yes</div><div class="sg-lc-eng">И with a breve accent on top</div><div class="sg-lc-word">Й е за йогурт — yogurt</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Е е</div><div class="sg-lc-hw">Е е</div><div class="sg-lc-sound">Sound: "eh" — like bed</div><div class="sg-lc-eng">Looks like our E, same sound!</div><div class="sg-lc-word">Е е за есен</div><div class="sg-lc-phonetic">(esen)</div><div class="sg-lc-meaning">autumn</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ж ж</div><div class="sg-lc-hw">Ж ж</div><div class="sg-lc-sound">Sound: "zh" — like measure</div><div class="sg-lc-eng">Like a snowflake, unique sound</div><div class="sg-lc-word">Ж е за жираф</div><div class="sg-lc-phonetic">(zhiraf)</div><div class="sg-lc-meaning">giraffe</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">З з</div><div class="sg-lc-hw">З з</div><div class="sg-lc-sound">Sound: "z" — like zoo</div><div class="sg-lc-eng">Looks like the number 3</div><div class="sg-lc-word">З е за зайче</div><div class="sg-lc-phonetic">(zayche)</div><div class="sg-lc-meaning">bunny</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">И и</div><div class="sg-lc-hw">И и</div><div class="sg-lc-sound">Sound: "ee" — like bee</div><div class="sg-lc-eng">Looks like backwards N</div><div class="sg-lc-word">И е за игра</div><div class="sg-lc-phonetic">(igra)</div><div class="sg-lc-meaning">game</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Й й</div><div class="sg-lc-hw">Й й</div><div class="sg-lc-sound">Sound: "y" — like yes</div><div class="sg-lc-eng">И with a breve accent on top</div><div class="sg-lc-word">Й е за йогурт</div><div class="sg-lc-phonetic">(yogurt)</div><div class="sg-lc-meaning">yogurt</div></div>
       </div>
       <div class="sg-tip"><strong>💡 Watch out:</strong> И sounds like "ee" (not like English I). Й is a short glide sound — like the Y in "yes". They look similar — the accent mark matters!</div>`,
     },
@@ -2495,7 +2567,7 @@ const studyGuides = {
       num: 3,
       title: 'Say each letter with its example word',
       desc: `Practice the "X е за Y" pattern out loud — this is how Bulgarian children learn:
-      <div class="sg-practice"><div class="sg-practice-title">🗣️ Say out loud, then press 🔊 on each card to check</div><ol><li><strong>Е е за есен</strong> — "E is for autumn"</li><li><strong>Ж е за жираф</strong> — "Zh is for giraffe"</li><li><strong>З е за зайче</strong> — "Z is for bunny"</li><li><strong>И е за игра</strong> — "I is for game"</li><li><strong>Й е за йогурт</strong> — "Y is for yogurt"</li></ol></div>`,
+      <div class="sg-practice"><div class="sg-practice-title">🗣️ Say each one out loud 3 times</div><ol><li><strong>Е е за есен</strong> <em>(esen)</em> — autumn</li><li><strong>Ж е за жираф</strong> <em>(zhiraf)</em> — giraffe</li><li><strong>З е за зайче</strong> <em>(zayche)</em> — bunny</li><li><strong>И е за игра</strong> <em>(igra)</em> — game</li><li><strong>Й е за йогурт</strong> <em>(yogurt)</em> — yogurt</li></ol>Use the phonetic spelling to guide your pronunciation. Try to say the Cyrillic word naturally, not letter by letter.</div>`,
     },
     {
       num: 4,
@@ -2511,11 +2583,11 @@ const studyGuides = {
     },
   ],
   flashcards: [
-    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен"},
-    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф"},
-    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче"},
-    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра"},
-    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт"}
+    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен", phonetic: "esen"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф", phonetic: "zhiraf"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче", phonetic: "zayche"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра", phonetic: "igra"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт", phonetic: "yogurt"}
   ],
   quiz: [
     {q: "Which letter makes the 'zh' sound like in 'measure'?", type: "mc", options: ["З", "Ж", "Й", "И"], answer: "Ж"},
@@ -2537,11 +2609,11 @@ const studyGuides = {
       title: 'Learn today\'s 5 letters',
       desc: `Good news: some of these look like English letters but sound different! Pay attention.
       <div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">К к</div><div class="sg-lc-hw">К к</div><div class="sg-lc-sound">Sound: "k" — like kite</div><div class="sg-lc-eng">Looks like English K — same sound!</div><div class="sg-lc-word">К е за котка — cat</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Л л</div><div class="sg-lc-hw">Л л</div><div class="sg-lc-sound">Sound: "l" — like lamp</div><div class="sg-lc-eng">Looks like an upside-down V</div><div class="sg-lc-word">Л е за лимон — lemon</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">М м</div><div class="sg-lc-hw">М м</div><div class="sg-lc-sound">Sound: "m" — like moon</div><div class="sg-lc-eng">Looks like English M — same sound!</div><div class="sg-lc-word">М е за майка — mother</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Н н</div><div class="sg-lc-hw">Н н</div><div class="sg-lc-sound">Sound: "n" — like night</div><div class="sg-lc-eng">Looks like English H — but sounds like N!</div><div class="sg-lc-word">Н е за небе — sky</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">О о</div><div class="sg-lc-hw">О о</div><div class="sg-lc-sound">Sound: "o" — like open</div><div class="sg-lc-eng">Looks like English O — similar sound</div><div class="sg-lc-word">О е за ориз — rice</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">К к</div><div class="sg-lc-hw">К к</div><div class="sg-lc-sound">Sound: "k" — like kite</div><div class="sg-lc-eng">Looks like English K — same sound!</div><div class="sg-lc-word">К е за котка</div><div class="sg-lc-phonetic">(kotka)</div><div class="sg-lc-meaning">cat</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Л л</div><div class="sg-lc-hw">Л л</div><div class="sg-lc-sound">Sound: "l" — like lamp</div><div class="sg-lc-eng">Looks like an upside-down V</div><div class="sg-lc-word">Л е за лимон</div><div class="sg-lc-phonetic">(limon)</div><div class="sg-lc-meaning">lemon</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">М м</div><div class="sg-lc-hw">М м</div><div class="sg-lc-sound">Sound: "m" — like moon</div><div class="sg-lc-eng">Looks like English M — same sound!</div><div class="sg-lc-word">М е за майка</div><div class="sg-lc-phonetic">(mayka)</div><div class="sg-lc-meaning">mother</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Н н</div><div class="sg-lc-hw">Н н</div><div class="sg-lc-sound">Sound: "n" — like night</div><div class="sg-lc-eng">Looks like English H — but sounds like N!</div><div class="sg-lc-word">Н е за небе</div><div class="sg-lc-phonetic">(nebe)</div><div class="sg-lc-meaning">sky</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">О о</div><div class="sg-lc-hw">О о</div><div class="sg-lc-sound">Sound: "o" — like open</div><div class="sg-lc-eng">Looks like English O — similar sound</div><div class="sg-lc-word">О е за ориз</div><div class="sg-lc-phonetic">(oriz)</div><div class="sg-lc-meaning">rice</div></div>
       </div>
       <div class="sg-tip"><strong>⚠️ Watch out for Н!</strong> It looks exactly like the English letter H — but it makes the "n" sound. This trips everyone up at first. Write it 10 extra times and say "n, n, n" each time.</div>`,
     },
@@ -2575,11 +2647,11 @@ const studyGuides = {
     },
   ],
   flashcards: [
-    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка"},
-    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон"},
-    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка"},
-    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе"},
-    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз"}
+    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка", phonetic: "kotka"},
+    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон", phonetic: "limon"},
+    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка", phonetic: "mayka"},
+    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе", phonetic: "nebe"},
+    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз", phonetic: "oriz"}
   ],
   quiz: [
     {q: "Which letter looks like H but sounds like N?", type: "mc", options: ["К", "Л", "М", "Н"], answer: "Н"},
@@ -2631,21 +2703,21 @@ const studyGuides = {
     },
   ],
   flashcards: [
-    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула"},
-    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба"},
-    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода"},
-    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде"},
-    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга"},
-    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен"},
-    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф"},
-    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче"},
-    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра"},
-    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт"},
-    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка"},
-    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон"},
-    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка"},
-    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе"},
-    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз"}
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула", phonetic: "akula"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба", phonetic: "baba"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода", phonetic: "voda"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде", phonetic: "grozde"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга", phonetic: "daga"},
+    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен", phonetic: "esen"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф", phonetic: "zhiraf"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче", phonetic: "zayche"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра", phonetic: "igra"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт", phonetic: "yogurt"},
+    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка", phonetic: "kotka"},
+    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон", phonetic: "limon"},
+    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка", phonetic: "mayka"},
+    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе", phonetic: "nebe"},
+    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз", phonetic: "oriz"}
   ],
   quiz: [
     {q: "Which letter looks like B but sounds like 'v'?", type: "mc", options: ["Б", "В", "Г", "Д"], answer: "В"},
@@ -2700,21 +2772,21 @@ const studyGuides = {
     },
   ],
   flashcards: [
-    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула"},
-    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба"},
-    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода"},
-    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде"},
-    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга"},
-    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен"},
-    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф"},
-    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче"},
-    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра"},
-    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт"},
-    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка"},
-    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон"},
-    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка"},
-    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе"},
-    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз"}
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", bgRef: "баща", speechText: "А е за акула", phonetic: "akula"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", bgRef: "топка", speechText: "Б е за баба", phonetic: "baba"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", bgRef: "глас", speechText: "В е за вода", phonetic: "voda"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", bgRef: "злато", speechText: "Г е за грозде", phonetic: "grozde"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", bgRef: "куче", speechText: "Д е за дъга", phonetic: "daga"},
+    {word: "Е е", translation: "'eh' — like in 'bed'", pronunciation: "Е as Есен", englishWord: "Autumn", bgRef: "легло", speechText: "Е е за есен", phonetic: "esen"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", bgRef: "мярка", speechText: "Ж е за жираф", phonetic: "zhiraf"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", bgRef: "зоопарк", speechText: "З е за зайче", phonetic: "zayche"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", bgRef: "пчела", speechText: "И е за игра", phonetic: "igra"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", bgRef: "да", speechText: "Й е за йогурт", phonetic: "yogurt"},
+    {word: "К к", translation: "'k' — like in 'kite'", pronunciation: "К as Котка", englishWord: "Cat", bgRef: "кошница", speechText: "К е за котка", phonetic: "kotka"},
+    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", bgRef: "лампа", speechText: "Л е за лимон", phonetic: "limon"},
+    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", bgRef: "мляко", speechText: "М е за майка", phonetic: "mayka"},
+    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", bgRef: "нощ", speechText: "Н е за небе", phonetic: "nebe"},
+    {word: "О о", translation: "'o' — like in 'open'", pronunciation: "О as Ориз", englishWord: "Rice", bgRef: "огън", speechText: "О е за ориз", phonetic: "oriz"}
   ],
   quiz: [
     {q: "What sound does В make?", type: "mc", options: ["b", "v", "g", "d"], answer: "v"},
@@ -2750,11 +2822,11 @@ const studyGuides = {
       num: 3,
       title: 'Learn today\'s 5 letters — more traps and a new sound',
       desc: `<div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">П</div><div class="sg-lc-lower">п (lowercase)</div><div class="sg-lc-sound">Sound: "p" — like park</div><div class="sg-lc-eng">Looks like English P without the bump</div><div class="sg-lc-word">П е за пролет — spring</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Р</div><div class="sg-lc-lower">р (lowercase)</div><div class="sg-lc-sound">Rolled "r" — like Spanish r in "pero"</div><div class="sg-lc-eng">⚠️ Looks like P but sounds like rolled R!</div><div class="sg-lc-word">Р е за роза — rose</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">С</div><div class="sg-lc-lower">с (lowercase)</div><div class="sg-lc-sound">Sound: "s" — like sun</div><div class="sg-lc-eng">⚠️ Looks like C but sounds like S!</div><div class="sg-lc-word">С е за слон — elephant</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Т</div><div class="sg-lc-lower">т (lowercase)</div><div class="sg-lc-sound">Sound: "t" — like tree</div><div class="sg-lc-eng">Looks like English T — same sound</div><div class="sg-lc-word">Т е за тигър — tiger</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">У</div><div class="sg-lc-lower">у (lowercase)</div><div class="sg-lc-sound">Sound: "oo" — like moon</div><div class="sg-lc-eng">Looks like English Y but sounds "oo"</div><div class="sg-lc-word">У е за утро — morning</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">П</div><div class="sg-lc-lower">п (lowercase)</div><div class="sg-lc-sound">Sound: "p" — like park</div><div class="sg-lc-eng">Looks like English P without the bump</div><div class="sg-lc-word">П е за пролет</div><div class="sg-lc-phonetic">(prolet)</div><div class="sg-lc-meaning">spring</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Р</div><div class="sg-lc-lower">р (lowercase)</div><div class="sg-lc-sound">Rolled "r" — like Spanish r in "pero"</div><div class="sg-lc-eng">⚠️ Looks like P but sounds like rolled R!</div><div class="sg-lc-word">Р е за роза</div><div class="sg-lc-phonetic">(roza)</div><div class="sg-lc-meaning">rose</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">С</div><div class="sg-lc-lower">с (lowercase)</div><div class="sg-lc-sound">Sound: "s" — like sun</div><div class="sg-lc-eng">⚠️ Looks like C but sounds like S!</div><div class="sg-lc-word">С е за слон</div><div class="sg-lc-phonetic">(slon)</div><div class="sg-lc-meaning">elephant</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Т</div><div class="sg-lc-lower">т (lowercase)</div><div class="sg-lc-sound">Sound: "t" — like tree</div><div class="sg-lc-eng">Looks like English T — same sound</div><div class="sg-lc-word">Т е за тигър</div><div class="sg-lc-phonetic">(tigar)</div><div class="sg-lc-meaning">tiger</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">У</div><div class="sg-lc-lower">у (lowercase)</div><div class="sg-lc-sound">Sound: "oo" — like moon</div><div class="sg-lc-eng">Looks like English Y but sounds "oo"</div><div class="sg-lc-word">У е за утро</div><div class="sg-lc-phonetic">(utro)</div><div class="sg-lc-meaning">morning</div></div>
       </div>
       <div class="sg-tip"><strong>⚠️ Two big traps today:</strong> Р looks like P but is a <em>rolled R</em>. С looks like C but is an S. Add these to your sticky note of "imposters"!</div>`,
     },
@@ -2808,11 +2880,11 @@ const studyGuides = {
       title: 'Learn today\'s 5 letters — the special sounds',
       desc: `Today's letters include some sounds that don't exist as single letters in English!
       <div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ф</div><div class="sg-lc-lower">ф (lowercase)</div><div class="sg-lc-sound">Sound: "f" — like family</div><div class="sg-lc-eng">Looks like a circle with a stick</div><div class="sg-lc-word">Ф е за фамилия — family</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Х</div><div class="sg-lc-lower">х (lowercase)</div><div class="sg-lc-sound">Sound: "kh" — like Scottish loch</div><div class="sg-lc-eng">Guttural throat sound, like clearing throat lightly</div><div class="sg-lc-word">Х е за хляб — bread</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ц</div><div class="sg-lc-lower">ц (lowercase)</div><div class="sg-lc-sound">Sound: "ts" — like pizza</div><div class="sg-lc-eng">The TZ in "pizza" said as one sound</div><div class="sg-lc-word">Ц е за цвете — flower</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ч</div><div class="sg-lc-lower">ч (lowercase)</div><div class="sg-lc-sound">Sound: "ch" — like chair</div><div class="sg-lc-eng">Like 4 without the top line</div><div class="sg-lc-word">Ч е за чай — tea</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ш</div><div class="sg-lc-lower">ш (lowercase)</div><div class="sg-lc-sound">Sound: "sh" — like shell</div><div class="sg-lc-eng">Like a comb — 3 teeth pointing down</div><div class="sg-lc-word">Ш е за шоколад — chocolate</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ф</div><div class="sg-lc-lower">ф (lowercase)</div><div class="sg-lc-sound">Sound: "f" — like family</div><div class="sg-lc-eng">Looks like a circle with a stick</div><div class="sg-lc-word">Ф е за фамилия</div><div class="sg-lc-phonetic">(familiya)</div><div class="sg-lc-meaning">family</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Х</div><div class="sg-lc-lower">х (lowercase)</div><div class="sg-lc-sound">Sound: "kh" — like Scottish loch</div><div class="sg-lc-eng">Guttural throat sound, like clearing throat lightly</div><div class="sg-lc-word">Х е за хляб</div><div class="sg-lc-phonetic">(hlyab)</div><div class="sg-lc-meaning">bread</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ц</div><div class="sg-lc-lower">ц (lowercase)</div><div class="sg-lc-sound">Sound: "ts" — like pizza</div><div class="sg-lc-eng">The TZ in "pizza" said as one sound</div><div class="sg-lc-word">Ц е за цвете</div><div class="sg-lc-phonetic">(tsvete)</div><div class="sg-lc-meaning">flower</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ч</div><div class="sg-lc-lower">ч (lowercase)</div><div class="sg-lc-sound">Sound: "ch" — like chair</div><div class="sg-lc-eng">Like 4 without the top line</div><div class="sg-lc-word">Ч е за чай</div><div class="sg-lc-phonetic">(chay)</div><div class="sg-lc-meaning">tea</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ш</div><div class="sg-lc-lower">ш (lowercase)</div><div class="sg-lc-sound">Sound: "sh" — like shell</div><div class="sg-lc-eng">Like a comb — 3 teeth pointing down</div><div class="sg-lc-word">Ш е за шоколад</div><div class="sg-lc-phonetic">(shokolad)</div><div class="sg-lc-meaning">chocolate</div></div>
       </div>`,
     },
     {
@@ -2822,8 +2894,8 @@ const studyGuides = {
     },
     {
       num: 4,
-      title: 'Flashcard drill — press 🔊 on every card',
-      desc: 'Alphabet flashcards. For today\'s 5 new letters, press the 🔊 button and then repeat the sound yourself. For Х especially — listen and try to match that throat sound.',
+      title: 'Flashcard drill',
+      desc: 'Go through today\'s flashcards below. Say each letter\'s sound out loud before flipping the card. For Х especially, practice that throat sound — like you\'re gently clearing your throat.',
     },
     {
       num: 5,
@@ -2863,10 +2935,10 @@ const studyGuides = {
       num: 2,
       title: 'Learn today\'s final letters',
       desc: `<div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Щ</div><div class="sg-lc-lower">щ (lowercase)</div><div class="sg-lc-sound">Sound: "sht" — like "mashed" quickly</div><div class="sg-lc-eng">Ш with a small tail — Sh + T combined</div><div class="sg-lc-word">Щ е за щастие — happiness</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ъ</div><div class="sg-lc-lower">ъ (lowercase)</div><div class="sg-lc-sound">Sound: "uh" — like the U in "but"</div><div class="sg-lc-eng">The unique Bulgarian sound! Like a neutral vowel</div><div class="sg-lc-word">Ъ е за ъгъл — corner/angle</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ю</div><div class="sg-lc-lower">ю (lowercase)</div><div class="sg-lc-sound">Sound: "yu" — like the word "you"</div><div class="sg-lc-eng">Sounds exactly like the English word "you"</div><div class="sg-lc-word">Ю е за юла — spinning top</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Я</div><div class="sg-lc-lower">я (lowercase)</div><div class="sg-lc-sound">Sound: "ya" — like "yard"</div><div class="sg-lc-eng">Backwards R — sounds like "ya"</div><div class="sg-lc-word">Я е за яйце — egg</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Щ</div><div class="sg-lc-lower">щ (lowercase)</div><div class="sg-lc-sound">Sound: "sht" — like "mashed" quickly</div><div class="sg-lc-eng">Ш with a small tail — Sh + T combined</div><div class="sg-lc-word">Щ е за щастие</div><div class="sg-lc-phonetic">(shtastie)</div><div class="sg-lc-meaning">happiness</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ъ</div><div class="sg-lc-lower">ъ (lowercase)</div><div class="sg-lc-sound">Sound: "uh" — like the U in "but"</div><div class="sg-lc-eng">The unique Bulgarian sound! Like a neutral vowel</div><div class="sg-lc-word">Ъ е за ъгъл</div><div class="sg-lc-phonetic">(agal)</div><div class="sg-lc-meaning">corner/angle</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ю</div><div class="sg-lc-lower">ю (lowercase)</div><div class="sg-lc-sound">Sound: "yu" — like the word "you"</div><div class="sg-lc-eng">Sounds exactly like the English word "you"</div><div class="sg-lc-word">Ю е за юла</div><div class="sg-lc-phonetic">(yula)</div><div class="sg-lc-meaning">spinning top</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Я</div><div class="sg-lc-lower">я (lowercase)</div><div class="sg-lc-sound">Sound: "ya" — like "yard"</div><div class="sg-lc-eng">Backwards R — sounds like "ya"</div><div class="sg-lc-word">Я е за яйце</div><div class="sg-lc-phonetic">(yaytse)</div><div class="sg-lc-meaning">egg</div></div>
       </div>
       <div class="sg-tip"><strong>💡 Ъ is special:</strong> This is the unique Bulgarian schwa sound that doesn't exist in most languages. It's the most common vowel in Bulgarian! It sounds like the "u" in "butter" — a relaxed neutral sound. Practice it until it feels natural.</div>`,
     },
@@ -3552,14 +3624,27 @@ function openStudyGuide(week, day) {
   document.getElementById('sg-body').innerHTML = html;
   processQuizAnswers();
 
-  // Initialize embedded flashcards if the guide has them
-  if (guide.flashcards) {
-    setTimeout(function() {
-      var fcEl = document.querySelector('.sg-fc-embed');
-      if (fcEl) renderEmbeddedFlashcards(fcEl.id, guide.flashcards);
-      initEmbeddedSwipe(fcEl.id);
-    }, 100);
-  }
+  // Initialize embedded flashcards
+  setTimeout(function() {
+    var allEmbeds = document.querySelectorAll('.sg-fc-embed');
+    allEmbeds.forEach(function(fcEl) {
+      if (fcEl.id.indexOf('sg-fc-review-') === 0) {
+        // Review embed: load previous day's flashcards
+        var prevDay = day - 1;
+        var prevWeek = week;
+        if (prevDay < 1) { prevWeek = week - 1; prevDay = 5; }
+        var prevKey = prevWeek + '-' + prevDay;
+        var prevGuide = studyGuides[prevKey];
+        if (prevGuide && prevGuide.flashcards) {
+          renderEmbeddedFlashcards(fcEl.id, prevGuide.flashcards);
+          initEmbeddedSwipe(fcEl.id);
+        }
+      } else if (guide.flashcards) {
+        renderEmbeddedFlashcards(fcEl.id, guide.flashcards);
+        initEmbeddedSwipe(fcEl.id);
+      }
+    });
+  }, 100);
 
   // Initialize interactive quizzes if the guide has them
   if (guide.quiz) {
@@ -3737,14 +3822,26 @@ function toggleStudyGuide(week, day, btn) {
   processQuizAnswers(panel);
   enhanceLetterCards(panel);
 
-  // Initialize embedded flashcards if the guide has them
-  if (guide.flashcards) {
-    setTimeout(function() {
-      var fcEl = panel.querySelector('.sg-fc-embed');
-      if (fcEl) renderEmbeddedFlashcards(fcEl.id, guide.flashcards);
-      if (fcEl) initEmbeddedSwipe(fcEl.id);
-    }, 100);
-  }
+  // Initialize embedded flashcards
+  setTimeout(function() {
+    var allEmbeds = panel.querySelectorAll('.sg-fc-embed');
+    allEmbeds.forEach(function(fcEl) {
+      if (fcEl.id.indexOf('sg-fc-review-') === 0) {
+        var prevDay = day - 1;
+        var prevWeek = week;
+        if (prevDay < 1) { prevWeek = week - 1; prevDay = 5; }
+        var prevKey = prevWeek + '-' + prevDay;
+        var prevGuide = studyGuides[prevKey];
+        if (prevGuide && prevGuide.flashcards) {
+          renderEmbeddedFlashcards(fcEl.id, prevGuide.flashcards);
+          initEmbeddedSwipe(fcEl.id);
+        }
+      } else if (guide.flashcards) {
+        renderEmbeddedFlashcards(fcEl.id, guide.flashcards);
+        initEmbeddedSwipe(fcEl.id);
+      }
+    });
+  }, 100);
 
   // Initialize interactive quizzes if the guide has them
   if (guide.quiz) {
@@ -3847,6 +3944,9 @@ function printInlineGuide(panelId) {
 
 
 // ---- EMBEDDED FLASHCARD COMPONENT ----
+// Each embed gets its own scoped functions keyed by containerId
+if (!window._embedFC) window._embedFC = {};
+
 function renderEmbeddedFlashcards(containerId, cards) {
   const container = document.getElementById(containerId);
   if (!container || !cards || cards.length === 0) return;
@@ -3854,22 +3954,30 @@ function renderEmbeddedFlashcards(containerId, cards) {
   let currentIdx = 0;
   let isFlipped = false;
 
+  // Use a safe key for global function names (replace hyphens)
+  var fk = containerId.replace(/-/g, '_');
+
   function render() {
     const card = cards[currentIdx];
     let html = '<div style="text-align: center; padding: 16px;">';
     var bgWord = card.pronunciation ? (card.pronunciation.split(' as ')[1] || '') : '';
     var letterPart = card.pronunciation ? (card.pronunciation.split(' as ')[0] || '') : '';
-    html += '<div class="sg-fc-embed-card" onclick="flipEmbedCard()">';
+    html += '<div class="sg-fc-embed-card" onclick="_embedFC.' + fk + '.flip()">';
     html += '<div class="sg-fc-embed-inner">';
     // Front side
     var hideStyle = 'opacity:0; visibility:hidden;';
     html += '<div class="sg-fc-embed-front" style="' + (isFlipped ? hideStyle : '') + '">';
     html += '<div style="font-size: 3rem; font-weight: 800; color: var(--accent); margin-bottom: 12px;">' + card.word + '</div>';
     html += '<div style="text-align: center; margin-bottom: 4px;">';
-    html += '<span style="font-size: 1rem; color: var(--muted);">' + letterPart + ' as </span>';
-    html += '<span style="font-size: 1.1rem; font-weight: 700; color: var(--text);">' + bgWord + '</span>';
+    if (card.speechText) {
+      html += '<span style="font-size: 1rem; font-weight: 600; color: var(--text);">' + card.speechText + '</span>';
+      if (card.phonetic) html += ' <span style="font-size: 0.9rem; color: var(--muted); font-style: italic;">(' + card.phonetic + ')</span>';
+    } else {
+      html += '<span style="font-size: 1rem; color: var(--muted);">' + letterPart + ' as </span>';
+      html += '<span style="font-size: 1.1rem; font-weight: 700; color: var(--text);">' + bgWord + '</span>';
+    }
     html += '</div>';
-    if (card.englishWord) html += '<div style="font-size: 0.9rem; color: var(--green); font-weight: 600; text-align: center;">(' + card.englishWord + ')</div>';
+    if (card.englishWord) html += '<div style="font-size: 0.9rem; color: var(--green); font-weight: 600; text-align: center; margin-top: 4px;">' + card.englishWord + '</div>';
     html += '</div>';
     // Back side
     html += '<div class="sg-fc-embed-back" style="' + (!isFlipped ? hideStyle : '') + '">';
@@ -3880,39 +3988,20 @@ function renderEmbeddedFlashcards(containerId, cards) {
     html += '</div>';
     html += '<div class="sg-fc-embed-counter">' + (currentIdx + 1) + ' / ' + cards.length + '</div>';
     html += '<div class="sg-fc-embed-nav">';
-    if (currentIdx > 0) html += '<button onclick="prevEmbedCard()">← Prev</button>';
-    html += '<button onclick="flipEmbedCard()">Flip</button>';
-    if (currentIdx < cards.length - 1) html += '<button onclick="nextEmbedCard()">Next →</button>';
-    if (card.speechText) html += '<button onclick="speakEmbedCard()">🔊</button>';
+    if (currentIdx > 0) html += '<button onclick="_embedFC.' + fk + '.prev()">← Prev</button>';
+    html += '<button onclick="_embedFC.' + fk + '.flip()">Flip</button>';
+    if (currentIdx < cards.length - 1) html += '<button onclick="_embedFC.' + fk + '.next()">Next →</button>';
+    if (card.speechText) html += '<button onclick="_embedFC.' + fk + '.speak()">🔊</button>';
     html += '</div>';
     html += '</div>';
     container.innerHTML = html;
   }
 
-  window.flipEmbedCard = function() {
-    isFlipped = !isFlipped;
-    render();
-  };
-
-  window.nextEmbedCard = function() {
-    if (currentIdx < cards.length - 1) {
-      currentIdx++;
-      isFlipped = false;
-      render();
-    }
-  };
-
-  window.prevEmbedCard = function() {
-    if (currentIdx > 0) {
-      currentIdx--;
-      isFlipped = false;
-      render();
-    }
-  };
-
-  window.speakEmbedCard = function() {
-    const card = cards[currentIdx];
-    if (card.speechText) speakText(card.speechText);
+  window._embedFC[fk] = {
+    flip: function() { isFlipped = !isFlipped; render(); },
+    next: function() { if (currentIdx < cards.length - 1) { currentIdx++; isFlipped = false; render(); } },
+    prev: function() { if (currentIdx > 0) { currentIdx--; isFlipped = false; render(); } },
+    speak: function() { var card = cards[currentIdx]; if (card.speechText) speakText(card.speechText); }
   };
 
   render();
@@ -4063,6 +4152,29 @@ function renderInteractiveQuiz(containerId, quiz, storageKey) {
 function markLessonComplete(week, day, evt) {
   const dayIdx = day - 1;  // Convert to 0-indexed
   setChecked(week, dayIdx, true);
+
+  // Update the checkbox and row visual state in the DOM
+  const row = document.getElementById('row-' + week + '-' + dayIdx);
+  if (row) {
+    row.classList.add('checked');
+    const cb = row.querySelector('input[type=checkbox]');
+    if (cb) cb.checked = true;
+  }
+
+  // Update week progress counter
+  const wk = weeks.find(function(x) { return x.w === week; });
+  if (wk) {
+    const doneCount = wk.days.filter(function(_, j) { return isChecked(week, j); }).length;
+    const allDone = doneCount === wk.days.length;
+    const wkEl = document.getElementById('week-' + week);
+    if (wkEl) {
+      wkEl.classList.toggle('done', allDone);
+      var progEl = wkEl.querySelector('.week-prog');
+      if (progEl) progEl.textContent = doneCount + '/' + wk.days.length;
+      var numEl = wkEl.querySelector('.week-num');
+      if (numEl) numEl.textContent = allDone ? '✓' : week;
+    }
+  }
 
   // Update dashboard
   updateDashboard();
