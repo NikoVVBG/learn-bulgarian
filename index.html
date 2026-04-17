@@ -561,15 +561,16 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 /* Mobile: convert tables to stacked cards */
 @media (max-width: 520px) {
   .sg-vocab-wrap { overflow-x: visible; }
-  .sg-vocab { font-size: 0.8rem; border: none; }
+  .sg-vocab { font-size: 0.85rem; border: none; }
   .sg-vocab thead, .sg-vocab .sg-vocab-hdr { display: none !important; }
   .sg-vocab, .sg-vocab tbody { display: block; width: 100%; }
-  .sg-vocab tr { display: block; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+  .sg-vocab tr { display: block; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
   .sg-vocab tr:nth-child(even) { background: #fafafa; }
   .sg-vocab tr:nth-child(even) td { background: transparent; }
-  .sg-vocab td { display: flex; gap: 6px; align-items: baseline; border: none; padding: 2px 0; }
-  .sg-vocab td:first-child { font-size: 1.05rem; margin-bottom: 2px; }
-  .sg-vocab td:before { content: attr(data-label); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); min-width: 80px; flex-shrink: 0; }
+  .sg-vocab td { display: block; border: none; padding: 0; margin-bottom: 6px; word-wrap: break-word; overflow-wrap: break-word; }
+  .sg-vocab td:last-child { margin-bottom: 0; }
+  .sg-vocab td:first-child { font-size: 1.1rem; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #e5e7eb; }
+  .sg-vocab td:before { content: attr(data-label); display: block; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 1px; }
   .sg-vocab td:first-child:before { display: none; }
 }
 
