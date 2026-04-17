@@ -548,13 +548,29 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); cu
 .sg-arr { font-size: 0.7em; display: inline-block; transition: transform 0.2s; }
 
 /* Vocabulary table */
-.sg-vocab { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.83rem; }
-.sg-vocab th { text-align: left; padding: 6px 10px; background: #f8fafc; border: 1px solid var(--border); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+/* Vocabulary table - responsive wrapper */
+.sg-vocab-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 10px; border-radius: 8px; }
+.sg-vocab { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+.sg-vocab th { text-align: left; padding: 6px 10px; background: #f8fafc; border: 1px solid var(--border); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); white-space: nowrap; }
 .sg-vocab td { padding: 8px 10px; border: 1px solid var(--border); vertical-align: top; }
 .sg-vocab td:first-child { font-weight: 700; color: var(--accent); font-size: 0.95rem; }
 .sg-vocab td:nth-child(2) { color: var(--text); }
 .sg-vocab td:nth-child(3) { color: var(--muted); font-style: italic; }
 .sg-vocab tr:nth-child(even) td { background: #fafafa; }
+
+/* Mobile: convert tables to stacked cards */
+@media (max-width: 520px) {
+  .sg-vocab { font-size: 0.8rem; }
+  .sg-vocab thead { display: none; }
+  .sg-vocab, .sg-vocab tbody, .sg-vocab tr, .sg-vocab td { display: block; width: 100%; }
+  .sg-vocab tr { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+  .sg-vocab tr:nth-child(even) { background: #fafafa; }
+  .sg-vocab tr:nth-child(even) td { background: transparent; }
+  .sg-vocab td { border: none; padding: 2px 0; display: flex; gap: 6px; align-items: baseline; }
+  .sg-vocab td:first-child { font-size: 1.05rem; margin-bottom: 2px; }
+  .sg-vocab td:before { content: attr(data-label); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); min-width: 70px; flex-shrink: 0; }
+  .sg-vocab td:first-child:before { display: none; }
+}
 
 /* Practice box */
 .sg-practice {
@@ -3198,7 +3214,7 @@ const studyGuides = {
     {
       num: 3,
       title: 'The 6 Bulgarian vowels',
-      desc: `<table class="sg-vocab" style="margin-top:10px"><tr><th>Letter</th><th>Sound</th><th>Like in English</th><th>Example</th></tr><tr><td>А</td><td>"ah"</td><td>f<strong>a</strong>ther, c<strong>a</strong>r</td><td>баба <em>(BA-ba)</em> — grandma</td></tr><tr><td>Е</td><td>"eh"</td><td>b<strong>e</strong>d, s<strong>e</strong>t</td><td>есен <em>(E-sen)</em> — autumn</td></tr><tr><td>И</td><td>"ee"</td><td>s<strong>ee</strong>, b<strong>ee</strong></td><td>игра <em>(ig-RA)</em> — game</td></tr><tr><td>О</td><td>"oh"</td><td>m<strong>o</strong>re (pure, no "ow" glide)</td><td>ориз <em>(o-RIZ)</em> — rice</td></tr><tr><td>У</td><td>"oo"</td><td>m<strong>oo</strong>n, f<strong>oo</strong>d</td><td>утро <em>(UT-ro)</em> — morning</td></tr><tr><td>Ъ</td><td>"uh"</td><td>b<strong>u</strong>tter, sof<strong>a</strong></td><td>ъгъл <em>(UH-gal)</em> — corner</td></tr></table>`,
+      desc: `<div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Letter</th><th>Sound</th><th>Like in English</th><th>Example</th></tr><tr><td data-label="Letter">А</td><td data-label="Sound">"ah"</td><td data-label="Like in English">f<strong>a</strong>ther, c<strong>a</strong>r</td><td data-label="Example">баба <em>(BA-ba)</em> — grandma</td></tr><tr><td data-label="Letter">Е</td><td data-label="Sound">"eh"</td><td data-label="Like in English">b<strong>e</strong>d, s<strong>e</strong>t</td><td data-label="Example">есен <em>(E-sen)</em> — autumn</td></tr><tr><td data-label="Letter">И</td><td data-label="Sound">"ee"</td><td data-label="Like in English">s<strong>ee</strong>, b<strong>ee</strong></td><td data-label="Example">игра <em>(ig-RA)</em> — game</td></tr><tr><td data-label="Letter">О</td><td data-label="Sound">"oh"</td><td data-label="Like in English">m<strong>o</strong>re (pure, no "ow" glide)</td><td data-label="Example">ориз <em>(o-RIZ)</em> — rice</td></tr><tr><td data-label="Letter">У</td><td data-label="Sound">"oo"</td><td data-label="Like in English">m<strong>oo</strong>n, f<strong>oo</strong>d</td><td data-label="Example">утро <em>(UT-ro)</em> — morning</td></tr><tr><td data-label="Letter">Ъ</td><td data-label="Sound">"uh"</td><td data-label="Like in English">b<strong>u</strong>tter, sof<strong>a</strong></td><td data-label="Example">ъгъл <em>(UH-gal)</em> — corner</td></tr></table></div>`,
     },
     {
       num: 4,
@@ -3258,7 +3274,7 @@ const studyGuides = {
       num: 2,
       title: 'The three special consonants',
       desc: `These consonant sounds don't exist as single letters in English, but you make them naturally! Let's master them.
-      <table class="sg-vocab"><tr><th>Letter</th><th>Sound</th><th>You already say it in...</th><th>Bulgarian words</th></tr><tr><td>Ж</td><td>"zh"</td><td>mea<strong>s</strong>ure, vi<strong>s</strong>ion, bei<strong>ge</strong></td><td>жена <em>(zhe-NA)</em> — woman<br>жираф <em>(zhi-RAF)</em> — giraffe</td></tr><tr><td>Ц</td><td>"ts"</td><td>pi<strong>zz</strong>a, i<strong>ts</strong>, ca<strong>ts</strong></td><td>цвете <em>(TSVE-te)</em> — flower<br>цар <em>(tsar)</em> — king</td></tr><tr><td>Щ</td><td>"sht"</td><td>ma<strong>shed</strong>, pu<strong>shed</strong> (fast)</td><td>щастие <em>(SHTAS-ti-e)</em> — happiness</td></tr></table>
+      <div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Letter</th><th>Sound</th><th>You already say it in...</th><th>Bulgarian words</th></tr><tr><td data-label="Letter">Ж</td><td data-label="Sound">"zh"</td><td data-label="You already say it in...">mea<strong>s</strong>ure, vi<strong>s</strong>ion, bei<strong>ge</strong></td><td data-label="Bulgarian words">жена <em>(zhe-NA)</em> — woman<br>жираф <em>(zhi-RAF)</em> — giraffe</td></tr><tr><td data-label="Letter">Ц</td><td data-label="Sound">"ts"</td><td data-label="You already say it in...">pi<strong>zz</strong>a, i<strong>ts</strong>, ca<strong>ts</strong></td><td data-label="Bulgarian words">цвете <em>(TSVE-te)</em> — flower<br>цар <em>(tsar)</em> — king</td></tr><tr><td data-label="Letter">Щ</td><td data-label="Sound">"sht"</td><td data-label="You already say it in...">ma<strong>shed</strong>, pu<strong>shed</strong> (fast)</td><td data-label="Bulgarian words">щастие <em>(SHTAS-ti-e)</em> — happiness</td></tr></table></div>
       <div class="sg-tip" style="margin-top:10px"><strong>💡 Fun fact:</strong> Ж appears in almost every other Bulgarian word. Ц is how you say "tsar" (цар). And Щ is in щастие (happiness) — one of the most beautiful Bulgarian words!</div>`,
     },
     {
@@ -3330,7 +3346,7 @@ const studyGuides = {
       num: 3,
       title: 'Stress in common words',
       desc: `These are words you'll use every day in Week 4. The stressed syllable is shown in CAPS — that's where your voice gets slightly louder and longer.
-      <table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>Stress on</th></tr><tr><td>добре</td><td>dob-RE</td><td>good/okay</td><td>last</td></tr><tr><td>благодаря</td><td>bla-go-da-RYA</td><td>thank you</td><td>last</td></tr><tr><td>довиждане</td><td>do-VIZH-da-ne</td><td>goodbye</td><td>2nd</td></tr><tr><td>съжалявам</td><td>suh-zha-LYA-vam</td><td>I'm sorry</td><td>3rd</td></tr><tr><td>здравей</td><td>zdra-VEY</td><td>hello (informal)</td><td>last</td></tr><tr><td>здравейте</td><td>zdra-VEY-te</td><td>hello (formal)</td><td>2nd</td></tr><tr><td>разбирам</td><td>raz-BI-ram</td><td>I understand</td><td>2nd</td></tr><tr><td>моля</td><td>MO-lya</td><td>please / you're welcome</td><td>1st</td></tr></table>`,
+      <div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>Stress on</th></tr><tr><td data-label="Bulgarian">добре</td><td data-label="Pronunciation">dob-RE</td><td data-label="English">good/okay</td><td data-label="Stress on">last</td></tr><tr><td data-label="Bulgarian">благодаря</td><td data-label="Pronunciation">bla-go-da-RYA</td><td data-label="English">thank you</td><td data-label="Stress on">last</td></tr><tr><td data-label="Bulgarian">довиждане</td><td data-label="Pronunciation">do-VIZH-da-ne</td><td data-label="English">goodbye</td><td data-label="Stress on">2nd</td></tr><tr><td data-label="Bulgarian">съжалявам</td><td data-label="Pronunciation">suh-zha-LYA-vam</td><td data-label="English">I'm sorry</td><td data-label="Stress on">3rd</td></tr><tr><td data-label="Bulgarian">здравей</td><td data-label="Pronunciation">zdra-VEY</td><td data-label="English">hello (informal)</td><td data-label="Stress on">last</td></tr><tr><td data-label="Bulgarian">здравейте</td><td data-label="Pronunciation">zdra-VEY-te</td><td data-label="English">hello (formal)</td><td data-label="Stress on">2nd</td></tr><tr><td data-label="Bulgarian">разбирам</td><td data-label="Pronunciation">raz-BI-ram</td><td data-label="English">I understand</td><td data-label="Stress on">2nd</td></tr><tr><td data-label="Bulgarian">моля</td><td data-label="Pronunciation">MO-lya</td><td data-label="English">please / you're welcome</td><td data-label="Stress on">1st</td></tr></table></div>`,
     },
     {
       num: 4,
@@ -3527,7 +3543,7 @@ const studyGuides = {
     {
       num: 2,
       title: 'Today\'s greetings',
-      desc: `<table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>When to use</th></tr><tr><td>Здравей</td><td>zdra-VEY</td><td>Hello (informal)</td><td>Friends, family, people you know</td></tr><tr><td>Здравейте</td><td>zdra-VEY-te</td><td>Hello (formal/plural)</td><td>Strangers, elders, groups, respect</td></tr><tr><td>Добро утро</td><td>DOB-ro OOT-ro</td><td>Good morning</td><td>Morning, until ~noon</td></tr><tr><td>Добър ден</td><td>DO-bur den</td><td>Good afternoon/day</td><td>Noon until ~6pm</td></tr></table>
+      desc: `<div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>When to use</th></tr><tr><td data-label="Bulgarian">Здравей</td><td data-label="Pronunciation">zdra-VEY</td><td data-label="English">Hello (informal)</td><td data-label="When to use">Friends, family, people you know</td></tr><tr><td data-label="Bulgarian">Здравейте</td><td data-label="Pronunciation">zdra-VEY-te</td><td data-label="English">Hello (formal/plural)</td><td data-label="When to use">Strangers, elders, groups, respect</td></tr><tr><td data-label="Bulgarian">Добро утро</td><td data-label="Pronunciation">DOB-ro OOT-ro</td><td data-label="English">Good morning</td><td data-label="When to use">Morning, until ~noon</td></tr><tr><td data-label="Bulgarian">Добър ден</td><td data-label="Pronunciation">DO-bur den</td><td data-label="English">Good afternoon/day</td><td data-label="When to use">Noon until ~6pm</td></tr></table></div>
       <div class="sg-tip" style="margin-top:10px"><strong>💡 Formal vs informal:</strong> Здравей is for people you know. Здравейте is the respectful form — used for strangers, older people, your partner's parents, or addressing a group. When in doubt, use Здравейте — it's always safe.</div>`,
     },
     {
@@ -3581,7 +3597,7 @@ const studyGuides = {
     {
       num: 2,
       title: 'Today\'s phrases — evening and farewells',
-      desc: `<table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>Notes</th></tr><tr><td>Добър вечер</td><td>DO-bur VE-cher</td><td>Good evening</td><td>From ~6pm until bedtime</td></tr><tr><td>Лека нощ</td><td>LE-ka nosht</td><td>Good night</td><td>Only when going to sleep</td></tr><tr><td>Довиждане</td><td>do-VIZH-da-ne</td><td>Goodbye (formal)</td><td>Polite, somewhat permanent</td></tr><tr><td>Чао</td><td>chow</td><td>Bye (informal)</td><td>Casual — borrowed from Italian!</td></tr></table>
+      desc: `<div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>Notes</th></tr><tr><td data-label="Bulgarian">Добър вечер</td><td data-label="Pronunciation">DO-bur VE-cher</td><td data-label="English">Good evening</td><td data-label="Notes">From ~6pm until bedtime</td></tr><tr><td data-label="Bulgarian">Лека нощ</td><td data-label="Pronunciation">LE-ka nosht</td><td data-label="English">Good night</td><td data-label="Notes">Only when going to sleep</td></tr><tr><td data-label="Bulgarian">Довиждане</td><td data-label="Pronunciation">do-VIZH-da-ne</td><td data-label="English">Goodbye (formal)</td><td data-label="Notes">Polite, somewhat permanent</td></tr><tr><td data-label="Bulgarian">Чао</td><td data-label="Pronunciation">chow</td><td data-label="English">Bye (informal)</td><td data-label="Notes">Casual — borrowed from Italian!</td></tr></table></div>
       <div class="sg-tip"><strong>💡 Лека нощ</strong> is ONLY for going to sleep — not just "leaving at night". If you're leaving in the evening, use Довиждане or Чао. Using Лека нощ at the wrong time is like saying "sweet dreams" at the front door!</div>`,
     },
     {
@@ -3631,7 +3647,7 @@ const studyGuides = {
     {
       num: 2,
       title: 'The four core polite words',
-      desc: `<table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>Special note</th></tr><tr><td>Да</td><td>da</td><td>Yes</td><td>Also means "to" in infinitives — context clarifies</td></tr><tr><td>Не</td><td>ne</td><td>No</td><td>Also used as "not" (Не разбирам = I don't understand)</td></tr><tr><td>Моля</td><td>MO-lya</td><td>Please / You're welcome</td><td>One word does BOTH! Context tells you which.</td></tr><tr><td>Благодаря</td><td>bla-go-da-RYA</td><td>Thank you</td><td>Formal and warm. Always appropriate.</td></tr></table>
+      desc: `<div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>Special note</th></tr><tr><td data-label="Bulgarian">Да</td><td data-label="Pronunciation">da</td><td data-label="English">Yes</td><td data-label="Special note">Also means "to" in infinitives — context clarifies</td></tr><tr><td data-label="Bulgarian">Не</td><td data-label="Pronunciation">ne</td><td data-label="English">No</td><td data-label="Special note">Also used as "not" (Не разбирам = I don't understand)</td></tr><tr><td data-label="Bulgarian">Моля</td><td data-label="Pronunciation">MO-lya</td><td data-label="English">Please / You're welcome</td><td data-label="Special note">One word does BOTH! Context tells you which.</td></tr><tr><td data-label="Bulgarian">Благодаря</td><td data-label="Pronunciation">bla-go-da-RYA</td><td data-label="English">Thank you</td><td data-label="Special note">Formal and warm. Always appropriate.</td></tr></table></div>
       <div class="sg-tip"><strong>💡 Моля does double duty:</strong> When asking for something: "Едно кафе, моля" (One coffee, please). When someone thanks you: "Благодаря!" → "Моля!" (You're welcome!). This is the same in several European languages.</div>`,
     },
     {
@@ -3682,7 +3698,7 @@ const studyGuides = {
     {
       num: 2,
       title: 'The phrases you\'ll need most as a beginner',
-      desc: `<table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th></tr><tr><td>Съжалявам</td><td>suh-zha-LYA-vam</td><td>I'm sorry / I apologize</td></tr><tr><td>Разбирам</td><td>raz-BI-ram</td><td>I understand</td></tr><tr><td>Не разбирам</td><td>ne raz-BI-ram</td><td>I don't understand</td></tr><tr><td>Говорите ли бавно?</td><td>go-VO-ri-te li BAV-no</td><td>Can you speak slowly?</td></tr><tr><td>Как се казваш?</td><td>kak se KAZ-vash</td><td>What is your name? (informal)</td></tr><tr><td>Казвам се...</td><td>KAZ-vam se...</td><td>My name is...</td></tr></table>`,
+      desc: `<div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th></tr><tr><td data-label="Bulgarian">Съжалявам</td><td data-label="Pronunciation">suh-zha-LYA-vam</td><td data-label="English">I'm sorry / I apologize</td></tr><tr><td data-label="Bulgarian">Разбирам</td><td data-label="Pronunciation">raz-BI-ram</td><td data-label="English">I understand</td></tr><tr><td data-label="Bulgarian">Не разбирам</td><td data-label="Pronunciation">ne raz-BI-ram</td><td data-label="English">I don't understand</td></tr><tr><td data-label="Bulgarian">Говорите ли бавно?</td><td data-label="Pronunciation">go-VO-ri-te li BAV-no</td><td data-label="English">Can you speak slowly?</td></tr><tr><td data-label="Bulgarian">Как се казваш?</td><td data-label="Pronunciation">kak se KAZ-vash</td><td data-label="English">What is your name? (informal)</td></tr><tr><td data-label="Bulgarian">Казвам се...</td><td data-label="Pronunciation">KAZ-vam se...</td><td data-label="English">My name is...</td></tr></table></div>`,
     },
     {
       num: 3,
@@ -3731,7 +3747,7 @@ const studyGuides = {
     {
       num: 2,
       title: 'Full greetings review — say them all',
-      desc: `<table class="sg-vocab"><tr><th>Time/Situation</th><th>What to say</th></tr><tr><td>Morning</td><td>Добро утро!</td></tr><tr><td>Afternoon</td><td>Добър ден!</td></tr><tr><td>Evening</td><td>Добър вечер!</td></tr><tr><td>Going to sleep</td><td>Лека нощ!</td></tr><tr><td>Seeing someone you know</td><td>Здравей! / Здравейте!</td></tr><tr><td>Goodbye</td><td>Довиждане! / Чао!</td></tr><tr><td>Thank you</td><td>Благодаря!</td></tr><tr><td>You're welcome</td><td>Моля!</td></tr><tr><td>I'm sorry</td><td>Съжалявам</td></tr><tr><td>I don't understand</td><td>Не разбирам</td></tr></table>`,
+      desc: `<div class="sg-vocab-wrap"><table class="sg-vocab"><tr><th>Time/Situation</th><th>What to say</th></tr><tr><td data-label="Time/Situation">Morning</td><td data-label="What to say">Добро утро!</td></tr><tr><td data-label="Time/Situation">Afternoon</td><td data-label="What to say">Добър ден!</td></tr><tr><td data-label="Time/Situation">Evening</td><td data-label="What to say">Добър вечер!</td></tr><tr><td data-label="Time/Situation">Going to sleep</td><td data-label="What to say">Лека нощ!</td></tr><tr><td data-label="Time/Situation">Seeing someone you know</td><td data-label="What to say">Здравей! / Здравейте!</td></tr><tr><td data-label="Time/Situation">Goodbye</td><td data-label="What to say">Довиждане! / Чао!</td></tr><tr><td data-label="Time/Situation">Thank you</td><td data-label="What to say">Благодаря!</td></tr><tr><td data-label="Time/Situation">You're welcome</td><td data-label="What to say">Моля!</td></tr><tr><td data-label="Time/Situation">I'm sorry</td><td data-label="What to say">Съжалявам</td></tr><tr><td data-label="Time/Situation">I don't understand</td><td data-label="What to say">Не разбирам</td></tr></table></div>`,
     },
     {
       num: 3,
