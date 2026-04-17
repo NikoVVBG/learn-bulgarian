@@ -2809,58 +2809,72 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Week 2! You already know 15 letters. This week you\'ll complete the Bulgarian alphabet. Check your Dashboard to see your Week 1 progress.',
+      num: 1,
+      title: '5-minute warm-up: Week 1 review',
+      desc: `Welcome to Week 2! You already know 15 letters. Before new ones, let's make sure the old ones are solid. Flip through yesterday's cards below.
+      <div class="sg-fc-embed" id="sg-fc-review-2-1"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> Say each sound from memory before flipping. If you hesitate on any letter, pause and say it 3 times before moving on.</div>`,
     },
     {
       num: 2,
-      title: '3-minute warm-up: Week 1 letters',
-      desc: 'Quick blast through the first 15 flashcards. Your brain needs the retrieval practice — it\'s not wasted time.',
+      title: 'Learn today\'s 5 letters — watch out for imposters!',
+      desc: `Two of today's letters are <strong>traps</strong> — they look like English letters but sound completely different!
+      <div class="sg-letter-grid">
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">П п</div><div class="sg-lc-hw">П п</div><div class="sg-lc-sound">Sound: "p" — like park</div><div class="sg-lc-eng">Looks like a gate or doorframe</div><div class="sg-lc-word">П е за пролет</div><div class="sg-lc-phonetic">(prolet)</div><div class="sg-lc-meaning">spring (season)</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Р р</div><div class="sg-lc-hw">Р р</div><div class="sg-lc-sound">Rolled "r" — like Spanish pero</div><div class="sg-lc-eng">⚠️ Looks like P but is a rolled R!</div><div class="sg-lc-word">Р е за роза</div><div class="sg-lc-phonetic">(roza)</div><div class="sg-lc-meaning">rose</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">С с</div><div class="sg-lc-hw">С с</div><div class="sg-lc-sound">Sound: "s" — like sun</div><div class="sg-lc-eng">⚠️ Looks like C but sounds like S!</div><div class="sg-lc-word">С е за слон</div><div class="sg-lc-phonetic">(slon)</div><div class="sg-lc-meaning">elephant</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Т т</div><div class="sg-lc-hw">Т т</div><div class="sg-lc-sound">Sound: "t" — like tree</div><div class="sg-lc-eng">Same as English T — easy one!</div><div class="sg-lc-word">Т е за тигър</div><div class="sg-lc-phonetic">(tigar)</div><div class="sg-lc-meaning">tiger</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">У у</div><div class="sg-lc-hw">У у</div><div class="sg-lc-sound">Sound: "oo" — like moon</div><div class="sg-lc-eng">Looks like Y but sounds "oo"!</div><div class="sg-lc-word">У е за утро</div><div class="sg-lc-phonetic">(utro)</div><div class="sg-lc-meaning">morning</div></div>
+      </div>
+      <div class="sg-tip"><strong>⚠️ Two big traps today:</strong> Р looks like P but is a <em>rolled R</em>. С looks like C but is an S. Add these to your mental list of "imposters"!</div>`,
     },
     {
       num: 3,
-      title: 'Learn today\'s 5 letters — more traps and a new sound',
-      desc: `<div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">П</div><div class="sg-lc-lower">п (lowercase)</div><div class="sg-lc-sound">Sound: "p" — like park</div><div class="sg-lc-eng">Looks like English P without the bump</div><div class="sg-lc-word">П е за пролет</div><div class="sg-lc-phonetic">(prolet)</div><div class="sg-lc-meaning">spring</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Р</div><div class="sg-lc-lower">р (lowercase)</div><div class="sg-lc-sound">Rolled "r" — like Spanish r in "pero"</div><div class="sg-lc-eng">⚠️ Looks like P but sounds like rolled R!</div><div class="sg-lc-word">Р е за роза</div><div class="sg-lc-phonetic">(roza)</div><div class="sg-lc-meaning">rose</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">С</div><div class="sg-lc-lower">с (lowercase)</div><div class="sg-lc-sound">Sound: "s" — like sun</div><div class="sg-lc-eng">⚠️ Looks like C but sounds like S!</div><div class="sg-lc-word">С е за слон</div><div class="sg-lc-phonetic">(slon)</div><div class="sg-lc-meaning">elephant</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Т</div><div class="sg-lc-lower">т (lowercase)</div><div class="sg-lc-sound">Sound: "t" — like tree</div><div class="sg-lc-eng">Looks like English T — same sound</div><div class="sg-lc-word">Т е за тигър</div><div class="sg-lc-phonetic">(tigar)</div><div class="sg-lc-meaning">tiger</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">У</div><div class="sg-lc-lower">у (lowercase)</div><div class="sg-lc-sound">Sound: "oo" — like moon</div><div class="sg-lc-eng">Looks like English Y but sounds "oo"</div><div class="sg-lc-word">У е за утро</div><div class="sg-lc-phonetic">(utro)</div><div class="sg-lc-meaning">morning</div></div>
-      </div>
-      <div class="sg-tip"><strong>⚠️ Two big traps today:</strong> Р looks like P but is a <em>rolled R</em>. С looks like C but is an S. Add these to your sticky note of "imposters"!</div>`,
+      title: 'Say each letter with its example word',
+      desc: `Practice the "X е за Y" pattern out loud — this is how Bulgarian children learn:
+      <div class="sg-practice"><div class="sg-practice-title">🗣️ Say each one out loud 3 times</div><ol><li><strong>П е за пролет</strong> <em>(prolet)</em> — spring</li><li><strong>Р е за роза</strong> <em>(roza)</em> — rose</li><li><strong>С е за слон</strong> <em>(slon)</em> — elephant</li><li><strong>Т е за тигър</strong> <em>(tigar)</em> — tiger</li><li><strong>У е за утро</strong> <em>(utro)</em> — morning</li></ol></div>
+      <div class="sg-tip"><strong>🗣️ Rolled R tip:</strong> Lightly touch your tongue to the roof of your mouth and blow air — that fluttering is the roll. Try: ро-ро-ро, then say роза <em>(roza)</em> slowly.</div>`,
     },
     {
       num: 4,
-      title: 'Practice the rolled R',
-      desc: `The Bulgarian Р is one of the trickier sounds for English speakers.
-      <div class="sg-practice"><div class="sg-practice-title">🗣️ Rolled R practice</div><ol><li>Lightly touch your tongue to the roof of your mouth and blow air — that fluttering is the roll</li><li>Try: "butter" said very fast — the double-T flap is close</li><li>Practice: ро-ро-ро-ро, ра-ра-ра-ра, ри-ри-ри</li><li>Say роза (rose) slowly: Р-о-з-а, then faster</li></ol>It doesn't need to be perfect yet — just get comfortable with the attempt.</div>`,
+      title: 'Flashcard practice — new letters + bonus words',
+      desc: `Practice today's 5 new letters plus bonus vocabulary words you can already read! Every word below uses only letters you've learned.
+      <div class="sg-fc-embed" id="sg-fc-2-1"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> The bonus words at the end are real Bulgarian words you can already sound out. Try reading them letter by letter before flipping!</div>`,
     },
     {
       num: 5,
-      title: 'Flashcard drill — all 20 letters so far',
-      desc: 'Flashcards → Alphabet. Cycle through А–У. Try to do it in under 90 seconds while still saying each sound. Turn on Autoplay and just cycle through.',
+      title: 'Writing practice',
+      desc: `Write each new letter 5 times on paper. Say the sound as you write it.
+      <div class="sg-practice"><div class="sg-practice-title">✍️ Write each letter 5× while saying the sound out loud</div><ol><li><strong>П п</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">П п</span> — say "p" each time</li><li><strong>Р р</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Р р</span> — say rolled "r" (not English P!)</li><li><strong>С с</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">С с</span> — say "s" (not English C!)</li><li><strong>Т т</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">Т т</span> — say "t"</li><li><strong>У у</strong> / <span class="sg-lc-hw" style="display:inline;font-size:1.3em;">У у</span> — say "oo"</li></ol></div>`,
     },
     {
       num: 6,
       title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>Which letter looks like P but sounds like rolled R? (Р)</li><li>What does <em>пролет</em> mean? (spring)</li><li>С looks like which English letter? What sound does it make? (C — sounds like S)</li><li>What does <em>утро</em> mean? (morning)</li><li>Write the 5 new letters without looking.</li></ol></div>`,
+      desc: `<div class="sg-iquiz" id="sg-iquiz-2-1"></div>`,
     },
-    {
-      num: 7,
-      title: 'Mark Day 1 complete',
-      desc: 'Weekly Plan → Week 2 → check off Day 1. Only 9 more letters to go before you can read the whole Bulgarian alphabet!',
-    },
-
+  ],
+  flashcards: [
+    {word: "П п", translation: "'p' — like in 'park'", pronunciation: "П as Пролет", englishWord: "Spring", speechText: "П е за пролет", phonetic: "prolet"},
+    {word: "Р р", translation: "rolled 'r' — like Spanish pero", pronunciation: "Р as Роза", englishWord: "Rose", speechText: "Р е за роза", phonetic: "roza"},
+    {word: "С с", translation: "'s' — like sun", pronunciation: "С as Слон", englishWord: "Elephant", speechText: "С е за слон", phonetic: "slon"},
+    {word: "Т т", translation: "'t' — like tree", pronunciation: "Т as Тигър", englishWord: "Tiger", speechText: "Т е за тигър", phonetic: "tigar"},
+    {word: "У у", translation: "'oo' — like moon", pronunciation: "У as Утро", englishWord: "Morning", speechText: "У е за утро", phonetic: "utro"},
+    {word: "супа", translation: "soup", pronunciation: "SU-pa", phonetic: "SU-pa", speechText: "супа"},
+    {word: "нос", translation: "nose", pronunciation: "nos", phonetic: "nos", speechText: "нос"},
+    {word: "маса", translation: "table", pronunciation: "ma-SA", phonetic: "ma-SA", speechText: "маса"},
+    {word: "сок", translation: "juice", pronunciation: "sok", phonetic: "sok", speechText: "сок"},
+    {word: "парк", translation: "park", pronunciation: "park", phonetic: "park", speechText: "парк"}
   ],
   quiz: [
     {q: "Which letter looks like P but sounds like a rolled R?", type: "mc", options: ["П", "Р", "С", "Т"], answer: "Р"},
     {q: "What does пролет mean?", type: "text", answer: "spring"},
-    {q: "С looks like the English letter C. What sound does it make?", type: "mc", options: ["ch", "k", "s", "ts"], answer: "s"},
+    {q: "С looks like the English letter C. What sound does it actually make?", type: "mc", options: ["ch", "k", "s", "ts"], answer: "s"},
     {q: "What does утро mean?", type: "text", answer: "morning"},
     {q: "Which letter makes the 'oo' sound (like in 'moon')?", type: "mc", options: ["Т", "У", "П", "Р"], answer: "У"},
-    {q: "What Bulgarian word means 'rose'?", type: "text", answer: "роза"},
-    {q: "Which of these is an 'imposter' letter (looks like English but sounds different)?", type: "mc", options: ["П", "М", "Р", "О"], answer: "Р"}
+    {q: "What does супа mean?", type: "text", answer: "soup"},
+    {q: "What does маса mean?", type: "mc", options: ["nose", "park", "table", "juice"], answer: "table"},
+    {q: "Which of these is an 'imposter' letter (looks like English but sounds different)?", type: "mc", options: ["П", "Т", "Р", "О"], answer: "Р"}
   ]
 },
 
@@ -2871,43 +2885,54 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'You\'re in! Do a 3-minute warm-up on the Flashcards tab covering all letters you\'ve learned so far (А–У, 20 letters).',
+      num: 1,
+      title: '5-minute review of П–У',
+      desc: `Before new letters, warm up with yesterday's cards. Can you remember what sound Р makes? (Hint: it's NOT what it looks like!)
+      <div class="sg-fc-embed" id="sg-fc-review-2-2"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> Pay extra attention to the imposter letters Р and С. If you can name them instantly, you're on track!</div>`,
     },
     {
       num: 2,
       title: 'Learn today\'s 5 letters — the special sounds',
-      desc: `Today's letters include some sounds that don't exist as single letters in English!
+      desc: `Today's letters include sounds that don't exist as single letters in English. But they're sounds you already make every day!
       <div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ф</div><div class="sg-lc-lower">ф (lowercase)</div><div class="sg-lc-sound">Sound: "f" — like family</div><div class="sg-lc-eng">Looks like a circle with a stick</div><div class="sg-lc-word">Ф е за фамилия</div><div class="sg-lc-phonetic">(familiya)</div><div class="sg-lc-meaning">family</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Х</div><div class="sg-lc-lower">х (lowercase)</div><div class="sg-lc-sound">Sound: "kh" — like Scottish loch</div><div class="sg-lc-eng">Guttural throat sound, like clearing throat lightly</div><div class="sg-lc-word">Х е за хляб</div><div class="sg-lc-phonetic">(hlyab)</div><div class="sg-lc-meaning">bread</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ц</div><div class="sg-lc-lower">ц (lowercase)</div><div class="sg-lc-sound">Sound: "ts" — like pizza</div><div class="sg-lc-eng">The TZ in "pizza" said as one sound</div><div class="sg-lc-word">Ц е за цвете</div><div class="sg-lc-phonetic">(tsvete)</div><div class="sg-lc-meaning">flower</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ч</div><div class="sg-lc-lower">ч (lowercase)</div><div class="sg-lc-sound">Sound: "ch" — like chair</div><div class="sg-lc-eng">Like 4 without the top line</div><div class="sg-lc-word">Ч е за чай</div><div class="sg-lc-phonetic">(chay)</div><div class="sg-lc-meaning">tea</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ш</div><div class="sg-lc-lower">ш (lowercase)</div><div class="sg-lc-sound">Sound: "sh" — like shell</div><div class="sg-lc-eng">Like a comb — 3 teeth pointing down</div><div class="sg-lc-word">Ш е за шоколад</div><div class="sg-lc-phonetic">(shokolad)</div><div class="sg-lc-meaning">chocolate</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ф ф</div><div class="sg-lc-hw">Ф ф</div><div class="sg-lc-sound">Sound: "f" — like family</div><div class="sg-lc-eng">Looks like a circle on a stick</div><div class="sg-lc-word">Ф е за фамилия</div><div class="sg-lc-phonetic">(familiya)</div><div class="sg-lc-meaning">family</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Х х</div><div class="sg-lc-hw">Х х</div><div class="sg-lc-sound">Sound: "kh" — like Scottish loch</div><div class="sg-lc-eng">A gentle throat sound, like fogging a mirror</div><div class="sg-lc-word">Х е за хляб</div><div class="sg-lc-phonetic">(khlyab)</div><div class="sg-lc-meaning">bread</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ц ц</div><div class="sg-lc-hw">Ц ц</div><div class="sg-lc-sound">Sound: "ts" — like pizza</div><div class="sg-lc-eng">The TZ sound in "pizza" as one letter</div><div class="sg-lc-word">Ц е за цвете</div><div class="sg-lc-phonetic">(tsvete)</div><div class="sg-lc-meaning">flower</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ч ч</div><div class="sg-lc-hw">Ч ч</div><div class="sg-lc-sound">Sound: "ch" — like chair</div><div class="sg-lc-eng">Looks like a 4 without the top line</div><div class="sg-lc-word">Ч е за чай</div><div class="sg-lc-phonetic">(chay)</div><div class="sg-lc-meaning">tea</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ш ш</div><div class="sg-lc-hw">Ш ш</div><div class="sg-lc-sound">Sound: "sh" — like shell</div><div class="sg-lc-eng">Looks like a comb — 3 teeth pointing down</div><div class="sg-lc-word">Ш е за шоколад</div><div class="sg-lc-phonetic">(shokolad)</div><div class="sg-lc-meaning">chocolate</div></div>
       </div>`,
     },
     {
       num: 3,
       title: 'Practice the unique sounds out loud',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">🗣️ Say each combination 5 times fast</div><ol><li><strong>Х</strong> — "khhh" like you're fogging up a mirror. Then: хляб (bread)</li><li><strong>Ц</strong> — "ts ts ts" like a clock ticking. Then: цвете (flower)</li><li><strong>Ч</strong> — "ch ch ch" like a train. Then: чай (tea)</li><li><strong>Ш</strong> — "shhhh" like hushing someone. Then: шоколад (chocolate)</li></ol>Notice: Ц, Ч, Ш are used constantly in Bulgarian. They'll become automatic fast.</div>`,
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🗣️ Say each sound 5 times, then its word</div><ol><li><strong>Х</strong> — "khhh" like fogging up a mirror. Then: <strong>хляб</strong> <em>(khlyab)</em> — bread</li><li><strong>Ц</strong> — "ts ts ts" like a clock ticking. Then: <strong>цвете</strong> <em>(tsvete)</em> — flower</li><li><strong>Ч</strong> — "ch ch ch" like a train. Then: <strong>чай</strong> <em>(chay)</em> — tea</li><li><strong>Ш</strong> — "shhhh" like hushing someone. Then: <strong>шоколад</strong> <em>(shokolad)</em> — chocolate</li><li><strong>Ф</strong> — "fff" like blowing out a candle. Then: <strong>фамилия</strong> <em>(familiya)</em> — family</li></ol></div>
+      <div class="sg-tip"><strong>💡 Fun fact:</strong> Ц, Ч, and Ш appear in almost every other Bulgarian word. They'll become automatic fast!</div>`,
     },
     {
       num: 4,
-      title: 'Flashcard drill',
-      desc: 'Go through today\'s flashcards below. Say each letter\'s sound out loud before flipping the card. For Х especially, practice that throat sound — like you\'re gently clearing your throat.',
+      title: 'Flashcard practice — new letters + food words',
+      desc: `Practice today's letters plus some delicious bonus words. Bulgarian food vocabulary uses lots of today's letters!
+      <div class="sg-fc-embed" id="sg-fc-2-2"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> The food words (хляб, чай, шоколад, чаша) are ones you'll use in real life. Try to memorize them!</div>`,
     },
     {
       num: 5,
       title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>What sound does Ц make? (ts — like pizza)</li><li>What is <em>хляб</em> in English? (bread)</li><li>Which letter makes the "sh" sound? (Ш)</li><li>What does <em>чай</em> mean? (tea)</li><li>Write today's 5 letters and their sounds from memory.</li></ol></div>`,
+      desc: `<div class="sg-iquiz" id="sg-iquiz-2-2"></div>`,
     },
-    {
-      num: 6,
-      title: 'Mark Day 2 complete',
-      desc: 'Weekly Plan → Week 2 → check off Day 2. You know 25 letters. Almost there!',
-    },
-
+  ],
+  flashcards: [
+    {word: "Ф ф", translation: "'f' — like family", pronunciation: "Ф as Фамилия", englishWord: "Family", speechText: "Ф е за фамилия", phonetic: "familiya"},
+    {word: "Х х", translation: "'kh' — guttural, like Scottish loch", pronunciation: "Х as Хляб", englishWord: "Bread", speechText: "Х е за хляб", phonetic: "khlyab"},
+    {word: "Ц ц", translation: "'ts' — like in pizza", pronunciation: "Ц as Цвете", englishWord: "Flower", speechText: "Ц е за цвете", phonetic: "tsvete"},
+    {word: "Ч ч", translation: "'ch' — like chair", pronunciation: "Ч as Чай", englishWord: "Tea", speechText: "Ч е за чай", phonetic: "chay"},
+    {word: "Ш ш", translation: "'sh' — like shell", pronunciation: "Ш as Шоколад", englishWord: "Chocolate", speechText: "Ш е за шоколад", phonetic: "shokolad"},
+    {word: "хляб", translation: "bread", pronunciation: "khlyab", phonetic: "khlyab", speechText: "хляб"},
+    {word: "чай", translation: "tea", pronunciation: "chay", phonetic: "chay", speechText: "чай"},
+    {word: "шоколад", translation: "chocolate", pronunciation: "sho-ko-LAD", phonetic: "sho-ko-LAD", speechText: "шоколад"},
+    {word: "чаша", translation: "cup", pronunciation: "CHA-sha", phonetic: "CHA-sha", speechText: "чаша"},
+    {word: "цвете", translation: "flower", pronunciation: "TSVE-te", phonetic: "TSVE-te", speechText: "цвете"}
   ],
   quiz: [
     {q: "Which letter makes the 'f' sound?", type: "mc", options: ["Х", "Ф", "Ц", "Ч"], answer: "Ф"},
@@ -2915,7 +2940,8 @@ const studyGuides = {
     {q: "Which letter sounds like 'ts' (as in 'pizza')?", type: "mc", options: ["Ч", "Ш", "Ц", "Ф"], answer: "Ц"},
     {q: "What does чай mean?", type: "text", answer: "tea"},
     {q: "Which letter makes the 'sh' sound?", type: "mc", options: ["Щ", "Ш", "Ч", "Ц"], answer: "Ш"},
-    {q: "What Bulgarian word means 'flower'?", type: "text", answer: "цвете"},
+    {q: "What does чаша mean?", type: "text", answer: "cup"},
+    {q: "What does цвете mean?", type: "text", answer: "flower"},
     {q: "Х makes a guttural sound similar to which?", type: "mc", options: ["h in 'hello'", "kh as in German 'Bach'", "ch as in 'chair'", "g as in 'go'"], answer: "kh as in German 'Bach'"}
   ]
 },
@@ -2923,59 +2949,70 @@ const studyGuides = {
 // ── WEEK 2, DAY 3 ─────────────────────────────────────────
 '2-3': {
   weekLabel: 'Week 2 — Cyrillic Letters П–Я',
-  dayTitle: 'Day 3: The Final Letters — Щ, Ъ, Ю, Я',
+  dayTitle: 'Day 3: The Final Letters — Щ, Ъ, Ь, Ю, Я',
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Today you complete the Bulgarian alphabet! After this session, you can sound out any Bulgarian word you see. That\'s a huge milestone.',
+      num: 1,
+      title: '5-minute review of Ф–Ш',
+      desc: `Almost there! Warm up with yesterday's letters. Focus on that throat sound for Х.
+      <div class="sg-fc-embed" id="sg-fc-review-2-3"></div>`,
     },
     {
       num: 2,
-      title: 'Learn today\'s final letters',
-      desc: `<div class="sg-letter-grid">
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Щ</div><div class="sg-lc-lower">щ (lowercase)</div><div class="sg-lc-sound">Sound: "sht" — like "mashed" quickly</div><div class="sg-lc-eng">Ш with a small tail — Sh + T combined</div><div class="sg-lc-word">Щ е за щастие</div><div class="sg-lc-phonetic">(shtastie)</div><div class="sg-lc-meaning">happiness</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ъ</div><div class="sg-lc-lower">ъ (lowercase)</div><div class="sg-lc-sound">Sound: "uh" — like the U in "but"</div><div class="sg-lc-eng">The unique Bulgarian sound! Like a neutral vowel</div><div class="sg-lc-word">Ъ е за ъгъл</div><div class="sg-lc-phonetic">(agal)</div><div class="sg-lc-meaning">corner/angle</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ю</div><div class="sg-lc-lower">ю (lowercase)</div><div class="sg-lc-sound">Sound: "yu" — like the word "you"</div><div class="sg-lc-eng">Sounds exactly like the English word "you"</div><div class="sg-lc-word">Ю е за юла</div><div class="sg-lc-phonetic">(yula)</div><div class="sg-lc-meaning">spinning top</div></div>
-        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Я</div><div class="sg-lc-lower">я (lowercase)</div><div class="sg-lc-sound">Sound: "ya" — like "yard"</div><div class="sg-lc-eng">Backwards R — sounds like "ya"</div><div class="sg-lc-word">Я е за яйце</div><div class="sg-lc-phonetic">(yaytse)</div><div class="sg-lc-meaning">egg</div></div>
+      title: 'Learn today\'s final 5 letters — you\'re completing the alphabet!',
+      desc: `After this step, you'll know all 30 Bulgarian letters. That's a huge milestone!
+      <div class="sg-letter-grid">
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Щ щ</div><div class="sg-lc-hw">Щ щ</div><div class="sg-lc-sound">Sound: "sht" — like "mashed" quickly</div><div class="sg-lc-eng">Ш with a tiny tail — Sh + T combined</div><div class="sg-lc-word">Щ е за щастие</div><div class="sg-lc-phonetic">(shtastie)</div><div class="sg-lc-meaning">happiness</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ъ ъ</div><div class="sg-lc-hw">Ъ ъ</div><div class="sg-lc-sound">Sound: "uh" — like the U in "but"</div><div class="sg-lc-eng">The unique Bulgarian vowel! Relaxed and neutral.</div><div class="sg-lc-word">Ъ е за ъгъл</div><div class="sg-lc-phonetic">(agal)</div><div class="sg-lc-meaning">corner</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ь ь</div><div class="sg-lc-hw">Ь ь</div><div class="sg-lc-sound">Soft sign — softens the letter before it</div><div class="sg-lc-eng">No sound of its own — adds a "y" glide</div><div class="sg-lc-word">Ь as in бельо</div><div class="sg-lc-phonetic">(belyo)</div><div class="sg-lc-meaning">laundry/underwear</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Ю ю</div><div class="sg-lc-hw">Ю ю</div><div class="sg-lc-sound">Sound: "yu" — like the word "you"</div><div class="sg-lc-eng">Sounds exactly like the English word "you"</div><div class="sg-lc-word">Ю е за юла</div><div class="sg-lc-phonetic">(yula)</div><div class="sg-lc-meaning">spinning top</div></div>
+        <div class="sg-letter-card"><div class="sg-lc-cyrillic">Я я</div><div class="sg-lc-hw">Я я</div><div class="sg-lc-sound">Sound: "ya" — like "yard"</div><div class="sg-lc-eng">Looks like a backwards R — sounds like "ya"</div><div class="sg-lc-word">Я е за яйце</div><div class="sg-lc-phonetic">(yaytse)</div><div class="sg-lc-meaning">egg</div></div>
       </div>
-      <div class="sg-tip"><strong>💡 Ъ is special:</strong> This is the unique Bulgarian schwa sound that doesn't exist in most languages. It's the most common vowel in Bulgarian! It sounds like the "u" in "butter" — a relaxed neutral sound. Practice it until it feels natural.</div>`,
+      <div class="sg-tip"><strong>💡 About Ъ:</strong> This is the most common vowel in Bulgarian! It's the relaxed "uh" sound like in "butter." It appears in tons of words, so practice it until it feels natural.</div>`,
     },
     {
       num: 3,
-      title: 'The full alphabet — say it out loud',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">🎉 Recite the full Bulgarian alphabet!</div>А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ю Я<br><br>Say each letter's sound (not the name). Try to go from beginning to end without stopping. Don't worry about speed — accuracy first.</div>`,
+      title: 'Say each letter with its example word',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🗣️ Say each one out loud 3 times</div><ol><li><strong>Щ е за щастие</strong> <em>(shtastie)</em> — happiness. Try saying "mashed" fast — hear the "sht"?</li><li><strong>Ъ е за ъгъл</strong> <em>(agal)</em> — corner. Relax your mouth completely for this sound.</li><li><strong>Ь</strong> — no word starts with Ь. Practice: <strong>бельо</strong> <em>(belyo)</em> — hear how Л softens?</li><li><strong>Ю е за юла</strong> <em>(yula)</em> — spinning top. Just like saying "you" + "la"!</li><li><strong>Я е за яйце</strong> <em>(yaytse)</em> — egg. "Ya" like "yard" + "ytse".</li></ol></div>`,
     },
     {
       num: 4,
-      title: 'Try reading real Bulgarian words',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">📖 Sound out these words — then check Forvo for pronunciation</div><ol><li><strong>баба</strong> — ba-ba (grandma)</li><li><strong>дядо</strong> — dya-do (grandpa)</li><li><strong>вода</strong> — vo-da (water)</li><li><strong>хляб</strong> — khlyab (bread)</li><li><strong>добре</strong> — do-bre (good/okay)</li></ol>You can now read Bulgarian! The letters you've learned make exactly these sounds.</div>`,
+      title: '🎉 Recite the full alphabet!',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🎉 You know all 30 letters! Say them all:</div>А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ь Ю Я<br><br>Say each letter's <strong>sound</strong> (not the name). Go from beginning to end. Don't worry about speed — accuracy first!<br><br><strong>Then try these real words:</strong><ol><li><strong>баба</strong> <em>(BA-ba)</em> — grandma</li><li><strong>вода</strong> <em>(vo-DA)</em> — water</li><li><strong>хляб</strong> <em>(khlyab)</em> — bread</li><li><strong>щастие</strong> <em>(SHTAS-ti-e)</em> — happiness</li><li><strong>яйце</strong> <em>(YAY-tse)</em> — egg</li></ol></div>`,
     },
     {
       num: 5,
-      title: 'Full alphabet flashcard run',
-      desc: 'Flashcards → Alphabet → all 30 cards. How fast can you go while saying each sound correctly? This is where it all comes together.',
+      title: 'Flashcard practice — final letters + bonus words',
+      desc: `Practice today's letters plus words that use the unique Bulgarian sounds!
+      <div class="sg-fc-embed" id="sg-fc-2-3"></div>`,
     },
     {
       num: 6,
       title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Final alphabet quiz</div><ol><li>What is the unique Bulgarian vowel that doesn't exist in English? (Ъ)</li><li>What does Щ sound like? (sht)</li><li>Ю sounds like which English word? (you)</li><li>Sound out: баба, майка, шоколад</li><li>Write the full alphabet from memory (all 30 letters)</li></ol></div>`,
+      desc: `<div class="sg-iquiz" id="sg-iquiz-2-3"></div>`,
     },
-    {
-      num: 7,
-      title: 'Mark Day 3 complete',
-      desc: 'Weekly Plan → Week 2 → check off Day 3. You know the entire Bulgarian alphabet! 🎉',
-    },
-  
+  ],
+  flashcards: [
+    {word: "Щ щ", translation: "'sht' — like mashed (fast)", pronunciation: "Щ as Щастие", englishWord: "Happiness", speechText: "Щ е за щастие", phonetic: "shtastie"},
+    {word: "Ъ ъ", translation: "'uh' — unique Bulgarian vowel", pronunciation: "Ъ as Ъгъл", englishWord: "Corner", speechText: "Ъ е за ъгъл", phonetic: "agal"},
+    {word: "Ь ь", translation: "soft sign — softens preceding consonant", pronunciation: "Ь as in Бельо", englishWord: "Laundry", speechText: "Ь е за бельо", phonetic: "belyo"},
+    {word: "Ю ю", translation: "'yu' — like the word you", pronunciation: "Ю as Юла", englishWord: "Spinning top", speechText: "Ю е за юла", phonetic: "yula"},
+    {word: "Я я", translation: "'ya' — like yard", pronunciation: "Я as Яйце", englishWord: "Egg", speechText: "Я е за яйце", phonetic: "yaytse"},
+    {word: "щастие", translation: "happiness", pronunciation: "SHTAS-ti-e", phonetic: "SHTAS-ti-e", speechText: "щастие"},
+    {word: "ъгъл", translation: "corner/angle", pronunciation: "UH-gal", phonetic: "UH-gal", speechText: "ъгъл"},
+    {word: "яйце", translation: "egg", pronunciation: "YAY-tse", phonetic: "YAY-tse", speechText: "яйце"},
+    {word: "дядо", translation: "grandpa", pronunciation: "DYA-do", phonetic: "DYA-do", speechText: "дядо"},
+    {word: "мляко", translation: "milk", pronunciation: "MLYA-ko", phonetic: "MLYA-ko", speechText: "мляко"}
   ],
   quiz: [
     {q: "Which letter makes the 'sht' sound (as in 'mashed')?", type: "mc", options: ["Ш", "Щ", "Ц", "Ч"], answer: "Щ"},
     {q: "What does щастие mean?", type: "text", answer: "happiness"},
-    {q: "Ъ is unique to Bulgarian. What sound does it make?", type: "mc", options: ["oo like moon", "uh like utter", "ee like feet", "oh like open"], answer: "uh like utter"},
+    {q: "Ъ is unique to Bulgarian. What sound does it make?", type: "mc", options: ["oo like moon", "uh like butter", "ee like feet", "oh like open"], answer: "uh like butter"},
     {q: "What does яйце mean?", type: "text", answer: "egg"},
     {q: "Which letter sounds like 'yu' (as in 'you')?", type: "mc", options: ["Я", "Ъ", "Ю", "Щ"], answer: "Ю"},
-    {q: "What Bulgarian word means 'corner'?", type: "text", answer: "ъгъл"},
+    {q: "What does мляко mean?", type: "text", answer: "milk"},
+    {q: "What does Ь (soft sign) do?", type: "mc", options: ["Makes a vowel sound", "Softens the preceding consonant", "Makes a 'b' sound", "Is silent and ignored"], answer: "Softens the preceding consonant"},
     {q: "How many letters are in the Bulgarian alphabet?", type: "mc", options: ["26", "28", "30", "33"], answer: "30"}
   ]
 },
@@ -2987,93 +3024,156 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Pure drill day. You know all 30 letters. Today is about making them automatic so you can read without stopping to think.',
+      num: 1,
+      title: 'Warm-up: yesterday\'s final letters',
+      desc: `No new letters today — pure drill. Let's make sure yesterday's final 5 are solid before we speed-test the whole alphabet.
+      <div class="sg-fc-embed" id="sg-fc-review-2-4"></div>`,
     },
     {
       num: 2,
-      title: 'Full alphabet run — timed',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">⏱️ Time yourself: say the SOUND of all 30 letters</div><ol><li>Go to Flashcards → Alphabet</li><li>Click through all cards as fast as you can while saying the sound</li><li>Write down your time</li><li>Rest 1 minute, then try again</li><li>Goal for this week: under 60 seconds. Under 40 seconds is excellent.</li></ol></div>`,
+      title: 'Full alphabet flashcard drill — all 30 letters',
+      desc: `Time to prove you know the whole alphabet! Go through all 30 cards. Say each sound BEFORE flipping. Goal: no hesitations.
+      <div class="sg-fc-embed" id="sg-fc-2-4"></div>
+      <div class="sg-tip"><strong>⏱️ Challenge:</strong> Time yourself! Under 90 seconds = good. Under 60 seconds = great. Under 40 seconds = you're a natural!</div>`,
     },
     {
       num: 3,
-      title: 'Identify your problem letters',
-      desc: 'Which letters do you still hesitate on? Write down your 3 hardest letters. Then do 30 focused reps on those specific ones: look → say sound → write → say sound again.',
+      title: 'The imposter letter drill',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🚨 The 6 "false friends" — say the REAL sound for each</div><ol><li><strong>В</strong> — looks like B — really sounds like: <strong>"v"</strong> <em>as in вода (vo-DA) — water</em></li><li><strong>Н</strong> — looks like H — really sounds like: <strong>"n"</strong> <em>as in небе (NE-be) — sky</em></li><li><strong>С</strong> — looks like C — really sounds like: <strong>"s"</strong> <em>as in слон (slon) — elephant</em></li><li><strong>Р</strong> — looks like P — really sounds like: <strong>rolled "r"</strong> <em>as in роза (RO-za) — rose</em></li><li><strong>У</strong> — looks like Y — really sounds like: <strong>"oo"</strong> <em>as in утро (UT-ro) — morning</em></li><li><strong>Х</strong> — looks like X — really sounds like: <strong>"kh"</strong> <em>as in хляб (khlyab) — bread</em></li></ol>Cover the right side, look at each letter, and say the Bulgarian sound. Do this 3 times through.</div>`,
     },
     {
       num: 4,
-      title: 'Imposter letter drill',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">🚨 The "false friends" — write them from memory</div><ul><li>Looks like B — sounds like V: <strong>В</strong></li><li>Looks like H — sounds like N: <strong>Н</strong></li><li>Looks like C — sounds like S: <strong>С</strong></li><li>Looks like P — sounds like rolled R: <strong>Р</strong></li><li>Looks like Y — sounds like oo: <strong>У</strong></li><li>Looks like X — sounds like kh: <strong>Х</strong></li></ul>Cover the list, write them from memory, then check.</div>`,
+      title: 'Identify your problem letters',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🎯 Find and fix your weak spots</div><ol><li>Which 3 letters do you still hesitate on? Write them down.</li><li>Do 20 focused reps: look at the letter → say the sound → write it → say the sound again</li><li>Use the example word to anchor each one: every letter has a word you've already learned</li></ol></div>
+      <div class="sg-tip"><strong>💡 Everyone has 2-3 stubborn letters.</strong> That's totally normal. The focused reps here are what turns hesitation into instant recognition.</div>`,
     },
     {
       num: 5,
-      title: 'Take the quiz',
-      desc: 'Go to the ✏️ Quiz tab. Your score today vs Day 4 of last week should show improvement. This is your alphabet mastery benchmark.',
+      title: 'Bonus vocabulary — words you can now read',
+      desc: `You know all 30 letters! Here are more real words you can sound out. Try reading each one letter by letter before checking the answer.
+      <div class="sg-practice"><div class="sg-practice-title">📖 Sound out these words</div><ol><li><strong>торта</strong> <em>(TOR-ta)</em> — cake</li><li><strong>стол</strong> <em>(stol)</em> — chair</li><li><strong>кон</strong> <em>(kon)</em> — horse</li><li><strong>мост</strong> <em>(most)</em> — bridge</li><li><strong>котка</strong> <em>(KOT-ka)</em> — cat</li><li><strong>куче</strong> <em>(KU-che)</em> — dog</li><li><strong>шапка</strong> <em>(SHAP-ka)</em> — hat</li><li><strong>часовник</strong> <em>(cha-sov-NIK)</em> — clock</li></ol></div>`,
     },
     {
       num: 6,
-      title: 'Mark Day 4 complete',
-      desc: 'Weekly Plan → Week 2 → check off Day 4. One more day — and tomorrow you\'ll read your first real Bulgarian sentences!',
+      title: 'Quick quiz — alphabet mastery test',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-2-4"></div>`,
     },
-
+  ],
+  flashcards: [
+    {word: "А а", translation: "'ah' — like in 'father'", pronunciation: "А as Акула", englishWord: "Shark", speechText: "А е за акула", phonetic: "akula"},
+    {word: "Б б", translation: "'b' — like ball", pronunciation: "Б as Баба", englishWord: "Grandma", speechText: "Б е за баба", phonetic: "baba"},
+    {word: "В в", translation: "'v' — like voice", pronunciation: "В as Вода", englishWord: "Water", speechText: "В е за вода", phonetic: "voda"},
+    {word: "Г г", translation: "'g' — like gold", pronunciation: "Г as Грозде", englishWord: "Grapes", speechText: "Г е за грозде", phonetic: "grozde"},
+    {word: "Д д", translation: "'d' — like dog", pronunciation: "Д as Дъга", englishWord: "Rainbow", speechText: "Д е за дъга", phonetic: "daga"},
+    {word: "Е е", translation: "'eh' — like bed", pronunciation: "Е as Есен", englishWord: "Autumn", speechText: "Е е за есен", phonetic: "esen"},
+    {word: "Ж ж", translation: "'zh' — like measure", pronunciation: "Ж as Жираф", englishWord: "Giraffe", speechText: "Ж е за жираф", phonetic: "zhiraf"},
+    {word: "З з", translation: "'z' — like zoo", pronunciation: "З as Зайче", englishWord: "Bunny", speechText: "З е за зайче", phonetic: "zayche"},
+    {word: "И и", translation: "'ee' — like bee", pronunciation: "И as Игра", englishWord: "Game", speechText: "И е за игра", phonetic: "igra"},
+    {word: "Й й", translation: "'y' — like yes", pronunciation: "Й as Йогурт", englishWord: "Yogurt", speechText: "Й е за йогурт", phonetic: "yogurt"},
+    {word: "К к", translation: "'k' — like kite", pronunciation: "К as Котка", englishWord: "Cat", speechText: "К е за котка", phonetic: "kotka"},
+    {word: "Л л", translation: "'l' — like lamp", pronunciation: "Л as Лимон", englishWord: "Lemon", speechText: "Л е за лимон", phonetic: "limon"},
+    {word: "М м", translation: "'m' — like moon", pronunciation: "М as Майка", englishWord: "Mother", speechText: "М е за майка", phonetic: "mayka"},
+    {word: "Н н", translation: "'n' — like night", pronunciation: "Н as Небе", englishWord: "Sky", speechText: "Н е за небе", phonetic: "nebe"},
+    {word: "О о", translation: "'o' — like open", pronunciation: "О as Ориз", englishWord: "Rice", speechText: "О е за ориз", phonetic: "oriz"},
+    {word: "П п", translation: "'p' — like park", pronunciation: "П as Пролет", englishWord: "Spring", speechText: "П е за пролет", phonetic: "prolet"},
+    {word: "Р р", translation: "rolled 'r'", pronunciation: "Р as Роза", englishWord: "Rose", speechText: "Р е за роза", phonetic: "roza"},
+    {word: "С с", translation: "'s' — like sun", pronunciation: "С as Слон", englishWord: "Elephant", speechText: "С е за слон", phonetic: "slon"},
+    {word: "Т т", translation: "'t' — like tree", pronunciation: "Т as Тигър", englishWord: "Tiger", speechText: "Т е за тигър", phonetic: "tigar"},
+    {word: "У у", translation: "'oo' — like moon", pronunciation: "У as Утро", englishWord: "Morning", speechText: "У е за утро", phonetic: "utro"},
+    {word: "Ф ф", translation: "'f' — like family", pronunciation: "Ф as Фамилия", englishWord: "Family", speechText: "Ф е за фамилия", phonetic: "familiya"},
+    {word: "Х х", translation: "'kh' — guttural", pronunciation: "Х as Хляб", englishWord: "Bread", speechText: "Х е за хляб", phonetic: "khlyab"},
+    {word: "Ц ц", translation: "'ts' — like pizza", pronunciation: "Ц as Цвете", englishWord: "Flower", speechText: "Ц е за цвете", phonetic: "tsvete"},
+    {word: "Ч ч", translation: "'ch' — like chair", pronunciation: "Ч as Чай", englishWord: "Tea", speechText: "Ч е за чай", phonetic: "chay"},
+    {word: "Ш ш", translation: "'sh' — like shell", pronunciation: "Ш as Шоколад", englishWord: "Chocolate", speechText: "Ш е за шоколад", phonetic: "shokolad"},
+    {word: "Щ щ", translation: "'sht' — like mashed", pronunciation: "Щ as Щастие", englishWord: "Happiness", speechText: "Щ е за щастие", phonetic: "shtastie"},
+    {word: "Ъ ъ", translation: "'uh' — unique Bulgarian", pronunciation: "Ъ as Ъгъл", englishWord: "Corner", speechText: "Ъ е за ъгъл", phonetic: "agal"},
+    {word: "Ь ь", translation: "soft sign", pronunciation: "Ь as in Бельо", englishWord: "Laundry", speechText: "Ь е за бельо", phonetic: "belyo"},
+    {word: "Ю ю", translation: "'yu' — like you", pronunciation: "Ю as Юла", englishWord: "Spinning top", speechText: "Ю е за юла", phonetic: "yula"},
+    {word: "Я я", translation: "'ya' — like yard", pronunciation: "Я as Яйце", englishWord: "Egg", speechText: "Я е за яйце", phonetic: "yaytse"}
   ],
   quiz: [
-    {q: "В looks like the English letter B. What sound does it actually make?", type: "mc", options: ["b", "v", "d", "g"], answer: "v"},
-    {q: "Н looks like the English letter H. What sound does it actually make?", type: "mc", options: ["h", "n", "m", "r"], answer: "n"},
-    {q: "Р looks like the English letter P. What sound does it actually make?", type: "mc", options: ["p", "rolled r", "b", "d"], answer: "rolled r"},
-    {q: "С looks like the English letter C. What sound does it actually make?", type: "mc", options: ["k", "ch", "s", "ts"], answer: "s"},
-    {q: "У looks like the English letter Y. What sound does it actually make?", type: "mc", options: ["y", "oo", "uh", "ee"], answer: "oo"},
-    {q: "Which letter sounds like 'kh' (a guttural throat sound)?", type: "mc", options: ["К", "Г", "Х", "Ц"], answer: "Х"}
+    {q: "В looks like English B. What sound does it really make?", type: "mc", options: ["b", "v", "d", "g"], answer: "v"},
+    {q: "Н looks like English H. What sound does it really make?", type: "mc", options: ["h", "n", "m", "r"], answer: "n"},
+    {q: "Р looks like English P. What sound does it really make?", type: "mc", options: ["p", "rolled r", "b", "d"], answer: "rolled r"},
+    {q: "С looks like English C. What sound does it really make?", type: "mc", options: ["k", "ch", "s", "ts"], answer: "s"},
+    {q: "What does торта mean?", type: "text", answer: "cake"},
+    {q: "What does шапка mean?", type: "mc", options: ["shoe", "hat", "shirt", "scarf"], answer: "hat"},
+    {q: "Which letter sounds like 'kh' (a guttural throat sound)?", type: "mc", options: ["К", "Г", "Х", "Ц"], answer: "Х"},
+    {q: "How many letters are in the Bulgarian alphabet?", type: "mc", options: ["26", "28", "30", "33"], answer: "30"}
   ]
 },
 
 // ── WEEK 2, DAY 5 ─────────────────────────────────────────
 '2-5': {
   weekLabel: 'Week 2 — Cyrillic Letters П–Я',
-  dayTitle: 'Day 5: Read Your First Bulgarian Words',
+  dayTitle: 'Day 5: Read Your First Bulgarian Words!',
   timeEst: '25–30 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Last day of Week 2. Today you use the alphabet for what it\'s for — reading real Bulgarian words out loud.',
+      num: 1,
+      title: 'Full alphabet speed review',
+      desc: `Last day of Week 2! Let's start with a quick blast through all 30 letters. How many can you name instantly?
+      <div class="sg-fc-embed" id="sg-fc-review-2-5"></div>
+      <div class="sg-tip"><strong>⏱️ Goal:</strong> Get through all 30 cards with zero hesitations. If you pause on any letter, that's your homework for next week!</div>`,
     },
     {
       num: 2,
-      title: 'Sound out the Week 2 words — slowly',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">📖 Read each word letter by letter, then blend into the whole word</div><table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th></tr><tr><td>баба</td><td>BAH-ba</td><td>grandma</td></tr><tr><td>дядо</td><td>DYAH-do</td><td>grandpa</td></tr><tr><td>мама</td><td>MAH-ma</td><td>mom</td></tr><tr><td>вода</td><td>vo-DA</td><td>water</td></tr><tr><td>хляб</td><td>khlyab</td><td>bread</td></tr><tr><td>котка</td><td>KOT-ka</td><td>cat</td></tr><tr><td>куче</td><td>KOO-che</td><td>dog</td></tr><tr><td>добре</td><td>dob-RE</td><td>okay / good</td></tr></table><div class="sg-tip" style="margin-top:10px"><strong>💡 How to read:</strong> Sound out each letter, then say the word. Bulgarian stress doesn't follow a fixed rule — the pronunciation guide above shows the stressed syllable in CAPS.</div></div>`,
+      title: 'Sound out real Bulgarian words',
+      desc: `This is the moment you've been building toward. Read each word letter by letter, then blend into the full word. Every word uses only letters you know!
+      <div class="sg-practice"><div class="sg-practice-title">📖 Read each word — phonetics are there to help</div><ol><li><strong>баба</strong> <em>(BA-ba)</em> — grandma</li><li><strong>дядо</strong> <em>(DYA-do)</em> — grandpa</li><li><strong>мама</strong> <em>(MA-ma)</em> — mom</li><li><strong>вода</strong> <em>(vo-DA)</em> — water</li><li><strong>хляб</strong> <em>(khlyab)</em> — bread</li><li><strong>мляко</strong> <em>(MLYA-ko)</em> — milk</li><li><strong>котка</strong> <em>(KOT-ka)</em> — cat</li><li><strong>куче</strong> <em>(KU-che)</em> — dog</li><li><strong>добре</strong> <em>(dob-RE)</em> — good/okay</li><li><strong>щастие</strong> <em>(SHTAS-ti-e)</em> — happiness</li></ol></div>
+      <div class="sg-tip"><strong>💡 Stress tip:</strong> Bulgarian stress doesn't follow a fixed rule — the pronunciation guide shows the stressed syllable in CAPS. Getting stress right makes you sound more natural!</div>`,
     },
     {
       num: 3,
-      title: 'Listen on Forvo',
-      desc: 'Search each word above on Forvo and listen to a real Bulgarian speaker, then repeat immediately after them. This is "shadowing" — one of the best pronunciation techniques.<br><br><a href="https://forvo.com/languages/bg/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#2d6a4f;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Forvo</a>',
+      title: 'Vocabulary flashcard practice',
+      desc: `Practice all the vocabulary words you've learned. These are the building blocks for real conversations!
+      <div class="sg-fc-embed" id="sg-fc-2-5"></div>`,
     },
     {
       num: 4,
-      title: 'Weekly challenge — recite to your learning partner',
-      desc: `<div class="sg-challenge">🏆 <strong>Weekly Challenge:</strong> Recite the full Bulgarian alphabet (А–Я) to your learning partner from memory. They time you — goal is under 40 seconds with no mistakes. Under 30 seconds earns extra praise!</div>`,
+      title: 'Listen on Forvo — hear real speakers',
+      desc: `Search for these words on Forvo and listen to a real Bulgarian speaker. Repeat immediately after them — this is called "shadowing" and it's one of the best pronunciation techniques.
+      <div class="sg-practice"><div class="sg-practice-title">🔊 Shadow these words on Forvo</div><ol><li><strong>баба</strong> <em>(BA-ba)</em> — listen → repeat 3×</li><li><strong>вода</strong> <em>(vo-DA)</em> — listen → repeat 3×</li><li><strong>хляб</strong> <em>(khlyab)</em> — listen → repeat 3×</li><li><strong>добре</strong> <em>(dob-RE)</em> — listen → repeat 3×</li><li><strong>щастие</strong> <em>(SHTAS-ti-e)</em> — listen → repeat 3×</li></ol></div>
+      <a href="https://forvo.com/languages/bg/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#2d6a4f;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Forvo</a>`,
     },
     {
       num: 5,
-      title: 'Preview Week 3',
-      desc: 'Next week is Pronunciation Rules — you\'ll learn how to actually speak Bulgarian with confidence: vowel sounds, tricky consonants, and stress patterns. The reading you just did is the perfect foundation.',
+      title: 'Weekly challenge',
+      desc: `<div class="sg-challenge">🏆 <strong>Weekly Challenge:</strong> Recite the full Bulgarian alphabet (А–Я) from memory to your learning partner. Goal: under 40 seconds with no mistakes. Under 30 seconds earns extra praise!<br><br><em>Bonus: Can you also say what each letter sounds like?</em></div>`,
     },
     {
       num: 6,
-      title: 'Mark Day 5 complete — Week 2 done! 🎉',
-      desc: 'Weekly Plan → Week 2 → check off Day 5. Check your Dashboard — you\'ve completed Phase 1! You can now read the Bulgarian alphabet.',
+      title: 'End-of-week quiz',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-2-5"></div>`,
     },
-  
+  ],
+  flashcards: [
+    {word: "баба", translation: "grandma", pronunciation: "BA-ba", phonetic: "BA-ba", speechText: "баба"},
+    {word: "дядо", translation: "grandpa", pronunciation: "DYA-do", phonetic: "DYA-do", speechText: "дядо"},
+    {word: "мама", translation: "mom", pronunciation: "MA-ma", phonetic: "MA-ma", speechText: "мама"},
+    {word: "вода", translation: "water", pronunciation: "vo-DA", phonetic: "vo-DA", speechText: "вода"},
+    {word: "хляб", translation: "bread", pronunciation: "khlyab", phonetic: "khlyab", speechText: "хляб"},
+    {word: "мляко", translation: "milk", pronunciation: "MLYA-ko", phonetic: "MLYA-ko", speechText: "мляко"},
+    {word: "котка", translation: "cat", pronunciation: "KOT-ka", phonetic: "KOT-ka", speechText: "котка"},
+    {word: "куче", translation: "dog", pronunciation: "KU-che", phonetic: "KU-che", speechText: "куче"},
+    {word: "добре", translation: "good/okay", pronunciation: "dob-RE", phonetic: "dob-RE", speechText: "добре"},
+    {word: "щастие", translation: "happiness", pronunciation: "SHTAS-ti-e", phonetic: "SHTAS-ti-e", speechText: "щастие"},
+    {word: "супа", translation: "soup", pronunciation: "SU-pa", phonetic: "SU-pa", speechText: "супа"},
+    {word: "чай", translation: "tea", pronunciation: "chay", phonetic: "chay", speechText: "чай"},
+    {word: "торта", translation: "cake", pronunciation: "TOR-ta", phonetic: "TOR-ta", speechText: "торта"},
+    {word: "шапка", translation: "hat", pronunciation: "SHAP-ka", phonetic: "SHAP-ka", speechText: "шапка"},
+    {word: "яйце", translation: "egg", pronunciation: "YAY-tse", phonetic: "YAY-tse", speechText: "яйце"}
   ],
   quiz: [
     {q: "What does баба mean?", type: "text", answer: "grandma"},
     {q: "What does дядо mean?", type: "text", answer: "grandpa"},
     {q: "What does вода mean?", type: "text", answer: "water"},
     {q: "What does хляб mean?", type: "text", answer: "bread"},
+    {q: "What does мляко mean?", type: "text", answer: "milk"},
     {q: "What does котка mean?", type: "text", answer: "cat"},
-    {q: "What does куче mean?", type: "text", answer: "dog"},
-    {q: "What does добре mean?", type: "mc", options: ["hello", "okay / good", "goodbye", "sorry"], answer: "okay / good"},
+    {q: "What does добре mean?", type: "mc", options: ["hello", "good/okay", "goodbye", "sorry"], answer: "good/okay"},
+    {q: "What does щастие mean?", type: "mc", options: ["sadness", "corner", "happiness", "morning"], answer: "happiness"},
+    {q: "What does шапка mean?", type: "text", answer: "hat"},
     {q: "Where does stress typically fall in Bulgarian words?", type: "mc", options: ["Always on the first syllable", "Always on the last syllable", "It varies — must be learned per word", "Always on the second syllable"], answer: "It varies — must be learned per word"}
   ]
 },
@@ -3085,41 +3185,50 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Welcome to Phase 2 — Sounds & First Words! You know the letters. Now you\'ll learn to speak them correctly. Check the Dashboard to see your Phase 1 complete.',
+      num: 1,
+      title: 'Quick alphabet warm-up',
+      desc: `Welcome to Phase 2! You know all the letters. Now you'll learn to speak them correctly. Start with a quick review of the vocabulary you learned last week.
+      <div class="sg-fc-embed" id="sg-fc-review-3-1"></div>`,
     },
     {
       num: 2,
       title: 'The golden rule of Bulgarian pronunciation',
-      desc: `<div class="sg-tip"><strong>💡 The most important thing about Bulgarian vowels:</strong> Every vowel is <em>pure and consistent</em> — it always makes the same sound, no exceptions. Unlike English where "a" can sound like "ah", "ay", "uh", or even "i" (imagine!), Bulgarian А is always "ah". Always.</div>`,
+      desc: `<div class="sg-tip"><strong>💡 The most important thing about Bulgarian vowels:</strong> Every vowel is <em>pure and consistent</em> — it always makes the same sound, no exceptions. Unlike English where "a" can sound like "ah", "ay", "uh", or even "i" (imagine!), Bulgarian А is always "ah". Always. This actually makes Bulgarian pronunciation <strong>easier</strong> than English once you learn the 6 sounds.</div>`,
     },
     {
       num: 3,
       title: 'The 6 Bulgarian vowels',
-      desc: `<table class="sg-vocab" style="margin-top:10px"><tr><th>Letter</th><th>Sound</th><th>Like in English</th><th>Bulgarian example</th></tr><tr><td>А</td><td>"ah"</td><td>f<strong>a</strong>ther, c<strong>a</strong>r</td><td>баба (grandma)</td></tr><tr><td>Е</td><td>"eh"</td><td>b<strong>e</strong>d, s<strong>e</strong>t</td><td>есен (autumn)</td></tr><tr><td>И</td><td>"ee"</td><td>s<strong>ee</strong>, b<strong>ee</strong></td><td>игра (game)</td></tr><tr><td>О</td><td>"oh"</td><td>m<strong>o</strong>re (pure, no "ow" glide)</td><td>ориз (rice)</td></tr><tr><td>У</td><td>"oo"</td><td>m<strong>oo</strong>n, f<strong>oo</strong>d</td><td>утро (morning)</td></tr><tr><td>Ъ</td><td>"uh"</td><td>b<strong>u</strong>tter, sof<strong>a</strong></td><td>ъгъл (corner)</td></tr></table>`,
+      desc: `<table class="sg-vocab" style="margin-top:10px"><tr><th>Letter</th><th>Sound</th><th>Like in English</th><th>Example</th></tr><tr><td>А</td><td>"ah"</td><td>f<strong>a</strong>ther, c<strong>a</strong>r</td><td>баба <em>(BA-ba)</em> — grandma</td></tr><tr><td>Е</td><td>"eh"</td><td>b<strong>e</strong>d, s<strong>e</strong>t</td><td>есен <em>(E-sen)</em> — autumn</td></tr><tr><td>И</td><td>"ee"</td><td>s<strong>ee</strong>, b<strong>ee</strong></td><td>игра <em>(ig-RA)</em> — game</td></tr><tr><td>О</td><td>"oh"</td><td>m<strong>o</strong>re (pure, no "ow" glide)</td><td>ориз <em>(o-RIZ)</em> — rice</td></tr><tr><td>У</td><td>"oo"</td><td>m<strong>oo</strong>n, f<strong>oo</strong>d</td><td>утро <em>(UT-ro)</em> — morning</td></tr><tr><td>Ъ</td><td>"uh"</td><td>b<strong>u</strong>tter, sof<strong>a</strong></td><td>ъгъл <em>(UH-gal)</em> — corner</td></tr></table>`,
     },
     {
       num: 4,
       title: 'Vowel practice — say each 10 times',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">🗣️ Say each vowel sound cleanly 10 times</div><ol><li><strong>А</strong> — "ah ah ah" — open mouth, relaxed jaw</li><li><strong>Е</strong> — "eh eh eh" — like you're confused but short</li><li><strong>И</strong> — "ee ee ee" — smile slightly, corners of mouth out</li><li><strong>О</strong> — "oh oh oh" — lips rounded, NO glide to "ow"</li><li><strong>У</strong> — "oo oo oo" — lips very rounded</li><li><strong>Ъ</strong> — "uh uh uh" — the most relaxed sound, middle of mouth</li></ol></div>`,
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🗣️ Say each vowel sound cleanly 10 times</div><ol><li><strong>А</strong> — "ah ah ah" — open mouth, relaxed jaw</li><li><strong>Е</strong> — "eh eh eh" — short and clean, like you're confused</li><li><strong>И</strong> — "ee ee ee" — smile slightly, corners of mouth out</li><li><strong>О</strong> — "oh oh oh" — lips rounded, NO glide to "ow"</li><li><strong>У</strong> — "oo oo oo" — lips very rounded, like blowing out a candle</li><li><strong>Ъ</strong> — "uh uh uh" — the most relaxed sound, middle of mouth</li></ol></div>
+      <div class="sg-tip"><strong>💡 The О trap:</strong> English speakers often turn О into "ow" (like in "go"). In Bulgarian, keep it pure "oh" — lips rounded, no movement at the end.</div>`,
     },
     {
       num: 5,
-      title: 'Practice vowels in words',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">📖 Read each word and hold the vowel sound for 1 second</div><ol><li><strong>мама</strong> — MA-MA (hold each A)</li><li><strong>вода</strong> — vo-DA (hold each vowel)</li><li><strong>добре</strong> — do-BRE (hold the E at the end)</li><li><strong>куче</strong> — KU-che (U is "oo", E is "eh")</li><li><strong>ъгъл</strong> — UH-gul (both Ъ = "uh")</li></ol></div>`,
+      title: 'Practice vowels in real words',
+      desc: `Listen for the vowels in each word. They sound exactly like what you just practiced!
+      <div class="sg-fc-embed" id="sg-fc-3-1"></div>`,
     },
     {
       num: 6,
       title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>How many vowels are there in Bulgarian? (6: А, Е, И, О, У, Ъ)</li><li>What makes Bulgarian vowels easier than English vowels? (Each always has one consistent sound)</li><li>What does Ъ sound like? (the "uh" in butter)</li><li>Say the 6 vowels in order without looking.</li><li>What word means "water"? Can you sound it out? (вода = vo-DA)</li></ol></div>`,
+      desc: `<div class="sg-iquiz" id="sg-iquiz-3-1"></div>`,
     },
-    {
-      num: 7,
-      title: 'Mark Day 1 complete',
-      desc: 'Weekly Plan → Week 3 → check off Day 1. Solid foundation — vowels are the building blocks of every word.',
-    },
-
+  ],
+  flashcards: [
+    {word: "баба", translation: "grandma — both vowels are А = 'ah'", pronunciation: "BA-ba", phonetic: "BA-ba", speechText: "баба"},
+    {word: "вода", translation: "water — О = 'oh', А = 'ah'", pronunciation: "vo-DA", phonetic: "vo-DA", speechText: "вода"},
+    {word: "есен", translation: "autumn — both vowels are Е = 'eh'", pronunciation: "E-sen", phonetic: "E-sen", speechText: "есен"},
+    {word: "игра", translation: "game — И = 'ee', А = 'ah'", pronunciation: "ig-RA", phonetic: "ig-RA", speechText: "игра"},
+    {word: "ориз", translation: "rice — О = pure 'oh', И = 'ee'", pronunciation: "o-RIZ", phonetic: "o-RIZ", speechText: "ориз"},
+    {word: "утро", translation: "morning — У = 'oo', О = 'oh'", pronunciation: "UT-ro", phonetic: "UT-ro", speechText: "утро"},
+    {word: "ъгъл", translation: "corner — both vowels are Ъ = 'uh'", pronunciation: "UH-gal", phonetic: "UH-gal", speechText: "ъгъл"},
+    {word: "куче", translation: "dog — У = 'oo', Е = 'eh'", pronunciation: "KU-che", phonetic: "KU-che", speechText: "куче"},
+    {word: "мляко", translation: "milk — А = 'ah', О = 'oh'", pronunciation: "MLYA-ko", phonetic: "MLYA-ko", speechText: "мляко"},
+    {word: "добре", translation: "good/okay — О = 'oh', Е = 'eh'", pronunciation: "dob-RE", phonetic: "dob-RE", speechText: "добре"}
   ],
   quiz: [
     {q: "How many vowels does Bulgarian have?", type: "mc", options: ["5", "6", "7", "8"], answer: "6"},
@@ -3127,8 +3236,9 @@ const studyGuides = {
     {q: "How are Bulgarian vowels different from English vowels?", type: "mc", options: ["They have more sounds each", "Each vowel always has one consistent sound", "They change based on stress", "They are silent sometimes"], answer: "Each vowel always has one consistent sound"},
     {q: "What sound does Ъ make?", type: "mc", options: ["oo", "ah", "uh (schwa)", "oh"], answer: "uh (schwa)"},
     {q: "What does есен mean?", type: "text", answer: "autumn"},
-    {q: "What does игра mean?", type: "text", answer: "game"},
-    {q: "Which vowel sounds like 'ee' as in 'feet'?", type: "mc", options: ["Е", "И", "У", "Ъ"], answer: "И"}
+    {q: "What does ориз mean?", type: "text", answer: "rice"},
+    {q: "Which vowel sounds like 'ee' as in 'feet'?", type: "mc", options: ["Е", "И", "У", "Ъ"], answer: "И"},
+    {q: "What does мляко mean?", type: "text", answer: "milk"}
   ]
 },
 
@@ -3139,37 +3249,53 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Today: mastering the consonant sounds that don\'t exist in English. These are worth spending real time on — they appear constantly in Bulgarian.',
+      num: 1,
+      title: 'Vowel warm-up',
+      desc: `Before tackling consonants, make sure yesterday's vowels are solid. Flip through these cards and focus on the vowel sounds in each word.
+      <div class="sg-fc-embed" id="sg-fc-review-3-2"></div>`,
     },
     {
       num: 2,
       title: 'The three special consonants',
-      desc: `<table class="sg-vocab"><tr><th>Letter</th><th>Sound</th><th>English equivalent</th><th>Example words</th></tr><tr><td>Ж</td><td>"zh"</td><td>mea<strong>s</strong>ure, vi<strong>s</strong>ion, bei<strong>ge</strong></td><td>жена (woman), жираф (giraffe)</td></tr><tr><td>Ц</td><td>"ts"</td><td>pi<strong>zz</strong>a, i<strong>ts</strong>, ca<strong>ts</strong></td><td>цвете (flower), цар (king)</td></tr><tr><td>Щ</td><td>"sht"</td><td>ma<strong>shed</strong> (said fast), pu<strong>shed</strong></td><td>щастие (happiness), щракам (click)</td></tr></table>
-      <div class="sg-tip" style="margin-top:10px"><strong>💡 These appear everywhere:</strong> Ж is in almost every other Bulgarian word. Ц is how you say "tsar" (цар — king). Щ sounds like "sht" and is used in common words like "щастие" (happiness).</div>`,
+      desc: `These consonant sounds don't exist as single letters in English, but you make them naturally! Let's master them.
+      <table class="sg-vocab"><tr><th>Letter</th><th>Sound</th><th>You already say it in...</th><th>Bulgarian words</th></tr><tr><td>Ж</td><td>"zh"</td><td>mea<strong>s</strong>ure, vi<strong>s</strong>ion, bei<strong>ge</strong></td><td>жена <em>(zhe-NA)</em> — woman<br>жираф <em>(zhi-RAF)</em> — giraffe</td></tr><tr><td>Ц</td><td>"ts"</td><td>pi<strong>zz</strong>a, i<strong>ts</strong>, ca<strong>ts</strong></td><td>цвете <em>(TSVE-te)</em> — flower<br>цар <em>(tsar)</em> — king</td></tr><tr><td>Щ</td><td>"sht"</td><td>ma<strong>shed</strong>, pu<strong>shed</strong> (fast)</td><td>щастие <em>(SHTAS-ti-e)</em> — happiness</td></tr></table>
+      <div class="sg-tip" style="margin-top:10px"><strong>💡 Fun fact:</strong> Ж appears in almost every other Bulgarian word. Ц is how you say "tsar" (цар). And Щ is in щастие (happiness) — one of the most beautiful Bulgarian words!</div>`,
     },
     {
       num: 3,
       title: 'Tongue placement practice',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">🗣️ Practice drill for each sound</div><ol><li><strong>Ж (zh)</strong>: Say "s" then gradually move your tongue back — "s...sh...zh". Practice: жа-же-жи-жо-жу</li><li><strong>Ц (ts)</strong>: Start with "t" then immediately "s" — very quick. Practice: ца-це-ци-цо-цу. Say "pizza" fast: pi-TSA</li><li><strong>Щ (sht)</strong>: "sh" then "t" immediately. Practice: ща-ще-щи-що-щу. Say "mashed" fast: ma-SHT</li></ol></div>`,
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🗣️ Practice drill for each sound</div><ol><li><strong>Ж (zh)</strong>: Say "s" then gradually move your tongue back — "s...sh...zh." Practice: жа-же-жи-жо-жу. Then: <strong>жена</strong> <em>(zhe-NA)</em></li><li><strong>Ц (ts)</strong>: Start with "t" then immediately "s" — very quick. Say "pizza" fast: pi-TSA. Practice: ца-це-ци-цо-цу. Then: <strong>цвете</strong> <em>(TSVE-te)</em></li><li><strong>Щ (sht)</strong>: "sh" then "t" blended together. Say "mashed" fast: ma-SHT. Practice: ща-ще-щи-що-щу. Then: <strong>щастие</strong> <em>(SHTAS-ti-e)</em></li></ol></div>`,
     },
     {
       num: 4,
-      title: 'Record yourself and compare',
-      desc: 'Open your phone Voice Memos app. Record yourself saying: <strong>жена, цвете, щастие</strong>. Then search these words on Forvo. <a href="https://forvo.com/languages/bg/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#2d6a4f;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Forvo</a> Compare your recording to the native speaker. The goal isn\'t perfection — it\'s to hear the difference and adjust.',
+      title: 'Flashcard practice — consonants + new vocabulary',
+      desc: `Practice the sounds in context with real words. Focus on making Ж, Ц, and Щ feel natural.
+      <div class="sg-fc-embed" id="sg-fc-3-2"></div>`,
     },
     {
       num: 5,
-      title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>What sound does Ж make? Give an English word that contains it. (zh — like "measure")</li><li>What is цвете? (flower)</li><li>Щ is a combination of which two sounds? (sh + t)</li><li>What does жена mean? (woman)</li><li>Say these out loud: жа-ца-ща, жи-ци-щи</li></ol></div>`,
+      title: 'Record yourself and compare',
+      desc: `Open your phone's Voice Memos. Record yourself saying these 5 words, then search them on Forvo to compare with a native speaker. The goal isn't perfection — it's hearing the difference.
+      <div class="sg-practice"><div class="sg-practice-title">📱 Record these words</div><ol><li><strong>жена</strong> <em>(zhe-NA)</em> — woman</li><li><strong>цвете</strong> <em>(TSVE-te)</em> — flower</li><li><strong>щастие</strong> <em>(SHTAS-ti-e)</em> — happiness</li><li><strong>цар</strong> <em>(tsar)</em> — king</li><li><strong>жираф</strong> <em>(zhi-RAF)</em> — giraffe</li></ol></div>
+      <a href="https://forvo.com/languages/bg/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#2d6a4f;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Forvo</a>`,
     },
     {
       num: 6,
-      title: 'Mark Day 2 complete',
-      desc: 'Weekly Plan → Week 3 → check off Day 2.',
+      title: 'Quick quiz',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-3-2"></div>`,
     },
-
+  ],
+  flashcards: [
+    {word: "жена", translation: "woman", pronunciation: "zhe-NA", phonetic: "zhe-NA", speechText: "жена"},
+    {word: "жираф", translation: "giraffe", pronunciation: "zhi-RAF", phonetic: "zhi-RAF", speechText: "жираф"},
+    {word: "цвете", translation: "flower", pronunciation: "TSVE-te", phonetic: "TSVE-te", speechText: "цвете"},
+    {word: "цар", translation: "king / tsar", pronunciation: "tsar", phonetic: "tsar", speechText: "цар"},
+    {word: "щастие", translation: "happiness", pronunciation: "SHTAS-ti-e", phonetic: "SHTAS-ti-e", speechText: "щастие"},
+    {word: "чай", translation: "tea (review: Ч = 'ch')", pronunciation: "chay", phonetic: "chay", speechText: "чай"},
+    {word: "шоколад", translation: "chocolate (review: Ш = 'sh')", pronunciation: "sho-ko-LAD", phonetic: "sho-ko-LAD", speechText: "шоколад"},
+    {word: "жаба", translation: "frog", pronunciation: "ZHA-ba", phonetic: "ZHA-ba", speechText: "жаба"},
+    {word: "цена", translation: "price", pronunciation: "tse-NA", phonetic: "tse-NA", speechText: "цена"},
+    {word: "площад", translation: "square (city)", pronunciation: "plosh-TAD", phonetic: "plosh-TAD", speechText: "площад"}
   ],
   quiz: [
     {q: "What sound does Ж make?", type: "mc", options: ["sh like 'shell'", "zh like 'measure'", "ch like 'chair'", "j like 'jar'"], answer: "zh like 'measure'"},
@@ -3178,7 +3304,8 @@ const studyGuides = {
     {q: "What does цар mean?", type: "text", answer: "king"},
     {q: "Щ sounds like which combination?", type: "mc", options: ["sh", "ts", "sht", "st"], answer: "sht"},
     {q: "What does щастие mean?", type: "text", answer: "happiness"},
-    {q: "Which sound is described as being in 'almost every other Bulgarian word'?", type: "mc", options: ["Ц", "Щ", "Ж", "Ш"], answer: "Ж"}
+    {q: "What does жаба mean?", type: "mc", options: ["frog", "fish", "bird", "snake"], answer: "frog"},
+    {q: "What does цена mean?", type: "text", answer: "price"}
   ]
 },
 
@@ -3189,41 +3316,51 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Today: word stress. Where you put emphasis in a word changes how natural you sound — and sometimes even the meaning.',
+      num: 1,
+      title: 'Consonant review',
+      desc: `Quick warm-up with yesterday's tricky consonants. Can you say жена, цвете, and щастие without hesitating?
+      <div class="sg-fc-embed" id="sg-fc-review-3-3"></div>`,
     },
     {
       num: 2,
       title: 'The rule about stress in Bulgarian',
-      desc: `<div class="sg-tip"><strong>💡 The honest truth:</strong> Bulgarian stress is not fixed to a specific syllable position. It can fall on any syllable, and you learn it word-by-word. The good news: if you stress the wrong syllable, Bulgarians will usually understand you anyway. It just sounds a bit foreign — exactly like a Bulgarian speaking English with accent.</div>`,
+      desc: `<div class="sg-tip"><strong>💡 The honest truth:</strong> Bulgarian stress is not fixed to a specific syllable position. It can fall on any syllable, and you learn it word-by-word. <strong>The good news:</strong> if you stress the wrong syllable, Bulgarians will still understand you. It just sounds a bit foreign — exactly like a Bulgarian speaking English with an accent.</div>`,
     },
     {
       num: 3,
       title: 'Stress in common words',
-      desc: `<table class="sg-vocab"><tr><th>Word</th><th>Pronunciation</th><th>Meaning</th><th>Stress note</th></tr><tr><td>добре</td><td>dob-RE</td><td>good/okay</td><td>stress on last syllable</td></tr><tr><td>благодаря</td><td>bla-go-da-RYA</td><td>thank you</td><td>stress on last syllable</td></tr><tr><td>довиждане</td><td>do-VIZH-da-ne</td><td>goodbye</td><td>stress on 2nd syllable</td></tr><tr><td>съжалявам</td><td>suh-zha-LYA-vam</td><td>I'm sorry</td><td>stress on 3rd syllable</td></tr><tr><td>здравей</td><td>zdra-VEY</td><td>hello (informal)</td><td>stress on last syllable</td></tr></table>`,
+      desc: `These are words you'll use every day in Week 4. The stressed syllable is shown in CAPS — that's where your voice gets slightly louder and longer.
+      <table class="sg-vocab"><tr><th>Bulgarian</th><th>Pronunciation</th><th>English</th><th>Stress on</th></tr><tr><td>добре</td><td>dob-RE</td><td>good/okay</td><td>last</td></tr><tr><td>благодаря</td><td>bla-go-da-RYA</td><td>thank you</td><td>last</td></tr><tr><td>довиждане</td><td>do-VIZH-da-ne</td><td>goodbye</td><td>2nd</td></tr><tr><td>съжалявам</td><td>suh-zha-LYA-vam</td><td>I'm sorry</td><td>3rd</td></tr><tr><td>здравей</td><td>zdra-VEY</td><td>hello (informal)</td><td>last</td></tr><tr><td>здравейте</td><td>zdra-VEY-te</td><td>hello (formal)</td><td>2nd</td></tr><tr><td>разбирам</td><td>raz-BI-ram</td><td>I understand</td><td>2nd</td></tr><tr><td>моля</td><td>MO-lya</td><td>please / you're welcome</td><td>1st</td></tr></table>`,
     },
     {
       num: 4,
-      title: 'Listening exercise on Forvo',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">🎧 Listen and mark the stress</div><ol><li><a href="https://forvo.com/languages/bg/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#2d6a4f;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Forvo</a></li><li>Search each word from the table above</li><li>Listen 3 times — where does the voice get louder/longer?</li><li>Write the word with the stressed syllable in CAPS</li><li>Say it back immediately after the recording</li></ol></div>`,
+      title: 'Flashcard drill — stress practice',
+      desc: `Practice each phrase. Pay attention to where the stress falls — say the CAPS syllable slightly louder.
+      <div class="sg-fc-embed" id="sg-fc-3-3"></div>
+      <div class="sg-tip"><strong>💡 Tip:</strong> Exaggerate the stress at first. Say the stressed syllable noticeably louder. Once it feels natural, tone it down to sound more native.</div>`,
     },
     {
       num: 5,
-      title: 'Read these 4 long words out loud',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">📖 Slow read → then natural speed</div><ol><li><strong>Благодаря</strong> — bla · go · da · RYA (thank you)</li><li><strong>Довиждане</strong> — do · VIZH · da · ne (goodbye)</li><li><strong>Здравейте</strong> — zdra · VEY · te (hello formal)</li><li><strong>Съжалявам</strong> — suh · zha · LYA · vam (I'm sorry)</li></ol>These are the longest words you'll use in Week 4. Learning them now means Week 4 will feel easy!</div>`,
+      title: 'Read these long words out loud',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">📖 Slow read → then natural speed</div><ol><li><strong>Благодаря</strong> <em>(bla-go-da-RYA)</em> — thank you. Say it in 4 beats first, then blend.</li><li><strong>Довиждане</strong> <em>(do-VIZH-da-ne)</em> — goodbye. Stress the VIZH.</li><li><strong>Здравейте</strong> <em>(zdra-VEY-te)</em> — hello (formal). The "здр" cluster is tough — try "z-dra" slowly.</li><li><strong>Съжалявам</strong> <em>(suh-zha-LYA-vam)</em> — I'm sorry. 4 syllables, stress on LYA.</li></ol>These are the longest words you'll use in Week 4. Learning them now means next week will feel easy!</div>`,
     },
     {
       num: 6,
       title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>Where is the stress in благодаря? (last syllable — RYA)</li><li>What does довиждане mean? (goodbye)</li><li>Is Bulgarian word stress always on the same syllable position? (No — it varies by word)</li><li>Say all 4 long words from the practice section out loud.</li></ol></div>`,
+      desc: `<div class="sg-iquiz" id="sg-iquiz-3-3"></div>`,
     },
-    {
-      num: 7,
-      title: 'Mark Day 3 complete',
-      desc: 'Weekly Plan → Week 3 → check off Day 3.',
-    },
-
+  ],
+  flashcards: [
+    {word: "добре", translation: "good / okay", pronunciation: "dob-RE (stress: last)", phonetic: "dob-RE", speechText: "добре"},
+    {word: "благодаря", translation: "thank you", pronunciation: "bla-go-da-RYA (stress: last)", phonetic: "bla-go-da-RYA", speechText: "благодаря"},
+    {word: "довиждане", translation: "goodbye", pronunciation: "do-VIZH-da-ne (stress: 2nd)", phonetic: "do-VIZH-da-ne", speechText: "довиждане"},
+    {word: "съжалявам", translation: "I'm sorry", pronunciation: "suh-zha-LYA-vam (stress: 3rd)", phonetic: "suh-zha-LYA-vam", speechText: "съжалявам"},
+    {word: "здравей", translation: "hello (informal)", pronunciation: "zdra-VEY (stress: last)", phonetic: "zdra-VEY", speechText: "здравей"},
+    {word: "здравейте", translation: "hello (formal)", pronunciation: "zdra-VEY-te (stress: 2nd)", phonetic: "zdra-VEY-te", speechText: "здравейте"},
+    {word: "разбирам", translation: "I understand", pronunciation: "raz-BI-ram (stress: 2nd)", phonetic: "raz-BI-ram", speechText: "разбирам"},
+    {word: "моля", translation: "please / you're welcome", pronunciation: "MO-lya (stress: 1st)", phonetic: "MO-lya", speechText: "моля"},
+    {word: "не разбирам", translation: "I don't understand", pronunciation: "ne raz-BI-ram", phonetic: "ne raz-BI-ram", speechText: "не разбирам"},
+    {word: "добро утро", translation: "good morning", pronunciation: "DOB-ro UT-ro", phonetic: "DOB-ro UT-ro", speechText: "добро утро"}
   ],
   quiz: [
     {q: "Is stress position fixed in Bulgarian?", type: "mc", options: ["Yes, always on the first syllable", "Yes, always on the last syllable", "No, it varies by word and must be memorized", "Yes, always on the second syllable"], answer: "No, it varies by word and must be memorized"},
@@ -3231,8 +3368,9 @@ const studyGuides = {
     {q: "Where is the stress in благодаря?", type: "mc", options: ["BLA-go-da-rya", "bla-GO-da-rya", "bla-go-DA-rya", "bla-go-da-RYA"], answer: "bla-go-da-RYA"},
     {q: "What does благодаря mean?", type: "text", answer: "thank you"},
     {q: "What does довиждане mean?", type: "text", answer: "goodbye"},
+    {q: "What does моля mean?", type: "mc", options: ["Hello", "Sorry", "Please / You're welcome", "Goodbye"], answer: "Please / You're welcome"},
     {q: "What does съжалявам mean?", type: "text", answer: "I'm sorry"},
-    {q: "What happens if you get the stress wrong in Bulgarian?", type: "mc", options: ["People won't understand you at all", "It sounds foreign but is still understandable", "It changes the meaning completely", "Nothing, stress doesn't matter"], answer: "It sounds foreign but is still understandable"}
+    {q: "What happens if you get the stress wrong?", type: "mc", options: ["People won't understand", "It sounds foreign but is still understandable", "It changes the meaning completely", "Nothing, stress doesn't matter"], answer: "It sounds foreign but is still understandable"}
   ]
 },
 
@@ -3243,36 +3381,53 @@ const studyGuides = {
   timeEst: '20–25 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Today is a reading aloud day — putting everything together. Letters + vowel sounds + consonants + stress.',
+      num: 1,
+      title: 'Stress pattern warm-up',
+      desc: `Today puts everything together: letters + vowels + consonants + stress. Start by reviewing yesterday's phrases.
+      <div class="sg-fc-embed" id="sg-fc-review-3-4"></div>`,
     },
     {
       num: 2,
-      title: 'Read this word list out loud — slowly',
-      desc: `<table class="sg-vocab"><tr><th>Bulgarian</th><th>Say it as</th><th>English</th></tr><tr><td>Благодаря</td><td>bla-go-da-RYA</td><td>thank you</td></tr><tr><td>Довиждане</td><td>do-VIZH-da-ne</td><td>goodbye</td></tr><tr><td>Здравей</td><td>zdra-VEY</td><td>hello (informal)</td></tr><tr><td>Съжалявам</td><td>suh-zha-LYA-vam</td><td>I'm sorry</td></tr><tr><td>Разбирам</td><td>raz-BI-ram</td><td>I understand</td></tr><tr><td>Не разбирам</td><td>ne raz-BI-ram</td><td>I don't understand</td></tr><tr><td>Моля</td><td>MO-lya</td><td>please / you're welcome</td></tr><tr><td>Добро утро</td><td>DOB-ro OOT-ro</td><td>good morning</td></tr></table>`,
+      title: 'Read these 8 phrases out loud',
+      desc: `This is your first real reading practice. Sound out each word slowly, then speed up.
+      <div class="sg-practice"><div class="sg-practice-title">📖 Read each phrase — phonetics help with pronunciation</div><ol><li><strong>Благодаря</strong> <em>(bla-go-da-RYA)</em> — thank you</li><li><strong>Довиждане</strong> <em>(do-VIZH-da-ne)</em> — goodbye</li><li><strong>Здравей</strong> <em>(zdra-VEY)</em> — hello (informal)</li><li><strong>Съжалявам</strong> <em>(suh-zha-LYA-vam)</em> — I'm sorry</li><li><strong>Разбирам</strong> <em>(raz-BI-ram)</em> — I understand</li><li><strong>Не разбирам</strong> <em>(ne raz-BI-ram)</em> — I don't understand</li><li><strong>Моля</strong> <em>(MO-lya)</em> — please / you're welcome</li><li><strong>Добро утро</strong> <em>(DOB-ro UT-ro)</em> — good morning</li></ol></div>`,
     },
     {
       num: 3,
-      title: 'Use Google Translate to check yourself',
-      desc: 'Type each Bulgarian word, then click the 🔊 speaker. Say it back after the audio. This is the fastest way to self-correct pronunciation.<br><br><a href="https://translate.google.com/?sl=bg&tl=en" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#4285f4;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Google Translate</a>',
+      title: 'Flashcard practice — all Week 3 phrases',
+      desc: `Practice all the phrases you've learned this week. Try to say each one from memory before flipping!
+      <div class="sg-fc-embed" id="sg-fc-3-4"></div>`,
     },
     {
       num: 4,
       title: 'Record yourself reading',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">📱 Voice recording exercise</div><ol><li>Open Voice Memos on your phone</li><li>Read all 8 words/phrases from the table as naturally as you can</li><li>Listen back — where do you sound natural? Where do you hesitate?</li><li>Do a second recording — aim to sound smoother</li><li>Keep this recording — you'll compare to it in Week 6 to hear your progress</li></ol></div>`,
+      desc: `<div class="sg-practice"><div class="sg-practice-title">📱 Voice recording exercise</div><ol><li>Open Voice Memos on your phone</li><li>Read all 8 phrases from Step 2 as naturally as you can</li><li>Listen back — where do you sound confident? Where do you hesitate?</li><li>Do a second recording — aim to sound smoother</li><li>Keep this recording — you'll compare to it in Week 6!</li></ol></div>
+      <div class="sg-tip"><strong>💡 Pro tip:</strong> Use Google Translate to hear each phrase spoken aloud. Type the Bulgarian text, click the speaker, then repeat immediately after it.</div>
+      <a href="https://translate.google.com/?sl=bg&tl=en" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#4285f4;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">🔊 Open Google Translate</a>`,
     },
     {
       num: 5,
-      title: 'Quick quiz',
-      desc: `<div class="sg-quiz"><div class="sg-quiz-title">🧠 Test yourself</div><ol><li>What is "I don't understand" in Bulgarian? (Не разбирам)</li><li>How do you say "you're welcome" / "please"? (Моля)</li><li>Say "thank you" and "goodbye" in one sentence.</li><li>What does разбирам mean? (I understand)</li></ol></div>`,
+      title: 'Mini conversation practice',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🤝 Try these mini exchanges out loud (play both parts!)</div><ol><li>"<strong>Здравей!</strong>" <em>(zdra-VEY)</em> → "<strong>Здравей! Как си?</strong>" <em>(kak si?)</em> — Hello! How are you?</li><li>"<strong>Добро утро!</strong>" <em>(DOB-ro UT-ro)</em> → "<strong>Добро утро! Добре съм.</strong>" <em>(dob-RE sam)</em> — Good morning! I'm fine.</li><li>"<strong>Благодаря!</strong>" <em>(bla-go-da-RYA)</em> → "<strong>Моля!</strong>" <em>(MO-lya)</em> — Thank you! → You're welcome!</li><li>"<strong>Съжалявам, не разбирам.</strong>" <em>(suh-zha-LYA-vam, ne raz-BI-ram)</em> — Sorry, I don't understand.</li></ol></div>
+      <div class="sg-tip"><strong>💡 Bonus words:</strong> Как си? <em>(kak si?)</em> = How are you? | Добре съм <em>(dob-RE sam)</em> = I'm fine</div>`,
     },
     {
       num: 6,
-      title: 'Mark Day 4 complete',
-      desc: 'Weekly Plan → Week 3 → check off Day 4. One more day — and next week you start real conversations!',
+      title: 'Quick quiz',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-3-4"></div>`,
     },
-
+  ],
+  flashcards: [
+    {word: "благодаря", translation: "thank you", pronunciation: "bla-go-da-RYA", phonetic: "bla-go-da-RYA", speechText: "благодаря"},
+    {word: "довиждане", translation: "goodbye (formal)", pronunciation: "do-VIZH-da-ne", phonetic: "do-VIZH-da-ne", speechText: "довиждане"},
+    {word: "здравей", translation: "hello (informal)", pronunciation: "zdra-VEY", phonetic: "zdra-VEY", speechText: "здравей"},
+    {word: "съжалявам", translation: "I'm sorry / excuse me", pronunciation: "suh-zha-LYA-vam", phonetic: "suh-zha-LYA-vam", speechText: "съжалявам"},
+    {word: "разбирам", translation: "I understand", pronunciation: "raz-BI-ram", phonetic: "raz-BI-ram", speechText: "разбирам"},
+    {word: "не разбирам", translation: "I don't understand", pronunciation: "ne raz-BI-ram", phonetic: "ne raz-BI-ram", speechText: "не разбирам"},
+    {word: "моля", translation: "please / you're welcome", pronunciation: "MO-lya", phonetic: "MO-lya", speechText: "моля"},
+    {word: "добро утро", translation: "good morning", pronunciation: "DOB-ro UT-ro", phonetic: "DOB-ro UT-ro", speechText: "добро утро"},
+    {word: "как си?", translation: "how are you? (informal)", pronunciation: "kak si?", phonetic: "kak si?", speechText: "как си"},
+    {word: "добре съм", translation: "I'm fine/well", pronunciation: "dob-RE sam", phonetic: "dob-RE sam", speechText: "добре съм"}
   ],
   quiz: [
     {q: "What does благодаря mean?", type: "text", answer: "thank you"},
@@ -3282,54 +3437,79 @@ const studyGuides = {
     {q: "What does разбирам mean?", type: "mc", options: ["I'm sorry", "I don't know", "I understand", "I speak"], answer: "I understand"},
     {q: "What does не разбирам mean?", type: "text", answer: "I don't understand"},
     {q: "What does моля mean?", type: "mc", options: ["Hello", "Sorry", "Please / You're welcome", "Goodbye"], answer: "Please / You're welcome"},
-    {q: "What does добро утро mean?", type: "text", answer: "good morning"}
+    {q: "What does добро утро mean?", type: "text", answer: "good morning"},
+    {q: "What does как си mean?", type: "mc", options: ["What's your name?", "How are you?", "Where are you?", "Who are you?"], answer: "How are you?"},
+    {q: "How do you say 'I'm fine' in Bulgarian?", type: "mc", options: ["добре съм", "моля", "здравей", "разбирам"], answer: "добре съм"}
   ]
 },
 
 // ── WEEK 3, DAY 5 ─────────────────────────────────────────
 '3-5': {
   weekLabel: 'Week 3 — Pronunciation Rules',
-  dayTitle: 'Day 5: Listening to Native Speech',
+  dayTitle: 'Day 5: Full Review + Listening Practice',
   timeEst: '25–30 min',
   steps: [
     {
-      num: 1, done: true,
-      title: 'Open the app ✓',
-      desc: 'Last day of Week 3! Today is a listening day — you\'re going to hear real Bulgarian speech and start training your ear.',
+      num: 1,
+      title: 'Full phrase review',
+      desc: `Last day of Week 3! Let's review everything. Go through yesterday's phrases — can you say each one without checking the phonetics?
+      <div class="sg-fc-embed" id="sg-fc-review-3-5"></div>`,
     },
     {
       num: 2,
-      title: 'Watch one BulgarianPod101 beginner video',
-      desc: `<div class="sg-practice"><div class="sg-practice-title">🎥 YouTube exercise</div><ol><li><a href="https://www.youtube.com/results?search_query=BulgarianPod101+absolute+beginner+lesson+1" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#ff0000;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">▶ Search BulgarianPod101</a></li><li>Watch the full video (usually 5–10 min)</li><li>Write down any words you recognize</li><li>Try to catch any of your alphabet letters being spoken</li><li>Don't worry if you don't understand much — your brain is building sound patterns</li></ol></div>`,
+      title: 'Everything you know so far — one big flashcard set',
+      desc: `This is a comprehensive review: vowels, tricky consonants, stress patterns, and real phrases. See how many you can get right!
+      <div class="sg-fc-embed" id="sg-fc-3-5"></div>
+      <div class="sg-tip"><strong>⏱️ Challenge:</strong> Try to get through all cards without a single mistake. If you miss one, restart from the beginning!</div>`,
     },
     {
       num: 3,
-      title: 'Listen to Bulgarian music (optional but fun)',
-      desc: 'Play 5–10 minutes while doing something relaxing. Passive listening is real practice.<br><br><a href="https://www.youtube.com/results?search_query=bulgarian+folk+music" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#ff0000;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">▶ Bulgarian Folk Music</a>&nbsp;&nbsp;<a href="https://www.youtube.com/results?search_query=bulgarian+pop+song" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#ff0000;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">▶ Bulgarian Pop</a>',
+      title: 'Watch a BulgarianPod101 beginner video',
+      desc: `<div class="sg-practice"><div class="sg-practice-title">🎥 YouTube listening exercise</div><ol><li>Watch one beginner video (5–10 minutes)</li><li>Write down any words you recognize from your vocabulary</li><li>Count how many phrases from this week you can catch</li><li>Don't worry about understanding everything — your brain is building sound patterns</li></ol></div>
+      <a href="https://www.youtube.com/results?search_query=BulgarianPod101+absolute+beginner+lesson+1" target="_blank" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;padding:9px 16px;background:#ff0000;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.85rem;">▶ Search BulgarianPod101</a>`,
     },
     {
       num: 4,
-      title: 'Weekly challenge — voice recording',
-      desc: `<div class="sg-challenge">🏆 <strong>Weekly Challenge:</strong> Record a 30-second video of yourself reading 5 Bulgarian words out loud. Choose your 5 favorites from what you've learned. Share it with your learning partner for feedback on your pronunciation!</div>`,
+      title: 'Weekly challenge',
+      desc: `<div class="sg-challenge">🏆 <strong>Weekly Challenge:</strong> Record a 30-second video of yourself having a mini conversation (play both parts):<br><br>"<strong>Здравей! Как си?</strong>" <em>(zdra-VEY! kak si?)</em><br>"<strong>Добре съм, благодаря!</strong>" <em>(dob-RE sam, bla-go-da-RYA!)</em><br>"<strong>Довиждане!</strong>" <em>(do-VIZH-da-ne!)</em><br><br>Share it with your learning partner. Can they understand you?</div>`,
     },
     {
       num: 5,
       title: 'Preview Week 4',
-      desc: 'Next week is greetings and polite phrases — your first real conversational Bulgarian. You\'ll learn how to say hello properly at different times of day, thank someone, apologize, and have a basic "nice to meet you" exchange.',
+      desc: `<div class="sg-tip"><strong>🎉 Coming next:</strong> Greetings and polite phrases! You'll learn how to properly greet someone at any time of day, say thank you, apologize, and introduce yourself. This is where Bulgarian goes from "letters on a screen" to "words you actually say to real people."</div>`,
     },
     {
       num: 6,
-      title: 'Mark Day 5 complete — Week 3 done! 🎉',
-      desc: 'Weekly Plan → Week 3 → check off Day 5. Check your Dashboard — you\'re 15% through the full 20-week course!',
+      title: 'End-of-week quiz',
+      desc: `<div class="sg-iquiz" id="sg-iquiz-3-5"></div>`,
     },
-
+  ],
+  flashcards: [
+    {word: "благодаря", translation: "thank you", pronunciation: "bla-go-da-RYA", phonetic: "bla-go-da-RYA", speechText: "благодаря"},
+    {word: "довиждане", translation: "goodbye", pronunciation: "do-VIZH-da-ne", phonetic: "do-VIZH-da-ne", speechText: "довиждане"},
+    {word: "съжалявам", translation: "I'm sorry", pronunciation: "suh-zha-LYA-vam", phonetic: "suh-zha-LYA-vam", speechText: "съжалявам"},
+    {word: "разбирам", translation: "I understand", pronunciation: "raz-BI-ram", phonetic: "raz-BI-ram", speechText: "разбирам"},
+    {word: "не разбирам", translation: "I don't understand", pronunciation: "ne raz-BI-ram", phonetic: "ne raz-BI-ram", speechText: "не разбирам"},
+    {word: "моля", translation: "please / you're welcome", pronunciation: "MO-lya", phonetic: "MO-lya", speechText: "моля"},
+    {word: "добре", translation: "good / okay", pronunciation: "dob-RE", phonetic: "dob-RE", speechText: "добре"},
+    {word: "добро утро", translation: "good morning", pronunciation: "DOB-ro UT-ro", phonetic: "DOB-ro UT-ro", speechText: "добро утро"},
+    {word: "жена", translation: "woman", pronunciation: "zhe-NA", phonetic: "zhe-NA", speechText: "жена"},
+    {word: "цвете", translation: "flower", pronunciation: "TSVE-te", phonetic: "TSVE-te", speechText: "цвете"},
+    {word: "щастие", translation: "happiness", pronunciation: "SHTAS-ti-e", phonetic: "SHTAS-ti-e", speechText: "щастие"},
+    {word: "как си?", translation: "how are you?", pronunciation: "kak si?", phonetic: "kak si?", speechText: "как си"},
+    {word: "добре съм", translation: "I'm fine", pronunciation: "dob-RE sam", phonetic: "dob-RE sam", speechText: "добре съм"}
   ],
   quiz: [
-    {q: "What type of content should you listen to for ear training?", type: "mc", options: ["English podcasts about Bulgaria", "Native Bulgarian speech (BulgarianPod101, music)", "Only your own recordings", "Audiobooks in English"], answer: "Native Bulgarian speech (BulgarianPod101, music)"},
-    {q: "What is 'shadowing' in language learning?", type: "mc", options: ["Reading quietly to yourself", "Repeating what a native speaker says immediately after them", "Writing translations of spoken words", "Listening without speaking"], answer: "Repeating what a native speaker says immediately after them"},
-    {q: "How many letters are in the Bulgarian alphabet?", type: "mc", options: ["26", "28", "30", "33"], answer: "30"},
-    {q: "What makes Ъ unique?", type: "mc", options: ["It's silent", "It's a vowel unique to Bulgarian (schwa sound)", "It's the rarest letter", "It only appears at the start of words"], answer: "It's a vowel unique to Bulgarian (schwa sound)"},
-    {q: "What does здравей mean?", type: "text", answer: "hello"}
+    {q: "What does здравей mean?", type: "text", answer: "hello"},
+    {q: "What does благодаря mean?", type: "text", answer: "thank you"},
+    {q: "What does съжалявам mean?", type: "text", answer: "I'm sorry"},
+    {q: "What does как си mean?", type: "mc", options: ["What's your name?", "How are you?", "Where are you from?", "How old are you?"], answer: "How are you?"},
+    {q: "How do you say 'I don't understand'?", type: "mc", options: ["Не разбирам", "Съжалявам", "Моля", "Довиждане"], answer: "Не разбирам"},
+    {q: "What sound does Ж make?", type: "mc", options: ["sh", "zh", "ch", "ts"], answer: "zh"},
+    {q: "How many vowels does Bulgarian have?", type: "mc", options: ["5", "6", "7", "8"], answer: "6"},
+    {q: "What does Ъ sound like?", type: "mc", options: ["It's silent", "uh (schwa) like butter", "oo like moon", "oh like more"], answer: "uh (schwa) like butter"},
+    {q: "What does добре съм mean?", type: "text", answer: "I'm fine"},
+    {q: "How many letters are in the Bulgarian alphabet?", type: "mc", options: ["26", "28", "30", "33"], answer: "30"}
   ]
 },
 
