@@ -1,4 +1,4 @@
-const CACHE_NAME = 'learn-bg-v8';
+const CACHE_NAME = 'learn-bg-v12';
 const ASSETS = [
   './index.html',
   './manifest.json',
